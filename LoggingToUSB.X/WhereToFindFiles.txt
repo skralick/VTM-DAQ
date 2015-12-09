@@ -1,0 +1,13 @@
+The files "main.c" and "usb_config.c" are local to this project.
+
+Up-to-date versions of the other .c files can copied from:
+
+    "C:\{MICROCHIP_SOLUTIONS}\Microchip\MDD File System\FSIO.c"
+    "C:\{MICROCHIP_SOLUTIONS}\Microchip\USB\usb_host.c"
+    "C:\{MICROCHIP_SOLUTIONS}\Microchip\USB\MSD Host Driver\usb_host_msd.c"
+    "C:\{MICROCHIP_SOLUTIONS}\Microchip\USB\MSD Host Driver\usb_host_msd_scsi.c"
+
+where {MICROCHIP_SOLUTIONS} represents the directory, or path to the 
+directory, that contains the Microchip Applications Library (MAL).
+
+The include file "FSconfig.h" is local to this project.
