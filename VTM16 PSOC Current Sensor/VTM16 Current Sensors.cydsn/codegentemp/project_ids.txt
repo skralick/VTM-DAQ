@@ -1,0 +1,6 @@
+D:\Documents\Virginia_Tech\FSAE\PSOC\Current Sensor\CE95277 ADC and UART\VTM16 Current Sensors.cydsn\VTM16 Current Sensors.cyprj|aeabe4f7-4154-4057-ad93-968142d38e9b
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyAnnotationLibrary\CyAnnotationLibrary.cylib\CyAnnotationLibrary.cyprj|80bf4970-28c1-482d-adc7-6b47c76c74c7
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\default\CyReferenceLibrary\CyReferenceLibrary.cylib\CyReferenceLibrary.cyprj|8157d9cd-6d53-4d3e-a2a0-1791ad809ce5
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibraryupdates\CyComponentLibraryUpdates.cylib\CyComponentLibraryUpdates.cyprj|25b45e23-1aa3-4349-9ad2-0d74b96b79ea
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\CyComponentLibrary.cyprj|dbc86a26-d972-44cb-993c-f7a52310e15e
+C:\Program Files (x86)\Cypress\PSoC Creator\3.3\PSoC Creator\psoc\content\cyprimitives\CyPrimitives.cylib\CyPrimitives.cyprj|218d6447-ad6a-471c-a7f1-751828ce3e49

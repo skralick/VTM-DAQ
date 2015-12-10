@@ -1,0 +1,1370 @@
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"EZI2C_1_PM.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.global	EZI2C_1_backup
+  19              		.data
+  20              		.align	2
+  21              		.type	EZI2C_1_backup, %object
+  22              		.size	EZI2C_1_backup, 6
+  23              	EZI2C_1_backup:
+  24 0000 00       		.byte	0
+  25 0001 C1       		.byte	-63
+  26 0002 08       		.byte	8
+  27 0003 41       		.byte	65
+  28 0004 03       		.byte	3
+  29 0005 00       		.byte	0
+  30              		.comm	EZI2C_1_wakeupSource,1,1
+  31 0006 0000     		.section	.text.EZI2C_1_SaveConfig,"ax",%progbits
+  32              		.align	2
+  33              		.global	EZI2C_1_SaveConfig
+  34              		.thumb
+  35              		.thumb_func
+  36              		.type	EZI2C_1_SaveConfig, %function
+  37              	EZI2C_1_SaveConfig:
+  38              	.LFB0:
+  39              		.file 1 ".\\Generated_Source\\PSoC5\\EZI2C_1_PM.c"
+   1:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * File Name: EZI2C_1_PM.c
+   3:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Version 2.0
+   4:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+   5:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Description:
+   6:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  This file contains the API for the proper switching to/from the low power
+   7:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  modes.
+   8:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+   9:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** ********************************************************************************
+  10:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  11:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  12:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  13:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * the software package with which this file was provided.
+  14:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *******************************************************************************/
+  15:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  16:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #include "EZI2C_1_PVT.h"
+  17:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  18:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** EZI2C_1_BACKUP_STRUCT EZI2C_1_backup =
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 2
+
+
+  19:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** {
+  20:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DISABLED,
+  21:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DEFAULT_XCFG,
+  22:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DEFAULT_ADDR,
+  23:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DEFAULT_CFG,
+  24:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DEFAULT_CLKDIV1,
+  25:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DEFAULT_CLKDIV2
+  26:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** };
+  27:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  28:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+  29:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     volatile uint8 EZI2C_1_wakeupSource;
+  30:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+  31:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  32:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  33:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** /*******************************************************************************
+  34:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Function Name: EZI2C_1_SaveConfig
+  35:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** ********************************************************************************
+  36:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  37:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Summary:
+  38:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  The Enable wakeup from Sleep Mode selection influences this function
+  39:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  implementation:
+  40:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Unchecked: Stores the component non-retention configuration registers.
+  41:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Checked:   Enables backup regulator of the I2C hardware. If a transaction
+  42:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              intended for component executes during this function call,
+  43:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              it waits until the current transaction is completed and
+  44:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              I2C hardware is ready to go to sleep mode. All subsequent
+  45:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              I2C traffic is NAKed until the device is put to sleep mode.
+  46:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  47:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Parameters:
+  48:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+  49:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  50:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Return:
+  51:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+  52:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  53:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Global variables:
+  54:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_backup - The non-retention registers are saved to.
+  55:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  56:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Reentrant:
+  57:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  No.
+  58:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+  59:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *******************************************************************************/
+  60:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** void EZI2C_1_SaveConfig(void) 
+  61:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** {
+  40              		.loc 1 61 0
+  41              		.cfi_startproc
+  42              		@ args = 0, pretend = 0, frame = 8
+  43              		@ frame_needed = 1, uses_anonymous_args = 0
+  44 0000 80B5     		push	{r7, lr}
+  45              		.cfi_def_cfa_offset 8
+  46              		.cfi_offset 7, -8
+  47              		.cfi_offset 14, -4
+  48 0002 82B0     		sub	sp, sp, #8
+  49              		.cfi_def_cfa_offset 16
+  50 0004 00AF     		add	r7, sp, #0
+  51              		.cfi_def_cfa_register 7
+  62:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+  63:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     uint8 interruptState;
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 3
+
+
+  64:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+  65:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  66:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Store component configuration into backup structure */
+  67:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.cfg     = EZI2C_1_CFG_REG;
+  52              		.loc 1 67 0
+  53 0006 254B     		ldr	r3, .L3
+  54 0008 1B78     		ldrb	r3, [r3]
+  55 000a DAB2     		uxtb	r2, r3
+  56 000c 244B     		ldr	r3, .L3+4
+  57 000e DA70     		strb	r2, [r3, #3]
+  68:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.xcfg    = EZI2C_1_XCFG_REG;
+  58              		.loc 1 68 0
+  59 0010 244B     		ldr	r3, .L3+8
+  60 0012 1B78     		ldrb	r3, [r3]
+  61 0014 DAB2     		uxtb	r2, r3
+  62 0016 224B     		ldr	r3, .L3+4
+  63 0018 5A70     		strb	r2, [r3, #1]
+  69:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.adr     = EZI2C_1_ADDR_REG;
+  64              		.loc 1 69 0
+  65 001a 234B     		ldr	r3, .L3+12
+  66 001c 1B78     		ldrb	r3, [r3]
+  67 001e DAB2     		uxtb	r2, r3
+  68 0020 1F4B     		ldr	r3, .L3+4
+  69 0022 9A70     		strb	r2, [r3, #2]
+  70:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.clkDiv1 = EZI2C_1_CLKDIV1_REG;
+  70              		.loc 1 70 0
+  71 0024 214B     		ldr	r3, .L3+16
+  72 0026 1B78     		ldrb	r3, [r3]
+  73 0028 DAB2     		uxtb	r2, r3
+  74 002a 1D4B     		ldr	r3, .L3+4
+  75 002c 1A71     		strb	r2, [r3, #4]
+  71:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.clkDiv2 = EZI2C_1_CLKDIV2_REG;
+  76              		.loc 1 71 0
+  77 002e 204B     		ldr	r3, .L3+20
+  78 0030 1B78     		ldrb	r3, [r3]
+  79 0032 DAB2     		uxtb	r2, r3
+  80 0034 1A4B     		ldr	r3, .L3+4
+  81 0036 5A71     		strb	r2, [r3, #5]
+  72:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  73:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+  74:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Enable I2C backup regulator */
+  75:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     interruptState = CyEnterCriticalSection();
+  82              		.loc 1 75 0
+  83 0038 FFF7FEFF 		bl	CyEnterCriticalSection
+  84 003c 0346     		mov	r3, r0
+  85 003e FB71     		strb	r3, [r7, #7]
+  76:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_PWRSYS_CR1_REG |= EZI2C_1_PWRSYS_CR1_I2C_BACKUP;
+  86              		.loc 1 76 0
+  87 0040 1C4A     		ldr	r2, .L3+24
+  88 0042 1C4B     		ldr	r3, .L3+24
+  89 0044 1B78     		ldrb	r3, [r3]
+  90 0046 DBB2     		uxtb	r3, r3
+  91 0048 43F00403 		orr	r3, r3, #4
+  92 004c DBB2     		uxtb	r3, r3
+  93 004e 1370     		strb	r3, [r2]
+  77:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     CyExitCriticalSection(interruptState);
+  94              		.loc 1 77 0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 4
+
+
+  95 0050 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+  96 0052 1846     		mov	r0, r3
+  97 0054 FFF7FEFF 		bl	CyExitCriticalSection
+  78:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  79:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Wait for completion of the current transaction. The following
+  80:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     * transactions have to be NACKed until the device enters the low power mode.
+  81:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     * After a wakeup, the force NACK bit is cleared automatically.
+  82:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     */
+  83:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_XCFG_REG |= EZI2C_1_XCFG_FORCE_NACK;
+  98              		.loc 1 83 0
+  99 0058 124A     		ldr	r2, .L3+8
+ 100 005a 124B     		ldr	r3, .L3+8
+ 101 005c 1B78     		ldrb	r3, [r3]
+ 102 005e DBB2     		uxtb	r3, r3
+ 103 0060 43F01003 		orr	r3, r3, #16
+ 104 0064 DBB2     		uxtb	r3, r3
+ 105 0066 1370     		strb	r3, [r2]
+  84:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     while (0u == (EZI2C_1_XCFG_REG & EZI2C_1_XCFG_SLEEP_READY))
+ 106              		.loc 1 84 0
+ 107 0068 00BF     		nop
+ 108              	.L2:
+ 109              		.loc 1 84 0 is_stmt 0 discriminator 1
+ 110 006a 0E4B     		ldr	r3, .L3+8
+ 111 006c 1B78     		ldrb	r3, [r3]
+ 112 006e DBB2     		uxtb	r3, r3
+ 113 0070 03F02003 		and	r3, r3, #32
+ 114 0074 002B     		cmp	r3, #0
+ 115 0076 F8D0     		beq	.L2
+  85:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+  86:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+  87:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  88:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****      /* Setup wakeup interrupt */
+  89:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DisableInt();
+ 116              		.loc 1 89 0 is_stmt 1
+ 117 0078 0F4B     		ldr	r3, .L3+28
+ 118 007a 4FF40042 		mov	r2, #32768
+ 119 007e 1A60     		str	r2, [r3]
+  90:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_wakeupSource = 0u; /* Clear wakeup event */
+ 120              		.loc 1 90 0
+ 121 0080 0E4B     		ldr	r3, .L3+32
+ 122 0082 0022     		movs	r2, #0
+ 123 0084 1A70     		strb	r2, [r3]
+  91:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     (void) CyIntSetVector(EZI2C_1_ISR_NUMBER, &EZI2C_1_WAKEUP_ISR);
+ 124              		.loc 1 91 0
+ 125 0086 0F20     		movs	r0, #15
+ 126 0088 0D49     		ldr	r1, .L3+36
+ 127 008a FFF7FEFF 		bl	CyIntSetVector
+  92:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_EnableInt();
+ 128              		.loc 1 92 0
+ 129 008e 0D4B     		ldr	r3, .L3+40
+ 130 0090 4FF40042 		mov	r2, #32768
+ 131 0094 1A60     		str	r2, [r3]
+  93:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+  94:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** }
+ 132              		.loc 1 94 0
+ 133 0096 0837     		adds	r7, r7, #8
+ 134              		.cfi_def_cfa_offset 8
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 5
+
+
+ 135 0098 BD46     		mov	sp, r7
+ 136              		.cfi_def_cfa_register 13
+ 137              		@ sp needed
+ 138 009a 80BD     		pop	{r7, pc}
+ 139              	.L4:
+ 140              		.align	2
+ 141              	.L3:
+ 142 009c D6490040 		.word	1073760726
+ 143 00a0 00000000 		.word	EZI2C_1_backup
+ 144 00a4 C8490040 		.word	1073760712
+ 145 00a8 CA490040 		.word	1073760714
+ 146 00ac DB490040 		.word	1073760731
+ 147 00b0 DC490040 		.word	1073760732
+ 148 00b4 31430040 		.word	1073759025
+ 149 00b8 80E100E0 		.word	-536813184
+ 150 00bc 00000000 		.word	EZI2C_1_wakeupSource
+ 151 00c0 00000000 		.word	EZI2C_1_WAKEUP_ISR
+ 152 00c4 00E100E0 		.word	-536813312
+ 153              		.cfi_endproc
+ 154              	.LFE0:
+ 155              		.size	EZI2C_1_SaveConfig, .-EZI2C_1_SaveConfig
+ 156              		.section	.text.EZI2C_1_RestoreConfig,"ax",%progbits
+ 157              		.align	2
+ 158              		.global	EZI2C_1_RestoreConfig
+ 159              		.thumb
+ 160              		.thumb_func
+ 161              		.type	EZI2C_1_RestoreConfig, %function
+ 162              	EZI2C_1_RestoreConfig:
+ 163              	.LFB1:
+  95:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  96:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+  97:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** /*******************************************************************************
+  98:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Function Name: EZI2C_1_RestoreConfig
+  99:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** ********************************************************************************
+ 100:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 101:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Summary:
+ 102:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  The Enable wakeup from Sleep Mode selection influences this function
+ 103:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  implementation:
+ 104:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Unchecked: Restores the component non-retention configuration registers
+ 105:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              to the state they were in before I2C_Sleep() or I2C_SaveConfig()
+ 106:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              was called.
+ 107:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Checked:   Disables the backup regulator of the I2C hardware. Sets up the
+ 108:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              regular component interrupt handler and generates the component
+ 109:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              interrupt if it was wake up source to release the bus and
+ 110:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              continue in-coming I2C transaction.
+ 111:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 112:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Parameters:
+ 113:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ 114:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 115:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Return:
+ 116:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ 117:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 118:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Global variables:
+ 119:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_backup - the non-retention registers are restored from.
+ 120:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 121:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Reentrant:
+ 122:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  No.
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 6
+
+
+ 123:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 124:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Side Effects:
+ 125:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  Calling this function before EZI2C_1_SaveConfig() or
+ 126:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_Sleep() may produce unexpected behavior.
+ 127:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 128:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *******************************************************************************/
+ 129:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** void EZI2C_1_RestoreConfig(void) 
+ 130:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** {
+ 164              		.loc 1 130 0
+ 165              		.cfi_startproc
+ 166              		@ args = 0, pretend = 0, frame = 8
+ 167              		@ frame_needed = 1, uses_anonymous_args = 0
+ 168 0000 80B5     		push	{r7, lr}
+ 169              		.cfi_def_cfa_offset 8
+ 170              		.cfi_offset 7, -8
+ 171              		.cfi_offset 14, -4
+ 172 0002 82B0     		sub	sp, sp, #8
+ 173              		.cfi_def_cfa_offset 16
+ 174 0004 00AF     		add	r7, sp, #0
+ 175              		.cfi_def_cfa_register 7
+ 131:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     uint8 intState;
+ 132:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 133:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     if (0u != (EZI2C_1_PWRSYS_CR1_I2C_BACKUP & EZI2C_1_PWRSYS_CR1_REG))
+ 176              		.loc 1 133 0
+ 177 0006 304B     		ldr	r3, .L9
+ 178 0008 1B78     		ldrb	r3, [r3]
+ 179 000a DBB2     		uxtb	r3, r3
+ 180 000c 03F00403 		and	r3, r3, #4
+ 181 0010 DBB2     		uxtb	r3, r3
+ 182 0012 002B     		cmp	r3, #0
+ 183 0014 10D0     		beq	.L6
+ 134:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Exit from Sleep */
+ 135:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+ 136:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Disable I2C backup regulator */
+ 137:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         intState = CyEnterCriticalSection();
+ 184              		.loc 1 137 0
+ 185 0016 FFF7FEFF 		bl	CyEnterCriticalSection
+ 186 001a 0346     		mov	r3, r0
+ 187 001c FB71     		strb	r3, [r7, #7]
+ 138:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_PWRSYS_CR1_REG &= (uint8) ~EZI2C_1_PWRSYS_CR1_I2C_BACKUP;
+ 188              		.loc 1 138 0
+ 189 001e 2A4A     		ldr	r2, .L9
+ 190 0020 294B     		ldr	r3, .L9
+ 191 0022 1B78     		ldrb	r3, [r3]
+ 192 0024 DBB2     		uxtb	r3, r3
+ 193 0026 23F00403 		bic	r3, r3, #4
+ 194 002a DBB2     		uxtb	r3, r3
+ 195 002c 1370     		strb	r3, [r2]
+ 139:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         CyExitCriticalSection(intState);
+ 196              		.loc 1 139 0
+ 197 002e FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 198 0030 1846     		mov	r0, r3
+ 199 0032 FFF7FEFF 		bl	CyExitCriticalSection
+ 200 0036 2EE0     		b	.L7
+ 201              	.L6:
+ 140:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+ 141:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     else /* Exit from Hibernate (bit is cleared) or wakeup disabled */
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 7
+
+
+ 142:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+ 143:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     #if (EZI2C_1_WAKEUP_ENABLED)
+ 144:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Disable power to I2C block before register restore */
+ 145:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         intState = CyEnterCriticalSection();
+ 202              		.loc 1 145 0
+ 203 0038 FFF7FEFF 		bl	CyEnterCriticalSection
+ 204 003c 0346     		mov	r3, r0
+ 205 003e FB71     		strb	r3, [r7, #7]
+ 146:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_PM_ACT_CFG_REG  &= (uint8) ~EZI2C_1_ACT_PWR_EN;
+ 206              		.loc 1 146 0
+ 207 0040 224A     		ldr	r2, .L9+4
+ 208 0042 224B     		ldr	r3, .L9+4
+ 209 0044 1B78     		ldrb	r3, [r3]
+ 210 0046 DBB2     		uxtb	r3, r3
+ 211 0048 23F00403 		bic	r3, r3, #4
+ 212 004c DBB2     		uxtb	r3, r3
+ 213 004e 1370     		strb	r3, [r2]
+ 147:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_PM_STBY_CFG_REG &= (uint8) ~EZI2C_1_STBY_PWR_EN;
+ 214              		.loc 1 147 0
+ 215 0050 1F4A     		ldr	r2, .L9+8
+ 216 0052 1F4B     		ldr	r3, .L9+8
+ 217 0054 1B78     		ldrb	r3, [r3]
+ 218 0056 DBB2     		uxtb	r3, r3
+ 219 0058 23F00403 		bic	r3, r3, #4
+ 220 005c DBB2     		uxtb	r3, r3
+ 221 005e 1370     		strb	r3, [r2]
+ 148:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         CyExitCriticalSection(intState);
+ 222              		.loc 1 148 0
+ 223 0060 FB79     		ldrb	r3, [r7, #7]	@ zero_extendqisi2
+ 224 0062 1846     		mov	r0, r3
+ 225 0064 FFF7FEFF 		bl	CyExitCriticalSection
+ 149:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 150:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Enable component after restore complete */
+ 151:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_backup.enableState = EZI2C_1_ENABLED;
+ 226              		.loc 1 151 0
+ 227 0068 1A4B     		ldr	r3, .L9+12
+ 228 006a 0122     		movs	r2, #1
+ 229 006c 1A70     		strb	r2, [r3]
+ 152:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+ 153:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 154:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Restore component registers: Hibernate disable power */
+ 155:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_CFG_REG     = EZI2C_1_backup.cfg;
+ 230              		.loc 1 155 0
+ 231 006e 1A4B     		ldr	r3, .L9+16
+ 232 0070 184A     		ldr	r2, .L9+12
+ 233 0072 D278     		ldrb	r2, [r2, #3]	@ zero_extendqisi2
+ 234 0074 1A70     		strb	r2, [r3]
+ 156:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_XCFG_REG    = EZI2C_1_backup.xcfg;
+ 235              		.loc 1 156 0
+ 236 0076 194B     		ldr	r3, .L9+20
+ 237 0078 164A     		ldr	r2, .L9+12
+ 238 007a 5278     		ldrb	r2, [r2, #1]	@ zero_extendqisi2
+ 239 007c 1A70     		strb	r2, [r3]
+ 157:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_ADDR_REG    = EZI2C_1_backup.adr;
+ 240              		.loc 1 157 0
+ 241 007e 184B     		ldr	r3, .L9+24
+ 242 0080 144A     		ldr	r2, .L9+12
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 8
+
+
+ 243 0082 9278     		ldrb	r2, [r2, #2]	@ zero_extendqisi2
+ 244 0084 1A70     		strb	r2, [r3]
+ 158:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_CLKDIV1_REG = EZI2C_1_backup.clkDiv1;
+ 245              		.loc 1 158 0
+ 246 0086 174B     		ldr	r3, .L9+28
+ 247 0088 124A     		ldr	r2, .L9+12
+ 248 008a 1279     		ldrb	r2, [r2, #4]	@ zero_extendqisi2
+ 249 008c 1A70     		strb	r2, [r3]
+ 159:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_CLKDIV2_REG = EZI2C_1_backup.clkDiv2;
+ 250              		.loc 1 159 0
+ 251 008e 164B     		ldr	r3, .L9+32
+ 252 0090 104A     		ldr	r2, .L9+12
+ 253 0092 5279     		ldrb	r2, [r2, #5]	@ zero_extendqisi2
+ 254 0094 1A70     		strb	r2, [r3]
+ 255              	.L7:
+ 160:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+ 161:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 162:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+ 163:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Set I2C interrupt to be pending if component is source of wake up */
+ 164:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_DisableInt();
+ 256              		.loc 1 164 0
+ 257 0096 154B     		ldr	r3, .L9+36
+ 258 0098 4FF40042 		mov	r2, #32768
+ 259 009c 1A60     		str	r2, [r3]
+ 165:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     (void) CyIntSetVector(EZI2C_1_ISR_NUMBER, &EZI2C_1_ISR);
+ 260              		.loc 1 165 0
+ 261 009e 0F20     		movs	r0, #15
+ 262 00a0 1349     		ldr	r1, .L9+40
+ 263 00a2 FFF7FEFF 		bl	CyIntSetVector
+ 166:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     if (0u != EZI2C_1_wakeupSource)
+ 264              		.loc 1 166 0
+ 265 00a6 134B     		ldr	r3, .L9+44
+ 266 00a8 1B78     		ldrb	r3, [r3]
+ 267 00aa DBB2     		uxtb	r3, r3
+ 268 00ac 002B     		cmp	r3, #0
+ 269 00ae 03D0     		beq	.L8
+ 167:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+ 168:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Generate interrupt to release I2C bus */
+ 169:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         (void) CyIntSetPending(EZI2C_1_ISR_NUMBER);
+ 270              		.loc 1 169 0
+ 271 00b0 114B     		ldr	r3, .L9+48
+ 272 00b2 4FF40042 		mov	r2, #32768
+ 273 00b6 1A60     		str	r2, [r3]
+ 274              	.L8:
+ 170:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+ 171:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_EnableInt();
+ 275              		.loc 1 171 0
+ 276 00b8 104B     		ldr	r3, .L9+52
+ 277 00ba 4FF40042 		mov	r2, #32768
+ 278 00be 1A60     		str	r2, [r3]
+ 172:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+ 173:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** }
+ 279              		.loc 1 173 0
+ 280 00c0 0837     		adds	r7, r7, #8
+ 281              		.cfi_def_cfa_offset 8
+ 282 00c2 BD46     		mov	sp, r7
+ 283              		.cfi_def_cfa_register 13
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 9
+
+
+ 284              		@ sp needed
+ 285 00c4 80BD     		pop	{r7, pc}
+ 286              	.L10:
+ 287 00c6 00BF     		.align	2
+ 288              	.L9:
+ 289 00c8 31430040 		.word	1073759025
+ 290 00cc A5430040 		.word	1073759141
+ 291 00d0 B5430040 		.word	1073759157
+ 292 00d4 00000000 		.word	EZI2C_1_backup
+ 293 00d8 D6490040 		.word	1073760726
+ 294 00dc C8490040 		.word	1073760712
+ 295 00e0 CA490040 		.word	1073760714
+ 296 00e4 DB490040 		.word	1073760731
+ 297 00e8 DC490040 		.word	1073760732
+ 298 00ec 80E100E0 		.word	-536813184
+ 299 00f0 00000000 		.word	EZI2C_1_ISR
+ 300 00f4 00000000 		.word	EZI2C_1_wakeupSource
+ 301 00f8 00E200E0 		.word	-536813056
+ 302 00fc 00E100E0 		.word	-536813312
+ 303              		.cfi_endproc
+ 304              	.LFE1:
+ 305              		.size	EZI2C_1_RestoreConfig, .-EZI2C_1_RestoreConfig
+ 306              		.section	.text.EZI2C_1_Sleep,"ax",%progbits
+ 307              		.align	2
+ 308              		.global	EZI2C_1_Sleep
+ 309              		.thumb
+ 310              		.thumb_func
+ 311              		.type	EZI2C_1_Sleep, %function
+ 312              	EZI2C_1_Sleep:
+ 313              	.LFB2:
+ 174:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 175:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 176:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** /*******************************************************************************
+ 177:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Function Name: EZI2C_1_Sleep
+ 178:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** ********************************************************************************
+ 179:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 180:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Summary:
+ 181:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  This is the preferred method to prepare the component before device enters
+ 182:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  sleep mode.
+ 183:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  The Enable wakeup from Sleep Mode selection influences this function
+ 184:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  implementation:
+ 185:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Unchecked: Checks current EZI2C component state, saves it, and disables the
+ 186:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              component by calling EZI2C_Stop() if it is currently enabled.
+ 187:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              EZI2C_SaveConfig() is then called to save the component
+ 188:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              non-retention configuration registers.
+ 189:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Checked:   If a transaction intended for component is in progress during
+ 190:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              this function call, it waits until the current transaction is
+ 191:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              completed. All subsequent I2C traffic intended for component is
+ 192:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              NAKed until the device is put to sleep mode. The address match
+ 193:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              event wakes up the device.
+ 194:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 195:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  Call the EZI2C_Sleep() function before calling the CyPmSleep() or the
+ 196:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  CyPmHibernate() function. Refer to the PSoC Creator System Reference Guide
+ 197:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  for more information about power-management functions.
+ 198:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 199:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Parameters:
+ 200:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 10
+
+
+ 201:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 202:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Return:
+ 203:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ 204:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 205:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Global variables:
+ 206:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_backup - The non retention registers are saved to. Changed
+ 207:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  by EZI2C_1_SaveConfig() function call.
+ 208:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 209:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Reentrant:
+ 210:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  No.
+ 211:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 212:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *******************************************************************************/
+ 213:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** void EZI2C_1_Sleep(void) 
+ 214:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** {
+ 314              		.loc 1 214 0
+ 315              		.cfi_startproc
+ 316              		@ args = 0, pretend = 0, frame = 0
+ 317              		@ frame_needed = 1, uses_anonymous_args = 0
+ 318 0000 80B5     		push	{r7, lr}
+ 319              		.cfi_def_cfa_offset 8
+ 320              		.cfi_offset 7, -8
+ 321              		.cfi_offset 14, -4
+ 322 0002 00AF     		add	r7, sp, #0
+ 323              		.cfi_def_cfa_register 7
+ 215:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+ 216:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Do not re-enable component in EZI2C_1_Wakeup(). It remains enabled as it is wakeup source */
+ 217:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.enableState = EZI2C_1_DISABLED;
+ 324              		.loc 1 217 0
+ 325 0004 024B     		ldr	r3, .L12
+ 326 0006 0022     		movs	r2, #0
+ 327 0008 1A70     		strb	r2, [r3]
+ 218:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #else
+ 219:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     /* Store component state enabled or disable to restore after wakeup */
+ 220:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_backup.enableState = (EZI2C_1_PM_ACT_CFG_REG & EZI2C_1_ACT_PWR_EN);
+ 221:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 222:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     if (0u != EZI2C_1_backup.enableState)
+ 223:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+ 224:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Disable component before enter Sleep */
+ 225:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_Stop();
+ 226:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+ 227:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** #endif /* (EZI2C_1_WAKEUP_ENABLED) */
+ 228:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 229:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_SaveConfig();
+ 328              		.loc 1 229 0
+ 329 000a FFF7FEFF 		bl	EZI2C_1_SaveConfig
+ 230:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** }
+ 330              		.loc 1 230 0
+ 331 000e 80BD     		pop	{r7, pc}
+ 332              	.L13:
+ 333              		.align	2
+ 334              	.L12:
+ 335 0010 00000000 		.word	EZI2C_1_backup
+ 336              		.cfi_endproc
+ 337              	.LFE2:
+ 338              		.size	EZI2C_1_Sleep, .-EZI2C_1_Sleep
+ 339              		.section	.text.EZI2C_1_Wakeup,"ax",%progbits
+ 340              		.align	2
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 11
+
+
+ 341              		.global	EZI2C_1_Wakeup
+ 342              		.thumb
+ 343              		.thumb_func
+ 344              		.type	EZI2C_1_Wakeup, %function
+ 345              	EZI2C_1_Wakeup:
+ 346              	.LFB3:
+ 231:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 232:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 233:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** /*******************************************************************************
+ 234:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Function Name: EZI2C_1_Wakeup
+ 235:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** ********************************************************************************
+ 236:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 237:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Summary:
+ 238:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  This is the preferred method to prepare the component for active mode
+ 239:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  operation (when device exits sleep mode).
+ 240:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  The Enable wakeup from Sleep Mode selection influences this function
+ 241:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  implementation:
+ 242:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Unchecked: Restores the component non-retention configuration registers
+ 243:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              by calling EZI2C_RestoreConfig(). If the component was enabled
+ 244:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              before the EZI2C_Sleep() function was called, EZI2C_Wakeup()
+ 245:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              re-enables it.
+ 246:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *   Checked:   Disables the backup regulator of I2C hardware. The incoming
+ 247:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              transaction continues as soon as the regular EZI2C interrupt
+ 248:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              handler is set up (global interrupts has to be  enabled to
+ 249:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *              service EZI2C component interrupt).
+ 250:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 251:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Parameters:
+ 252:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ 253:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 254:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Return:
+ 255:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  None.
+ 256:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 257:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Global variables:
+ 258:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_backup - The non retention registers are restored from.
+ 259:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 260:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Reentrant:
+ 261:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  No.
+ 262:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 263:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** * Side Effects:
+ 264:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  Calling this function before EZI2C_1_SaveConfig() or
+ 265:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *  EZI2C_1_Sleep() will lead to unpredictable results.
+ 266:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *
+ 267:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** *******************************************************************************/
+ 268:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** void EZI2C_1_Wakeup(void) 
+ 269:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** {
+ 347              		.loc 1 269 0
+ 348              		.cfi_startproc
+ 349              		@ args = 0, pretend = 0, frame = 0
+ 350              		@ frame_needed = 1, uses_anonymous_args = 0
+ 351 0000 80B5     		push	{r7, lr}
+ 352              		.cfi_def_cfa_offset 8
+ 353              		.cfi_offset 7, -8
+ 354              		.cfi_offset 14, -4
+ 355 0002 00AF     		add	r7, sp, #0
+ 356              		.cfi_def_cfa_register 7
+ 270:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     EZI2C_1_RestoreConfig();
+ 357              		.loc 1 270 0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 12
+
+
+ 358 0004 FFF7FEFF 		bl	EZI2C_1_RestoreConfig
+ 271:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** 
+ 272:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     if (0u != EZI2C_1_backup.enableState)
+ 359              		.loc 1 272 0
+ 360 0008 034B     		ldr	r3, .L16
+ 361 000a 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 362 000c 002B     		cmp	r3, #0
+ 363 000e 01D0     		beq	.L14
+ 273:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     {
+ 274:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         /* Enable component as it was enabled before Sleep */
+ 275:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****         EZI2C_1_Enable();
+ 364              		.loc 1 275 0
+ 365 0010 FFF7FEFF 		bl	EZI2C_1_Enable
+ 366              	.L14:
+ 276:.\Generated_Source\PSoC5/EZI2C_1_PM.c ****     }
+ 277:.\Generated_Source\PSoC5/EZI2C_1_PM.c **** }
+ 367              		.loc 1 277 0
+ 368 0014 80BD     		pop	{r7, pc}
+ 369              	.L17:
+ 370 0016 00BF     		.align	2
+ 371              	.L16:
+ 372 0018 00000000 		.word	EZI2C_1_backup
+ 373              		.cfi_endproc
+ 374              	.LFE3:
+ 375              		.size	EZI2C_1_Wakeup, .-EZI2C_1_Wakeup
+ 376              		.text
+ 377              	.Letext0:
+ 378              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 379              		.file 3 ".\\Generated_Source\\PSoC5\\EZI2C_1.h"
+ 380              		.section	.debug_info,"",%progbits
+ 381              	.Ldebug_info0:
+ 382 0000 B0010000 		.4byte	0x1b0
+ 383 0004 0400     		.2byte	0x4
+ 384 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 385 000a 04       		.byte	0x4
+ 386 000b 01       		.uleb128 0x1
+ 387 000c 59000000 		.4byte	.LASF31
+ 388 0010 01       		.byte	0x1
+ 389 0011 20010000 		.4byte	.LASF32
+ 390 0015 82010000 		.4byte	.LASF33
+ 391 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 392 001d 00000000 		.4byte	0
+ 393 0021 00000000 		.4byte	.Ldebug_line0
+ 394 0025 02       		.uleb128 0x2
+ 395 0026 01       		.byte	0x1
+ 396 0027 06       		.byte	0x6
+ 397 0028 6E020000 		.4byte	.LASF0
+ 398 002c 02       		.uleb128 0x2
+ 399 002d 01       		.byte	0x1
+ 400 002e 08       		.byte	0x8
+ 401 002f 1F000000 		.4byte	.LASF1
+ 402 0033 02       		.uleb128 0x2
+ 403 0034 02       		.byte	0x2
+ 404 0035 05       		.byte	0x5
+ 405 0036 2D020000 		.4byte	.LASF2
+ 406 003a 02       		.uleb128 0x2
+ 407 003b 02       		.byte	0x2
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 13
+
+
+ 408 003c 07       		.byte	0x7
+ 409 003d 06000000 		.4byte	.LASF3
+ 410 0041 02       		.uleb128 0x2
+ 411 0042 04       		.byte	0x4
+ 412 0043 05       		.byte	0x5
+ 413 0044 37020000 		.4byte	.LASF4
+ 414 0048 02       		.uleb128 0x2
+ 415 0049 04       		.byte	0x4
+ 416 004a 07       		.byte	0x7
+ 417 004b 41000000 		.4byte	.LASF5
+ 418 004f 02       		.uleb128 0x2
+ 419 0050 08       		.byte	0x8
+ 420 0051 05       		.byte	0x5
+ 421 0052 F0010000 		.4byte	.LASF6
+ 422 0056 02       		.uleb128 0x2
+ 423 0057 08       		.byte	0x8
+ 424 0058 07       		.byte	0x7
+ 425 0059 46010000 		.4byte	.LASF7
+ 426 005d 03       		.uleb128 0x3
+ 427 005e 04       		.byte	0x4
+ 428 005f 05       		.byte	0x5
+ 429 0060 696E7400 		.ascii	"int\000"
+ 430 0064 02       		.uleb128 0x2
+ 431 0065 04       		.byte	0x4
+ 432 0066 07       		.byte	0x7
+ 433 0067 13010000 		.4byte	.LASF8
+ 434 006b 04       		.uleb128 0x4
+ 435 006c 53000000 		.4byte	.LASF9
+ 436 0070 02       		.byte	0x2
+ 437 0071 C2       		.byte	0xc2
+ 438 0072 2C000000 		.4byte	0x2c
+ 439 0076 04       		.uleb128 0x4
+ 440 0077 FC000000 		.4byte	.LASF10
+ 441 007b 02       		.byte	0x2
+ 442 007c C3       		.byte	0xc3
+ 443 007d 3A000000 		.4byte	0x3a
+ 444 0081 04       		.uleb128 0x4
+ 445 0082 03010000 		.4byte	.LASF11
+ 446 0086 02       		.byte	0x2
+ 447 0087 C4       		.byte	0xc4
+ 448 0088 48000000 		.4byte	0x48
+ 449 008c 02       		.uleb128 0x2
+ 450 008d 04       		.byte	0x4
+ 451 008e 04       		.byte	0x4
+ 452 008f 19000000 		.4byte	.LASF12
+ 453 0093 02       		.uleb128 0x2
+ 454 0094 08       		.byte	0x8
+ 455 0095 04       		.byte	0x4
+ 456 0096 E7000000 		.4byte	.LASF13
+ 457 009a 02       		.uleb128 0x2
+ 458 009b 01       		.byte	0x1
+ 459 009c 08       		.byte	0x8
+ 460 009d FE010000 		.4byte	.LASF14
+ 461 00a1 05       		.uleb128 0x5
+ 462 00a2 2D000000 		.4byte	.LASF15
+ 463 00a6 02       		.byte	0x2
+ 464 00a7 6C01     		.2byte	0x16c
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 14
+
+
+ 465 00a9 AD000000 		.4byte	0xad
+ 466 00ad 06       		.uleb128 0x6
+ 467 00ae 6B000000 		.4byte	0x6b
+ 468 00b2 05       		.uleb128 0x5
+ 469 00b3 00000000 		.4byte	.LASF16
+ 470 00b7 02       		.byte	0x2
+ 471 00b8 6E01     		.2byte	0x16e
+ 472 00ba BE000000 		.4byte	0xbe
+ 473 00be 06       		.uleb128 0x6
+ 474 00bf 81000000 		.4byte	0x81
+ 475 00c3 02       		.uleb128 0x2
+ 476 00c4 04       		.byte	0x4
+ 477 00c5 07       		.byte	0x7
+ 478 00c6 E7010000 		.4byte	.LASF17
+ 479 00ca 07       		.uleb128 0x7
+ 480 00cb 06       		.byte	0x6
+ 481 00cc 03       		.byte	0x3
+ 482 00cd 42       		.byte	0x42
+ 483 00ce 1B010000 		.4byte	0x11b
+ 484 00d2 08       		.uleb128 0x8
+ 485 00d3 40020000 		.4byte	.LASF18
+ 486 00d7 03       		.byte	0x3
+ 487 00d8 44       		.byte	0x44
+ 488 00d9 6B000000 		.4byte	0x6b
+ 489 00dd 00       		.byte	0
+ 490 00de 08       		.uleb128 0x8
+ 491 00df 03020000 		.4byte	.LASF19
+ 492 00e3 03       		.byte	0x3
+ 493 00e4 45       		.byte	0x45
+ 494 00e5 6B000000 		.4byte	0x6b
+ 495 00e9 01       		.byte	0x1
+ 496 00ea 09       		.uleb128 0x9
+ 497 00eb 61647200 		.ascii	"adr\000"
+ 498 00ef 03       		.byte	0x3
+ 499 00f0 46       		.byte	0x46
+ 500 00f1 6B000000 		.4byte	0x6b
+ 501 00f5 02       		.byte	0x2
+ 502 00f6 09       		.uleb128 0x9
+ 503 00f7 63666700 		.ascii	"cfg\000"
+ 504 00fb 03       		.byte	0x3
+ 505 00fc 47       		.byte	0x47
+ 506 00fd 6B000000 		.4byte	0x6b
+ 507 0101 03       		.byte	0x3
+ 508 0102 08       		.uleb128 0x8
+ 509 0103 72010000 		.4byte	.LASF20
+ 510 0107 03       		.byte	0x3
+ 511 0108 48       		.byte	0x48
+ 512 0109 6B000000 		.4byte	0x6b
+ 513 010d 04       		.byte	0x4
+ 514 010e 08       		.uleb128 0x8
+ 515 010f 7A010000 		.4byte	.LASF21
+ 516 0113 03       		.byte	0x3
+ 517 0114 49       		.byte	0x49
+ 518 0115 6B000000 		.4byte	0x6b
+ 519 0119 05       		.byte	0x5
+ 520 011a 00       		.byte	0
+ 521 011b 04       		.uleb128 0x4
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 15
+
+
+ 522 011c 08020000 		.4byte	.LASF22
+ 523 0120 03       		.byte	0x3
+ 524 0121 4B       		.byte	0x4b
+ 525 0122 CA000000 		.4byte	0xca
+ 526 0126 0A       		.uleb128 0xa
+ 527 0127 5B020000 		.4byte	.LASF23
+ 528 012b 01       		.byte	0x1
+ 529 012c 3C       		.byte	0x3c
+ 530 012d 00000000 		.4byte	.LFB0
+ 531 0131 C8000000 		.4byte	.LFE0-.LFB0
+ 532 0135 01       		.uleb128 0x1
+ 533 0136 9C       		.byte	0x9c
+ 534 0137 4A010000 		.4byte	0x14a
+ 535 013b 0B       		.uleb128 0xb
+ 536 013c 32000000 		.4byte	.LASF25
+ 537 0140 01       		.byte	0x1
+ 538 0141 3F       		.byte	0x3f
+ 539 0142 6B000000 		.4byte	0x6b
+ 540 0146 02       		.uleb128 0x2
+ 541 0147 91       		.byte	0x91
+ 542 0148 77       		.sleb128 -9
+ 543 0149 00       		.byte	0
+ 544 014a 0A       		.uleb128 0xa
+ 545 014b 7A020000 		.4byte	.LASF24
+ 546 014f 01       		.byte	0x1
+ 547 0150 81       		.byte	0x81
+ 548 0151 00000000 		.4byte	.LFB1
+ 549 0155 00010000 		.4byte	.LFE1-.LFB1
+ 550 0159 01       		.uleb128 0x1
+ 551 015a 9C       		.byte	0x9c
+ 552 015b 6E010000 		.4byte	0x16e
+ 553 015f 0B       		.uleb128 0xb
+ 554 0160 0A010000 		.4byte	.LASF26
+ 555 0164 01       		.byte	0x1
+ 556 0165 83       		.byte	0x83
+ 557 0166 6B000000 		.4byte	0x6b
+ 558 016a 02       		.uleb128 0x2
+ 559 016b 91       		.byte	0x91
+ 560 016c 77       		.sleb128 -9
+ 561 016d 00       		.byte	0
+ 562 016e 0C       		.uleb128 0xc
+ 563 016f EE000000 		.4byte	.LASF27
+ 564 0173 01       		.byte	0x1
+ 565 0174 D5       		.byte	0xd5
+ 566 0175 00000000 		.4byte	.LFB2
+ 567 0179 14000000 		.4byte	.LFE2-.LFB2
+ 568 017d 01       		.uleb128 0x1
+ 569 017e 9C       		.byte	0x9c
+ 570 017f 0D       		.uleb128 0xd
+ 571 0180 4C020000 		.4byte	.LASF28
+ 572 0184 01       		.byte	0x1
+ 573 0185 0C01     		.2byte	0x10c
+ 574 0187 00000000 		.4byte	.LFB3
+ 575 018b 1C000000 		.4byte	.LFE3-.LFB3
+ 576 018f 01       		.uleb128 0x1
+ 577 0190 9C       		.byte	0x9c
+ 578 0191 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 16
+
+
+ 579 0192 1E020000 		.4byte	.LASF29
+ 580 0196 01       		.byte	0x1
+ 581 0197 12       		.byte	0x12
+ 582 0198 1B010000 		.4byte	0x11b
+ 583 019c 05       		.uleb128 0x5
+ 584 019d 03       		.byte	0x3
+ 585 019e 00000000 		.4byte	EZI2C_1_backup
+ 586 01a2 0E       		.uleb128 0xe
+ 587 01a3 5D010000 		.4byte	.LASF30
+ 588 01a7 01       		.byte	0x1
+ 589 01a8 1D       		.byte	0x1d
+ 590 01a9 AD000000 		.4byte	0xad
+ 591 01ad 05       		.uleb128 0x5
+ 592 01ae 03       		.byte	0x3
+ 593 01af 00000000 		.4byte	EZI2C_1_wakeupSource
+ 594 01b3 00       		.byte	0
+ 595              		.section	.debug_abbrev,"",%progbits
+ 596              	.Ldebug_abbrev0:
+ 597 0000 01       		.uleb128 0x1
+ 598 0001 11       		.uleb128 0x11
+ 599 0002 01       		.byte	0x1
+ 600 0003 25       		.uleb128 0x25
+ 601 0004 0E       		.uleb128 0xe
+ 602 0005 13       		.uleb128 0x13
+ 603 0006 0B       		.uleb128 0xb
+ 604 0007 03       		.uleb128 0x3
+ 605 0008 0E       		.uleb128 0xe
+ 606 0009 1B       		.uleb128 0x1b
+ 607 000a 0E       		.uleb128 0xe
+ 608 000b 55       		.uleb128 0x55
+ 609 000c 17       		.uleb128 0x17
+ 610 000d 11       		.uleb128 0x11
+ 611 000e 01       		.uleb128 0x1
+ 612 000f 10       		.uleb128 0x10
+ 613 0010 17       		.uleb128 0x17
+ 614 0011 00       		.byte	0
+ 615 0012 00       		.byte	0
+ 616 0013 02       		.uleb128 0x2
+ 617 0014 24       		.uleb128 0x24
+ 618 0015 00       		.byte	0
+ 619 0016 0B       		.uleb128 0xb
+ 620 0017 0B       		.uleb128 0xb
+ 621 0018 3E       		.uleb128 0x3e
+ 622 0019 0B       		.uleb128 0xb
+ 623 001a 03       		.uleb128 0x3
+ 624 001b 0E       		.uleb128 0xe
+ 625 001c 00       		.byte	0
+ 626 001d 00       		.byte	0
+ 627 001e 03       		.uleb128 0x3
+ 628 001f 24       		.uleb128 0x24
+ 629 0020 00       		.byte	0
+ 630 0021 0B       		.uleb128 0xb
+ 631 0022 0B       		.uleb128 0xb
+ 632 0023 3E       		.uleb128 0x3e
+ 633 0024 0B       		.uleb128 0xb
+ 634 0025 03       		.uleb128 0x3
+ 635 0026 08       		.uleb128 0x8
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 17
+
+
+ 636 0027 00       		.byte	0
+ 637 0028 00       		.byte	0
+ 638 0029 04       		.uleb128 0x4
+ 639 002a 16       		.uleb128 0x16
+ 640 002b 00       		.byte	0
+ 641 002c 03       		.uleb128 0x3
+ 642 002d 0E       		.uleb128 0xe
+ 643 002e 3A       		.uleb128 0x3a
+ 644 002f 0B       		.uleb128 0xb
+ 645 0030 3B       		.uleb128 0x3b
+ 646 0031 0B       		.uleb128 0xb
+ 647 0032 49       		.uleb128 0x49
+ 648 0033 13       		.uleb128 0x13
+ 649 0034 00       		.byte	0
+ 650 0035 00       		.byte	0
+ 651 0036 05       		.uleb128 0x5
+ 652 0037 16       		.uleb128 0x16
+ 653 0038 00       		.byte	0
+ 654 0039 03       		.uleb128 0x3
+ 655 003a 0E       		.uleb128 0xe
+ 656 003b 3A       		.uleb128 0x3a
+ 657 003c 0B       		.uleb128 0xb
+ 658 003d 3B       		.uleb128 0x3b
+ 659 003e 05       		.uleb128 0x5
+ 660 003f 49       		.uleb128 0x49
+ 661 0040 13       		.uleb128 0x13
+ 662 0041 00       		.byte	0
+ 663 0042 00       		.byte	0
+ 664 0043 06       		.uleb128 0x6
+ 665 0044 35       		.uleb128 0x35
+ 666 0045 00       		.byte	0
+ 667 0046 49       		.uleb128 0x49
+ 668 0047 13       		.uleb128 0x13
+ 669 0048 00       		.byte	0
+ 670 0049 00       		.byte	0
+ 671 004a 07       		.uleb128 0x7
+ 672 004b 13       		.uleb128 0x13
+ 673 004c 01       		.byte	0x1
+ 674 004d 0B       		.uleb128 0xb
+ 675 004e 0B       		.uleb128 0xb
+ 676 004f 3A       		.uleb128 0x3a
+ 677 0050 0B       		.uleb128 0xb
+ 678 0051 3B       		.uleb128 0x3b
+ 679 0052 0B       		.uleb128 0xb
+ 680 0053 01       		.uleb128 0x1
+ 681 0054 13       		.uleb128 0x13
+ 682 0055 00       		.byte	0
+ 683 0056 00       		.byte	0
+ 684 0057 08       		.uleb128 0x8
+ 685 0058 0D       		.uleb128 0xd
+ 686 0059 00       		.byte	0
+ 687 005a 03       		.uleb128 0x3
+ 688 005b 0E       		.uleb128 0xe
+ 689 005c 3A       		.uleb128 0x3a
+ 690 005d 0B       		.uleb128 0xb
+ 691 005e 3B       		.uleb128 0x3b
+ 692 005f 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 18
+
+
+ 693 0060 49       		.uleb128 0x49
+ 694 0061 13       		.uleb128 0x13
+ 695 0062 38       		.uleb128 0x38
+ 696 0063 0B       		.uleb128 0xb
+ 697 0064 00       		.byte	0
+ 698 0065 00       		.byte	0
+ 699 0066 09       		.uleb128 0x9
+ 700 0067 0D       		.uleb128 0xd
+ 701 0068 00       		.byte	0
+ 702 0069 03       		.uleb128 0x3
+ 703 006a 08       		.uleb128 0x8
+ 704 006b 3A       		.uleb128 0x3a
+ 705 006c 0B       		.uleb128 0xb
+ 706 006d 3B       		.uleb128 0x3b
+ 707 006e 0B       		.uleb128 0xb
+ 708 006f 49       		.uleb128 0x49
+ 709 0070 13       		.uleb128 0x13
+ 710 0071 38       		.uleb128 0x38
+ 711 0072 0B       		.uleb128 0xb
+ 712 0073 00       		.byte	0
+ 713 0074 00       		.byte	0
+ 714 0075 0A       		.uleb128 0xa
+ 715 0076 2E       		.uleb128 0x2e
+ 716 0077 01       		.byte	0x1
+ 717 0078 3F       		.uleb128 0x3f
+ 718 0079 19       		.uleb128 0x19
+ 719 007a 03       		.uleb128 0x3
+ 720 007b 0E       		.uleb128 0xe
+ 721 007c 3A       		.uleb128 0x3a
+ 722 007d 0B       		.uleb128 0xb
+ 723 007e 3B       		.uleb128 0x3b
+ 724 007f 0B       		.uleb128 0xb
+ 725 0080 27       		.uleb128 0x27
+ 726 0081 19       		.uleb128 0x19
+ 727 0082 11       		.uleb128 0x11
+ 728 0083 01       		.uleb128 0x1
+ 729 0084 12       		.uleb128 0x12
+ 730 0085 06       		.uleb128 0x6
+ 731 0086 40       		.uleb128 0x40
+ 732 0087 18       		.uleb128 0x18
+ 733 0088 9642     		.uleb128 0x2116
+ 734 008a 19       		.uleb128 0x19
+ 735 008b 01       		.uleb128 0x1
+ 736 008c 13       		.uleb128 0x13
+ 737 008d 00       		.byte	0
+ 738 008e 00       		.byte	0
+ 739 008f 0B       		.uleb128 0xb
+ 740 0090 34       		.uleb128 0x34
+ 741 0091 00       		.byte	0
+ 742 0092 03       		.uleb128 0x3
+ 743 0093 0E       		.uleb128 0xe
+ 744 0094 3A       		.uleb128 0x3a
+ 745 0095 0B       		.uleb128 0xb
+ 746 0096 3B       		.uleb128 0x3b
+ 747 0097 0B       		.uleb128 0xb
+ 748 0098 49       		.uleb128 0x49
+ 749 0099 13       		.uleb128 0x13
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 19
+
+
+ 750 009a 02       		.uleb128 0x2
+ 751 009b 18       		.uleb128 0x18
+ 752 009c 00       		.byte	0
+ 753 009d 00       		.byte	0
+ 754 009e 0C       		.uleb128 0xc
+ 755 009f 2E       		.uleb128 0x2e
+ 756 00a0 00       		.byte	0
+ 757 00a1 3F       		.uleb128 0x3f
+ 758 00a2 19       		.uleb128 0x19
+ 759 00a3 03       		.uleb128 0x3
+ 760 00a4 0E       		.uleb128 0xe
+ 761 00a5 3A       		.uleb128 0x3a
+ 762 00a6 0B       		.uleb128 0xb
+ 763 00a7 3B       		.uleb128 0x3b
+ 764 00a8 0B       		.uleb128 0xb
+ 765 00a9 27       		.uleb128 0x27
+ 766 00aa 19       		.uleb128 0x19
+ 767 00ab 11       		.uleb128 0x11
+ 768 00ac 01       		.uleb128 0x1
+ 769 00ad 12       		.uleb128 0x12
+ 770 00ae 06       		.uleb128 0x6
+ 771 00af 40       		.uleb128 0x40
+ 772 00b0 18       		.uleb128 0x18
+ 773 00b1 9642     		.uleb128 0x2116
+ 774 00b3 19       		.uleb128 0x19
+ 775 00b4 00       		.byte	0
+ 776 00b5 00       		.byte	0
+ 777 00b6 0D       		.uleb128 0xd
+ 778 00b7 2E       		.uleb128 0x2e
+ 779 00b8 00       		.byte	0
+ 780 00b9 3F       		.uleb128 0x3f
+ 781 00ba 19       		.uleb128 0x19
+ 782 00bb 03       		.uleb128 0x3
+ 783 00bc 0E       		.uleb128 0xe
+ 784 00bd 3A       		.uleb128 0x3a
+ 785 00be 0B       		.uleb128 0xb
+ 786 00bf 3B       		.uleb128 0x3b
+ 787 00c0 05       		.uleb128 0x5
+ 788 00c1 27       		.uleb128 0x27
+ 789 00c2 19       		.uleb128 0x19
+ 790 00c3 11       		.uleb128 0x11
+ 791 00c4 01       		.uleb128 0x1
+ 792 00c5 12       		.uleb128 0x12
+ 793 00c6 06       		.uleb128 0x6
+ 794 00c7 40       		.uleb128 0x40
+ 795 00c8 18       		.uleb128 0x18
+ 796 00c9 9642     		.uleb128 0x2116
+ 797 00cb 19       		.uleb128 0x19
+ 798 00cc 00       		.byte	0
+ 799 00cd 00       		.byte	0
+ 800 00ce 0E       		.uleb128 0xe
+ 801 00cf 34       		.uleb128 0x34
+ 802 00d0 00       		.byte	0
+ 803 00d1 03       		.uleb128 0x3
+ 804 00d2 0E       		.uleb128 0xe
+ 805 00d3 3A       		.uleb128 0x3a
+ 806 00d4 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 20
+
+
+ 807 00d5 3B       		.uleb128 0x3b
+ 808 00d6 0B       		.uleb128 0xb
+ 809 00d7 49       		.uleb128 0x49
+ 810 00d8 13       		.uleb128 0x13
+ 811 00d9 3F       		.uleb128 0x3f
+ 812 00da 19       		.uleb128 0x19
+ 813 00db 02       		.uleb128 0x2
+ 814 00dc 18       		.uleb128 0x18
+ 815 00dd 00       		.byte	0
+ 816 00de 00       		.byte	0
+ 817 00df 00       		.byte	0
+ 818              		.section	.debug_aranges,"",%progbits
+ 819 0000 34000000 		.4byte	0x34
+ 820 0004 0200     		.2byte	0x2
+ 821 0006 00000000 		.4byte	.Ldebug_info0
+ 822 000a 04       		.byte	0x4
+ 823 000b 00       		.byte	0
+ 824 000c 0000     		.2byte	0
+ 825 000e 0000     		.2byte	0
+ 826 0010 00000000 		.4byte	.LFB0
+ 827 0014 C8000000 		.4byte	.LFE0-.LFB0
+ 828 0018 00000000 		.4byte	.LFB1
+ 829 001c 00010000 		.4byte	.LFE1-.LFB1
+ 830 0020 00000000 		.4byte	.LFB2
+ 831 0024 14000000 		.4byte	.LFE2-.LFB2
+ 832 0028 00000000 		.4byte	.LFB3
+ 833 002c 1C000000 		.4byte	.LFE3-.LFB3
+ 834 0030 00000000 		.4byte	0
+ 835 0034 00000000 		.4byte	0
+ 836              		.section	.debug_ranges,"",%progbits
+ 837              	.Ldebug_ranges0:
+ 838 0000 00000000 		.4byte	.LFB0
+ 839 0004 C8000000 		.4byte	.LFE0
+ 840 0008 00000000 		.4byte	.LFB1
+ 841 000c 00010000 		.4byte	.LFE1
+ 842 0010 00000000 		.4byte	.LFB2
+ 843 0014 14000000 		.4byte	.LFE2
+ 844 0018 00000000 		.4byte	.LFB3
+ 845 001c 1C000000 		.4byte	.LFE3
+ 846 0020 00000000 		.4byte	0
+ 847 0024 00000000 		.4byte	0
+ 848              		.section	.debug_line,"",%progbits
+ 849              	.Ldebug_line0:
+ 850 0000 CE000000 		.section	.debug_str,"MS",%progbits,1
+ 850      02005600 
+ 850      00000201 
+ 850      FB0E0D00 
+ 850      01010101 
+ 851              	.LASF16:
+ 852 0000 72656733 		.ascii	"reg32\000"
+ 852      3200
+ 853              	.LASF3:
+ 854 0006 73686F72 		.ascii	"short unsigned int\000"
+ 854      7420756E 
+ 854      7369676E 
+ 854      65642069 
+ 854      6E7400
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 21
+
+
+ 855              	.LASF12:
+ 856 0019 666C6F61 		.ascii	"float\000"
+ 856      7400
+ 857              	.LASF1:
+ 858 001f 756E7369 		.ascii	"unsigned char\000"
+ 858      676E6564 
+ 858      20636861 
+ 858      7200
+ 859              	.LASF15:
+ 860 002d 72656738 		.ascii	"reg8\000"
+ 860      00
+ 861              	.LASF25:
+ 862 0032 696E7465 		.ascii	"interruptState\000"
+ 862      72727570 
+ 862      74537461 
+ 862      746500
+ 863              	.LASF5:
+ 864 0041 6C6F6E67 		.ascii	"long unsigned int\000"
+ 864      20756E73 
+ 864      69676E65 
+ 864      6420696E 
+ 864      7400
+ 865              	.LASF9:
+ 866 0053 75696E74 		.ascii	"uint8\000"
+ 866      3800
+ 867              	.LASF31:
+ 868 0059 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 868      4320342E 
+ 868      392E3320 
+ 868      32303135 
+ 868      30333033 
+ 869 008c 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 869      20726576 
+ 869      6973696F 
+ 869      6E203232 
+ 869      31323230 
+ 870 00bf 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 870      66756E63 
+ 870      74696F6E 
+ 870      2D736563 
+ 870      74696F6E 
+ 871              	.LASF13:
+ 872 00e7 646F7562 		.ascii	"double\000"
+ 872      6C6500
+ 873              	.LASF27:
+ 874 00ee 455A4932 		.ascii	"EZI2C_1_Sleep\000"
+ 874      435F315F 
+ 874      536C6565 
+ 874      7000
+ 875              	.LASF10:
+ 876 00fc 75696E74 		.ascii	"uint16\000"
+ 876      313600
+ 877              	.LASF11:
+ 878 0103 75696E74 		.ascii	"uint32\000"
+ 878      333200
+ 879              	.LASF26:
+ 880 010a 696E7453 		.ascii	"intState\000"
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 22
+
+
+ 880      74617465 
+ 880      00
+ 881              	.LASF8:
+ 882 0113 756E7369 		.ascii	"unsigned int\000"
+ 882      676E6564 
+ 882      20696E74 
+ 882      00
+ 883              	.LASF32:
+ 884 0120 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\EZI2C_1_PM.c\000"
+ 884      6E657261 
+ 884      7465645F 
+ 884      536F7572 
+ 884      63655C50 
+ 885              	.LASF7:
+ 886 0146 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 886      206C6F6E 
+ 886      6720756E 
+ 886      7369676E 
+ 886      65642069 
+ 887              	.LASF30:
+ 888 015d 455A4932 		.ascii	"EZI2C_1_wakeupSource\000"
+ 888      435F315F 
+ 888      77616B65 
+ 888      7570536F 
+ 888      75726365 
+ 889              	.LASF20:
+ 890 0172 636C6B44 		.ascii	"clkDiv1\000"
+ 890      69763100 
+ 891              	.LASF21:
+ 892 017a 636C6B44 		.ascii	"clkDiv2\000"
+ 892      69763200 
+ 893              	.LASF33:
+ 894 0182 443A5C44 		.ascii	"D:\\Documents\\Virginia_Tech\\FSAE\\PSOC\\Current S"
+ 894      6F63756D 
+ 894      656E7473 
+ 894      5C566972 
+ 894      67696E69 
+ 895 01b0 656E736F 		.ascii	"ensor\\CE95277 ADC and UART\\VTM16 Current Sensors."
+ 895      725C4345 
+ 895      39353237 
+ 895      37204144 
+ 895      4320616E 
+ 896 01e1 63796473 		.ascii	"cydsn\000"
+ 896      6E00
+ 897              	.LASF17:
+ 898 01e7 73697A65 		.ascii	"sizetype\000"
+ 898      74797065 
+ 898      00
+ 899              	.LASF6:
+ 900 01f0 6C6F6E67 		.ascii	"long long int\000"
+ 900      206C6F6E 
+ 900      6720696E 
+ 900      7400
+ 901              	.LASF14:
+ 902 01fe 63686172 		.ascii	"char\000"
+ 902      00
+ 903              	.LASF19:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccMNBuPc.s 			page 23
+
+
+ 904 0203 78636667 		.ascii	"xcfg\000"
+ 904      00
+ 905              	.LASF22:
+ 906 0208 455A4932 		.ascii	"EZI2C_1_BACKUP_STRUCT\000"
+ 906      435F315F 
+ 906      4241434B 
+ 906      55505F53 
+ 906      54525543 
+ 907              	.LASF29:
+ 908 021e 455A4932 		.ascii	"EZI2C_1_backup\000"
+ 908      435F315F 
+ 908      6261636B 
+ 908      757000
+ 909              	.LASF2:
+ 910 022d 73686F72 		.ascii	"short int\000"
+ 910      7420696E 
+ 910      7400
+ 911              	.LASF4:
+ 912 0237 6C6F6E67 		.ascii	"long int\000"
+ 912      20696E74 
+ 912      00
+ 913              	.LASF18:
+ 914 0240 656E6162 		.ascii	"enableState\000"
+ 914      6C655374 
+ 914      61746500 
+ 915              	.LASF28:
+ 916 024c 455A4932 		.ascii	"EZI2C_1_Wakeup\000"
+ 916      435F315F 
+ 916      57616B65 
+ 916      757000
+ 917              	.LASF23:
+ 918 025b 455A4932 		.ascii	"EZI2C_1_SaveConfig\000"
+ 918      435F315F 
+ 918      53617665 
+ 918      436F6E66 
+ 918      696700
+ 919              	.LASF0:
+ 920 026e 7369676E 		.ascii	"signed char\000"
+ 920      65642063 
+ 920      68617200 
+ 921              	.LASF24:
+ 922 027a 455A4932 		.ascii	"EZI2C_1_RestoreConfig\000"
+ 922      435F315F 
+ 922      52657374 
+ 922      6F726543 
+ 922      6F6E6669 
+ 923              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

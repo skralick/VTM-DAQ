@@ -1,0 +1,81 @@
+--------------- Build Started: 11/18/2015 16:01:59 Project: CE95277 ADC and UART, Configuration: ARM GCC 4.8.4 Debug ---------------
+cydsfit.exe -.appdatapath "C:\Users\Charlie\AppData\Local\Cypress Semiconductor\PSoC Creator\3.1" -.fdsnotice -.fdswarpdepfile=warp_dependencies.txt -.fdselabdepfile=elab_dependencies.txt -.fdsbldfile=generated_files.txt -p "D:\Documents\Virginia_Tech\FSAE\PSOC\Current Sensor\CE95277 ADC and UART\CE95277 ADC and UART.cydsn\CE95277 ADC and UART.cyprj" -d CY8C5888LTI-LP097 -s "D:\Documents\Virginia_Tech\FSAE\PSOC\Current Sensor\CE95277 ADC and UART\CE95277 ADC and UART.cydsn\Generated_Source\PSoC5" -- -yv2 -q10 -ygs -o2 -v3 -.fftcfgtype=LE
+Elaborating Design...
+ADD: sdb.M0065: information: Analog terminal "vdac_ref" on ADC_SAR_SEQ_v2_0 is unconnected.
+ * C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\ADC_SAR_SEQ_v2_0\PSoC5\ADC_SAR_SEQ_v2_0.cysch (Signal: vdac_ref)
+ * C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\ADC_SAR_SEQ_v2_0\PSoC5\ADC_SAR_SEQ_v2_0.cysch (Shape_798)
+ * C:\Program Files (x86)\Cypress\PSoC Creator\3.1\PSoC Creator\psoc\content\cycomponentlibrary\CyComponentLibrary.cylib\ADC_SAR_SEQ_v2_0\PSoC5\ADC_SAR_SEQ_v2_0.cysch (Shape_885)
+HDL Generation ...
+Synthesis ...
+Place and Route ...
+Tech mapping ...
+Analog Placement ...
+Info: apr.M0002: Analog signal "Net_553" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_555" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_557" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_558" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_560" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_562" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_563" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_565" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_567" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_568" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_570" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_572" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_573" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_575" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_577" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_578" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_580" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_582" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_583" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_585" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_587" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_588" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_590" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_592" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_593" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_595" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_597" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_598" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_600" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_602" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_603" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_605" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_607" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_608" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_610" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_612" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_613" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_615" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_617" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_618" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_620" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_622" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_623" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_624" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_625" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_626" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_627" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_628" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_629" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_630" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_631" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_632" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_633" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_634" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_635" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_636" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_637" is connected to one terminal only. (App=cydsfit)
+Info: apr.M0002: Analog signal "Net_638" is connected to one terminal only. (App=cydsfit)
+Log: apr.M0058: The analog placement iterative improvement is 49% done. (App=cydsfit)
+Analog Routing ...
+Analog Code Generation ...
+Digital Placement ...
+Digital Routing ...
+Bitstream Generation ...
+Static timing analysis ...
+API Generation ...
+Dependency Generation ...
+Clean Temporary Files ...
+--------------- Build Succeeded: 11/18/2015 16:02:18 ---------------
