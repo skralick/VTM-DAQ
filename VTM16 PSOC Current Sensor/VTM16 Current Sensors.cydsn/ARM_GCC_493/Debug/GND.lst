@@ -1,0 +1,904 @@
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"GND.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.GND_Write,"ax",%progbits
+  19              		.align	2
+  20              		.global	GND_Write
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	GND_Write, %function
+  24              	GND_Write:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\GND.c"
+   1:.\Generated_Source\PSoC5/GND.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/GND.c **** * File Name: GND.c  
+   3:.\Generated_Source\PSoC5/GND.c **** * Version 2.10
+   4:.\Generated_Source\PSoC5/GND.c **** *
+   5:.\Generated_Source\PSoC5/GND.c **** * Description:
+   6:.\Generated_Source\PSoC5/GND.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:.\Generated_Source\PSoC5/GND.c **** *
+   8:.\Generated_Source\PSoC5/GND.c **** * Note:
+   9:.\Generated_Source\PSoC5/GND.c **** *
+  10:.\Generated_Source\PSoC5/GND.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/GND.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/GND.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:.\Generated_Source\PSoC5/GND.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:.\Generated_Source\PSoC5/GND.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/GND.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/GND.c **** 
+  17:.\Generated_Source\PSoC5/GND.c **** #include "cytypes.h"
+  18:.\Generated_Source\PSoC5/GND.c **** #include "GND.h"
+  19:.\Generated_Source\PSoC5/GND.c **** 
+  20:.\Generated_Source\PSoC5/GND.c **** /* APIs are not generated for P15[7:6] on PSoC 5 */
+  21:.\Generated_Source\PSoC5/GND.c **** #if !(CY_PSOC5A &&\
+  22:.\Generated_Source\PSoC5/GND.c **** 	 GND__PORT == 15 && ((GND__MASK & 0xC0) != 0))
+  23:.\Generated_Source\PSoC5/GND.c **** 
+  24:.\Generated_Source\PSoC5/GND.c **** 
+  25:.\Generated_Source\PSoC5/GND.c **** /*******************************************************************************
+  26:.\Generated_Source\PSoC5/GND.c **** * Function Name: GND_Write
+  27:.\Generated_Source\PSoC5/GND.c **** ********************************************************************************
+  28:.\Generated_Source\PSoC5/GND.c **** *
+  29:.\Generated_Source\PSoC5/GND.c **** * Summary:
+  30:.\Generated_Source\PSoC5/GND.c **** *  Assign a new value to the digital port's data output register.  
+  31:.\Generated_Source\PSoC5/GND.c **** *
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/GND.c **** * Parameters:  
+  33:.\Generated_Source\PSoC5/GND.c **** *  prtValue:  The value to be assigned to the Digital Port. 
+  34:.\Generated_Source\PSoC5/GND.c **** *
+  35:.\Generated_Source\PSoC5/GND.c **** * Return: 
+  36:.\Generated_Source\PSoC5/GND.c **** *  None
+  37:.\Generated_Source\PSoC5/GND.c **** *  
+  38:.\Generated_Source\PSoC5/GND.c **** *******************************************************************************/
+  39:.\Generated_Source\PSoC5/GND.c **** void GND_Write(uint8 value) 
+  40:.\Generated_Source\PSoC5/GND.c **** {
+  27              		.loc 1 40 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 85B0     		sub	sp, sp, #20
+  36              		.cfi_def_cfa_offset 24
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 0346     		mov	r3, r0
+  40 0008 FB71     		strb	r3, [r7, #7]
+  41:.\Generated_Source\PSoC5/GND.c ****     uint8 staticBits = (GND_DR & (uint8)(~GND_MASK));
+  41              		.loc 1 41 0
+  42 000a 0A4B     		ldr	r3, .L2
+  43 000c 1B78     		ldrb	r3, [r3]
+  44 000e DBB2     		uxtb	r3, r3
+  45 0010 23F01F03 		bic	r3, r3, #31
+  46 0014 FB73     		strb	r3, [r7, #15]
+  42:.\Generated_Source\PSoC5/GND.c ****     GND_DR = staticBits | ((uint8)(value << GND_SHIFT) & GND_MASK);
+  47              		.loc 1 42 0
+  48 0016 0749     		ldr	r1, .L2
+  49 0018 FB79     		ldrb	r3, [r7, #7]
+  50 001a 03F01F03 		and	r3, r3, #31
+  51 001e DAB2     		uxtb	r2, r3
+  52 0020 FB7B     		ldrb	r3, [r7, #15]
+  53 0022 1343     		orrs	r3, r3, r2
+  54 0024 DBB2     		uxtb	r3, r3
+  55 0026 0B70     		strb	r3, [r1]
+  43:.\Generated_Source\PSoC5/GND.c **** }
+  56              		.loc 1 43 0
+  57 0028 1437     		adds	r7, r7, #20
+  58              		.cfi_def_cfa_offset 4
+  59 002a BD46     		mov	sp, r7
+  60              		.cfi_def_cfa_register 13
+  61              		@ sp needed
+  62 002c 5DF8047B 		ldr	r7, [sp], #4
+  63              		.cfi_restore 7
+  64              		.cfi_def_cfa_offset 0
+  65 0030 7047     		bx	lr
+  66              	.L3:
+  67 0032 00BF     		.align	2
+  68              	.L2:
+  69 0034 20510040 		.word	1073762592
+  70              		.cfi_endproc
+  71              	.LFE0:
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 3
+
+
+  72              		.size	GND_Write, .-GND_Write
+  73              		.section	.text.GND_SetDriveMode,"ax",%progbits
+  74              		.align	2
+  75              		.global	GND_SetDriveMode
+  76              		.thumb
+  77              		.thumb_func
+  78              		.type	GND_SetDriveMode, %function
+  79              	GND_SetDriveMode:
+  80              	.LFB1:
+  44:.\Generated_Source\PSoC5/GND.c **** 
+  45:.\Generated_Source\PSoC5/GND.c **** 
+  46:.\Generated_Source\PSoC5/GND.c **** /*******************************************************************************
+  47:.\Generated_Source\PSoC5/GND.c **** * Function Name: GND_SetDriveMode
+  48:.\Generated_Source\PSoC5/GND.c **** ********************************************************************************
+  49:.\Generated_Source\PSoC5/GND.c **** *
+  50:.\Generated_Source\PSoC5/GND.c **** * Summary:
+  51:.\Generated_Source\PSoC5/GND.c **** *  Change the drive mode on the pins of the port.
+  52:.\Generated_Source\PSoC5/GND.c **** * 
+  53:.\Generated_Source\PSoC5/GND.c **** * Parameters:  
+  54:.\Generated_Source\PSoC5/GND.c **** *  mode:  Change the pins to one of the following drive modes.
+  55:.\Generated_Source\PSoC5/GND.c **** *
+  56:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_STRONG     Strong Drive 
+  57:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_OD_HI      Open Drain, Drives High 
+  58:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_OD_LO      Open Drain, Drives Low 
+  59:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_RES_UP     Resistive Pull Up 
+  60:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_RES_DWN    Resistive Pull Down 
+  61:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_RES_UPDWN  Resistive Pull Up/Down 
+  62:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_DIG_HIZ    High Impedance Digital 
+  63:.\Generated_Source\PSoC5/GND.c **** *  GND_DM_ALG_HIZ    High Impedance Analog 
+  64:.\Generated_Source\PSoC5/GND.c **** *
+  65:.\Generated_Source\PSoC5/GND.c **** * Return: 
+  66:.\Generated_Source\PSoC5/GND.c **** *  None
+  67:.\Generated_Source\PSoC5/GND.c **** *
+  68:.\Generated_Source\PSoC5/GND.c **** *******************************************************************************/
+  69:.\Generated_Source\PSoC5/GND.c **** void GND_SetDriveMode(uint8 mode) 
+  70:.\Generated_Source\PSoC5/GND.c **** {
+  81              		.loc 1 70 0
+  82              		.cfi_startproc
+  83              		@ args = 0, pretend = 0, frame = 8
+  84              		@ frame_needed = 1, uses_anonymous_args = 0
+  85              		@ link register save eliminated.
+  86 0000 80B4     		push	{r7}
+  87              		.cfi_def_cfa_offset 4
+  88              		.cfi_offset 7, -4
+  89 0002 83B0     		sub	sp, sp, #12
+  90              		.cfi_def_cfa_offset 16
+  91 0004 00AF     		add	r7, sp, #0
+  92              		.cfi_def_cfa_register 7
+  93 0006 0346     		mov	r3, r0
+  94 0008 FB71     		strb	r3, [r7, #7]
+  71:.\Generated_Source\PSoC5/GND.c **** 	CyPins_SetPinDriveMode(GND_0, mode);
+  95              		.loc 1 71 0
+  96 000a 2A4B     		ldr	r3, .L5
+  97 000c 294A     		ldr	r2, .L5
+  98 000e 1278     		ldrb	r2, [r2]
+  99 0010 D2B2     		uxtb	r2, r2
+ 100 0012 D2B2     		uxtb	r2, r2
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 4
+
+
+ 101 0014 22F00E02 		bic	r2, r2, #14
+ 102 0018 D1B2     		uxtb	r1, r2
+ 103 001a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 104 001c 02F00E02 		and	r2, r2, #14
+ 105 0020 D2B2     		uxtb	r2, r2
+ 106 0022 0A43     		orrs	r2, r2, r1
+ 107 0024 D2B2     		uxtb	r2, r2
+ 108 0026 D2B2     		uxtb	r2, r2
+ 109 0028 1A70     		strb	r2, [r3]
+  72:.\Generated_Source\PSoC5/GND.c **** 	CyPins_SetPinDriveMode(GND_1, mode);
+ 110              		.loc 1 72 0
+ 111 002a 234B     		ldr	r3, .L5+4
+ 112 002c 224A     		ldr	r2, .L5+4
+ 113 002e 1278     		ldrb	r2, [r2]
+ 114 0030 D2B2     		uxtb	r2, r2
+ 115 0032 D2B2     		uxtb	r2, r2
+ 116 0034 22F00E02 		bic	r2, r2, #14
+ 117 0038 D1B2     		uxtb	r1, r2
+ 118 003a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 119 003c 02F00E02 		and	r2, r2, #14
+ 120 0040 D2B2     		uxtb	r2, r2
+ 121 0042 0A43     		orrs	r2, r2, r1
+ 122 0044 D2B2     		uxtb	r2, r2
+ 123 0046 D2B2     		uxtb	r2, r2
+ 124 0048 1A70     		strb	r2, [r3]
+  73:.\Generated_Source\PSoC5/GND.c **** 	CyPins_SetPinDriveMode(GND_2, mode);
+ 125              		.loc 1 73 0
+ 126 004a 1C4B     		ldr	r3, .L5+8
+ 127 004c 1B4A     		ldr	r2, .L5+8
+ 128 004e 1278     		ldrb	r2, [r2]
+ 129 0050 D2B2     		uxtb	r2, r2
+ 130 0052 D2B2     		uxtb	r2, r2
+ 131 0054 22F00E02 		bic	r2, r2, #14
+ 132 0058 D1B2     		uxtb	r1, r2
+ 133 005a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 134 005c 02F00E02 		and	r2, r2, #14
+ 135 0060 D2B2     		uxtb	r2, r2
+ 136 0062 0A43     		orrs	r2, r2, r1
+ 137 0064 D2B2     		uxtb	r2, r2
+ 138 0066 D2B2     		uxtb	r2, r2
+ 139 0068 1A70     		strb	r2, [r3]
+  74:.\Generated_Source\PSoC5/GND.c **** 	CyPins_SetPinDriveMode(GND_3, mode);
+ 140              		.loc 1 74 0
+ 141 006a 154B     		ldr	r3, .L5+12
+ 142 006c 144A     		ldr	r2, .L5+12
+ 143 006e 1278     		ldrb	r2, [r2]
+ 144 0070 D2B2     		uxtb	r2, r2
+ 145 0072 D2B2     		uxtb	r2, r2
+ 146 0074 22F00E02 		bic	r2, r2, #14
+ 147 0078 D1B2     		uxtb	r1, r2
+ 148 007a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 149 007c 02F00E02 		and	r2, r2, #14
+ 150 0080 D2B2     		uxtb	r2, r2
+ 151 0082 0A43     		orrs	r2, r2, r1
+ 152 0084 D2B2     		uxtb	r2, r2
+ 153 0086 D2B2     		uxtb	r2, r2
+ 154 0088 1A70     		strb	r2, [r3]
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 5
+
+
+  75:.\Generated_Source\PSoC5/GND.c **** 	CyPins_SetPinDriveMode(GND_4, mode);
+ 155              		.loc 1 75 0
+ 156 008a 0E4B     		ldr	r3, .L5+16
+ 157 008c 0D4A     		ldr	r2, .L5+16
+ 158 008e 1278     		ldrb	r2, [r2]
+ 159 0090 D2B2     		uxtb	r2, r2
+ 160 0092 D2B2     		uxtb	r2, r2
+ 161 0094 22F00E02 		bic	r2, r2, #14
+ 162 0098 D1B2     		uxtb	r1, r2
+ 163 009a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 164 009c 02F00E02 		and	r2, r2, #14
+ 165 00a0 D2B2     		uxtb	r2, r2
+ 166 00a2 0A43     		orrs	r2, r2, r1
+ 167 00a4 D2B2     		uxtb	r2, r2
+ 168 00a6 D2B2     		uxtb	r2, r2
+ 169 00a8 1A70     		strb	r2, [r3]
+  76:.\Generated_Source\PSoC5/GND.c **** }
+ 170              		.loc 1 76 0
+ 171 00aa 0C37     		adds	r7, r7, #12
+ 172              		.cfi_def_cfa_offset 4
+ 173 00ac BD46     		mov	sp, r7
+ 174              		.cfi_def_cfa_register 13
+ 175              		@ sp needed
+ 176 00ae 5DF8047B 		ldr	r7, [sp], #4
+ 177              		.cfi_restore 7
+ 178              		.cfi_def_cfa_offset 0
+ 179 00b2 7047     		bx	lr
+ 180              	.L6:
+ 181              		.align	2
+ 182              	.L5:
+ 183 00b4 10500040 		.word	1073762320
+ 184 00b8 11500040 		.word	1073762321
+ 185 00bc 12500040 		.word	1073762322
+ 186 00c0 13500040 		.word	1073762323
+ 187 00c4 14500040 		.word	1073762324
+ 188              		.cfi_endproc
+ 189              	.LFE1:
+ 190              		.size	GND_SetDriveMode, .-GND_SetDriveMode
+ 191              		.section	.text.GND_Read,"ax",%progbits
+ 192              		.align	2
+ 193              		.global	GND_Read
+ 194              		.thumb
+ 195              		.thumb_func
+ 196              		.type	GND_Read, %function
+ 197              	GND_Read:
+ 198              	.LFB2:
+  77:.\Generated_Source\PSoC5/GND.c **** 
+  78:.\Generated_Source\PSoC5/GND.c **** 
+  79:.\Generated_Source\PSoC5/GND.c **** /*******************************************************************************
+  80:.\Generated_Source\PSoC5/GND.c **** * Function Name: GND_Read
+  81:.\Generated_Source\PSoC5/GND.c **** ********************************************************************************
+  82:.\Generated_Source\PSoC5/GND.c **** *
+  83:.\Generated_Source\PSoC5/GND.c **** * Summary:
+  84:.\Generated_Source\PSoC5/GND.c **** *  Read the current value on the pins of the Digital Port in right justified 
+  85:.\Generated_Source\PSoC5/GND.c **** *  form.
+  86:.\Generated_Source\PSoC5/GND.c **** *
+  87:.\Generated_Source\PSoC5/GND.c **** * Parameters:  
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 6
+
+
+  88:.\Generated_Source\PSoC5/GND.c **** *  None
+  89:.\Generated_Source\PSoC5/GND.c **** *
+  90:.\Generated_Source\PSoC5/GND.c **** * Return: 
+  91:.\Generated_Source\PSoC5/GND.c **** *  Returns the current value of the Digital Port as a right justified number
+  92:.\Generated_Source\PSoC5/GND.c **** *  
+  93:.\Generated_Source\PSoC5/GND.c **** * Note:
+  94:.\Generated_Source\PSoC5/GND.c **** *  Macro GND_ReadPS calls this function. 
+  95:.\Generated_Source\PSoC5/GND.c **** *  
+  96:.\Generated_Source\PSoC5/GND.c **** *******************************************************************************/
+  97:.\Generated_Source\PSoC5/GND.c **** uint8 GND_Read(void) 
+  98:.\Generated_Source\PSoC5/GND.c **** {
+ 199              		.loc 1 98 0
+ 200              		.cfi_startproc
+ 201              		@ args = 0, pretend = 0, frame = 0
+ 202              		@ frame_needed = 1, uses_anonymous_args = 0
+ 203              		@ link register save eliminated.
+ 204 0000 80B4     		push	{r7}
+ 205              		.cfi_def_cfa_offset 4
+ 206              		.cfi_offset 7, -4
+ 207 0002 00AF     		add	r7, sp, #0
+ 208              		.cfi_def_cfa_register 7
+  99:.\Generated_Source\PSoC5/GND.c ****     return (GND_PS & GND_MASK) >> GND_SHIFT;
+ 209              		.loc 1 99 0
+ 210 0004 054B     		ldr	r3, .L9
+ 211 0006 1B78     		ldrb	r3, [r3]
+ 212 0008 DBB2     		uxtb	r3, r3
+ 213 000a 03F01F03 		and	r3, r3, #31
+ 214 000e DBB2     		uxtb	r3, r3
+ 100:.\Generated_Source\PSoC5/GND.c **** }
+ 215              		.loc 1 100 0
+ 216 0010 1846     		mov	r0, r3
+ 217 0012 BD46     		mov	sp, r7
+ 218              		.cfi_def_cfa_register 13
+ 219              		@ sp needed
+ 220 0014 5DF8047B 		ldr	r7, [sp], #4
+ 221              		.cfi_restore 7
+ 222              		.cfi_def_cfa_offset 0
+ 223 0018 7047     		bx	lr
+ 224              	.L10:
+ 225 001a 00BF     		.align	2
+ 226              	.L9:
+ 227 001c 21510040 		.word	1073762593
+ 228              		.cfi_endproc
+ 229              	.LFE2:
+ 230              		.size	GND_Read, .-GND_Read
+ 231              		.section	.text.GND_ReadDataReg,"ax",%progbits
+ 232              		.align	2
+ 233              		.global	GND_ReadDataReg
+ 234              		.thumb
+ 235              		.thumb_func
+ 236              		.type	GND_ReadDataReg, %function
+ 237              	GND_ReadDataReg:
+ 238              	.LFB3:
+ 101:.\Generated_Source\PSoC5/GND.c **** 
+ 102:.\Generated_Source\PSoC5/GND.c **** 
+ 103:.\Generated_Source\PSoC5/GND.c **** /*******************************************************************************
+ 104:.\Generated_Source\PSoC5/GND.c **** * Function Name: GND_ReadDataReg
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 7
+
+
+ 105:.\Generated_Source\PSoC5/GND.c **** ********************************************************************************
+ 106:.\Generated_Source\PSoC5/GND.c **** *
+ 107:.\Generated_Source\PSoC5/GND.c **** * Summary:
+ 108:.\Generated_Source\PSoC5/GND.c **** *  Read the current value assigned to a Digital Port's data output register
+ 109:.\Generated_Source\PSoC5/GND.c **** *
+ 110:.\Generated_Source\PSoC5/GND.c **** * Parameters:  
+ 111:.\Generated_Source\PSoC5/GND.c **** *  None 
+ 112:.\Generated_Source\PSoC5/GND.c **** *
+ 113:.\Generated_Source\PSoC5/GND.c **** * Return: 
+ 114:.\Generated_Source\PSoC5/GND.c **** *  Returns the current value assigned to the Digital Port's data output register
+ 115:.\Generated_Source\PSoC5/GND.c **** *  
+ 116:.\Generated_Source\PSoC5/GND.c **** *******************************************************************************/
+ 117:.\Generated_Source\PSoC5/GND.c **** uint8 GND_ReadDataReg(void) 
+ 118:.\Generated_Source\PSoC5/GND.c **** {
+ 239              		.loc 1 118 0
+ 240              		.cfi_startproc
+ 241              		@ args = 0, pretend = 0, frame = 0
+ 242              		@ frame_needed = 1, uses_anonymous_args = 0
+ 243              		@ link register save eliminated.
+ 244 0000 80B4     		push	{r7}
+ 245              		.cfi_def_cfa_offset 4
+ 246              		.cfi_offset 7, -4
+ 247 0002 00AF     		add	r7, sp, #0
+ 248              		.cfi_def_cfa_register 7
+ 119:.\Generated_Source\PSoC5/GND.c ****     return (GND_DR & GND_MASK) >> GND_SHIFT;
+ 249              		.loc 1 119 0
+ 250 0004 054B     		ldr	r3, .L13
+ 251 0006 1B78     		ldrb	r3, [r3]
+ 252 0008 DBB2     		uxtb	r3, r3
+ 253 000a 03F01F03 		and	r3, r3, #31
+ 254 000e DBB2     		uxtb	r3, r3
+ 120:.\Generated_Source\PSoC5/GND.c **** }
+ 255              		.loc 1 120 0
+ 256 0010 1846     		mov	r0, r3
+ 257 0012 BD46     		mov	sp, r7
+ 258              		.cfi_def_cfa_register 13
+ 259              		@ sp needed
+ 260 0014 5DF8047B 		ldr	r7, [sp], #4
+ 261              		.cfi_restore 7
+ 262              		.cfi_def_cfa_offset 0
+ 263 0018 7047     		bx	lr
+ 264              	.L14:
+ 265 001a 00BF     		.align	2
+ 266              	.L13:
+ 267 001c 20510040 		.word	1073762592
+ 268              		.cfi_endproc
+ 269              	.LFE3:
+ 270              		.size	GND_ReadDataReg, .-GND_ReadDataReg
+ 271              		.text
+ 272              	.Letext0:
+ 273              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 274              		.section	.debug_info,"",%progbits
+ 275              	.Ldebug_info0:
+ 276 0000 19010000 		.4byte	0x119
+ 277 0004 0400     		.2byte	0x4
+ 278 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 279 000a 04       		.byte	0x4
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 8
+
+
+ 280 000b 01       		.uleb128 0x1
+ 281 000c 39000000 		.4byte	.LASF20
+ 282 0010 01       		.byte	0x1
+ 283 0011 00000000 		.4byte	.LASF21
+ 284 0015 C7000000 		.4byte	.LASF22
+ 285 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 286 001d 00000000 		.4byte	0
+ 287 0021 00000000 		.4byte	.Ldebug_line0
+ 288 0025 02       		.uleb128 0x2
+ 289 0026 01       		.byte	0x1
+ 290 0027 06       		.byte	0x6
+ 291 0028 FD010000 		.4byte	.LASF0
+ 292 002c 02       		.uleb128 0x2
+ 293 002d 01       		.byte	0x1
+ 294 002e 08       		.byte	0x8
+ 295 002f 4E010000 		.4byte	.LASF1
+ 296 0033 02       		.uleb128 0x2
+ 297 0034 02       		.byte	0x2
+ 298 0035 05       		.byte	0x5
+ 299 0036 E4010000 		.4byte	.LASF2
+ 300 003a 02       		.uleb128 0x2
+ 301 003b 02       		.byte	0x2
+ 302 003c 07       		.byte	0x7
+ 303 003d 73010000 		.4byte	.LASF3
+ 304 0041 02       		.uleb128 0x2
+ 305 0042 04       		.byte	0x4
+ 306 0043 05       		.byte	0x5
+ 307 0044 F4010000 		.4byte	.LASF4
+ 308 0048 02       		.uleb128 0x2
+ 309 0049 04       		.byte	0x4
+ 310 004a 07       		.byte	0x7
+ 311 004b 61010000 		.4byte	.LASF5
+ 312 004f 02       		.uleb128 0x2
+ 313 0050 08       		.byte	0x8
+ 314 0051 05       		.byte	0x5
+ 315 0052 C0010000 		.4byte	.LASF6
+ 316 0056 02       		.uleb128 0x2
+ 317 0057 08       		.byte	0x8
+ 318 0058 07       		.byte	0x7
+ 319 0059 A4010000 		.4byte	.LASF7
+ 320 005d 03       		.uleb128 0x3
+ 321 005e 04       		.byte	0x4
+ 322 005f 05       		.byte	0x5
+ 323 0060 696E7400 		.ascii	"int\000"
+ 324 0064 02       		.uleb128 0x2
+ 325 0065 04       		.byte	0x4
+ 326 0066 07       		.byte	0x7
+ 327 0067 97010000 		.4byte	.LASF8
+ 328 006b 04       		.uleb128 0x4
+ 329 006c EE010000 		.4byte	.LASF12
+ 330 0070 02       		.byte	0x2
+ 331 0071 C2       		.byte	0xc2
+ 332 0072 2C000000 		.4byte	0x2c
+ 333 0076 02       		.uleb128 0x2
+ 334 0077 04       		.byte	0x4
+ 335 0078 04       		.byte	0x4
+ 336 0079 48010000 		.4byte	.LASF9
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 9
+
+
+ 337 007d 02       		.uleb128 0x2
+ 338 007e 08       		.byte	0x8
+ 339 007f 04       		.byte	0x4
+ 340 0080 90010000 		.4byte	.LASF10
+ 341 0084 02       		.uleb128 0x2
+ 342 0085 01       		.byte	0x1
+ 343 0086 08       		.byte	0x8
+ 344 0087 CE010000 		.4byte	.LASF11
+ 345 008b 05       		.uleb128 0x5
+ 346 008c 5C010000 		.4byte	.LASF13
+ 347 0090 02       		.byte	0x2
+ 348 0091 6C01     		.2byte	0x16c
+ 349 0093 97000000 		.4byte	0x97
+ 350 0097 06       		.uleb128 0x6
+ 351 0098 6B000000 		.4byte	0x6b
+ 352 009c 07       		.uleb128 0x7
+ 353 009d 86010000 		.4byte	.LASF14
+ 354 00a1 01       		.byte	0x1
+ 355 00a2 27       		.byte	0x27
+ 356 00a3 00000000 		.4byte	.LFB0
+ 357 00a7 38000000 		.4byte	.LFE0-.LFB0
+ 358 00ab 01       		.uleb128 0x1
+ 359 00ac 9C       		.byte	0x9c
+ 360 00ad CE000000 		.4byte	0xce
+ 361 00b1 08       		.uleb128 0x8
+ 362 00b2 1F000000 		.4byte	.LASF16
+ 363 00b6 01       		.byte	0x1
+ 364 00b7 27       		.byte	0x27
+ 365 00b8 6B000000 		.4byte	0x6b
+ 366 00bc 02       		.uleb128 0x2
+ 367 00bd 91       		.byte	0x91
+ 368 00be 6F       		.sleb128 -17
+ 369 00bf 09       		.uleb128 0x9
+ 370 00c0 2E000000 		.4byte	.LASF23
+ 371 00c4 01       		.byte	0x1
+ 372 00c5 29       		.byte	0x29
+ 373 00c6 6B000000 		.4byte	0x6b
+ 374 00ca 02       		.uleb128 0x2
+ 375 00cb 91       		.byte	0x91
+ 376 00cc 77       		.sleb128 -9
+ 377 00cd 00       		.byte	0
+ 378 00ce 07       		.uleb128 0x7
+ 379 00cf D3010000 		.4byte	.LASF15
+ 380 00d3 01       		.byte	0x1
+ 381 00d4 45       		.byte	0x45
+ 382 00d5 00000000 		.4byte	.LFB1
+ 383 00d9 C8000000 		.4byte	.LFE1-.LFB1
+ 384 00dd 01       		.uleb128 0x1
+ 385 00de 9C       		.byte	0x9c
+ 386 00df F2000000 		.4byte	0xf2
+ 387 00e3 08       		.uleb128 0x8
+ 388 00e4 BB010000 		.4byte	.LASF17
+ 389 00e8 01       		.byte	0x1
+ 390 00e9 45       		.byte	0x45
+ 391 00ea 6B000000 		.4byte	0x6b
+ 392 00ee 02       		.uleb128 0x2
+ 393 00ef 91       		.byte	0x91
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 10
+
+
+ 394 00f0 77       		.sleb128 -9
+ 395 00f1 00       		.byte	0
+ 396 00f2 0A       		.uleb128 0xa
+ 397 00f3 25000000 		.4byte	.LASF18
+ 398 00f7 01       		.byte	0x1
+ 399 00f8 61       		.byte	0x61
+ 400 00f9 6B000000 		.4byte	0x6b
+ 401 00fd 00000000 		.4byte	.LFB2
+ 402 0101 20000000 		.4byte	.LFE2-.LFB2
+ 403 0105 01       		.uleb128 0x1
+ 404 0106 9C       		.byte	0x9c
+ 405 0107 0A       		.uleb128 0xa
+ 406 0108 38010000 		.4byte	.LASF19
+ 407 010c 01       		.byte	0x1
+ 408 010d 75       		.byte	0x75
+ 409 010e 6B000000 		.4byte	0x6b
+ 410 0112 00000000 		.4byte	.LFB3
+ 411 0116 20000000 		.4byte	.LFE3-.LFB3
+ 412 011a 01       		.uleb128 0x1
+ 413 011b 9C       		.byte	0x9c
+ 414 011c 00       		.byte	0
+ 415              		.section	.debug_abbrev,"",%progbits
+ 416              	.Ldebug_abbrev0:
+ 417 0000 01       		.uleb128 0x1
+ 418 0001 11       		.uleb128 0x11
+ 419 0002 01       		.byte	0x1
+ 420 0003 25       		.uleb128 0x25
+ 421 0004 0E       		.uleb128 0xe
+ 422 0005 13       		.uleb128 0x13
+ 423 0006 0B       		.uleb128 0xb
+ 424 0007 03       		.uleb128 0x3
+ 425 0008 0E       		.uleb128 0xe
+ 426 0009 1B       		.uleb128 0x1b
+ 427 000a 0E       		.uleb128 0xe
+ 428 000b 55       		.uleb128 0x55
+ 429 000c 17       		.uleb128 0x17
+ 430 000d 11       		.uleb128 0x11
+ 431 000e 01       		.uleb128 0x1
+ 432 000f 10       		.uleb128 0x10
+ 433 0010 17       		.uleb128 0x17
+ 434 0011 00       		.byte	0
+ 435 0012 00       		.byte	0
+ 436 0013 02       		.uleb128 0x2
+ 437 0014 24       		.uleb128 0x24
+ 438 0015 00       		.byte	0
+ 439 0016 0B       		.uleb128 0xb
+ 440 0017 0B       		.uleb128 0xb
+ 441 0018 3E       		.uleb128 0x3e
+ 442 0019 0B       		.uleb128 0xb
+ 443 001a 03       		.uleb128 0x3
+ 444 001b 0E       		.uleb128 0xe
+ 445 001c 00       		.byte	0
+ 446 001d 00       		.byte	0
+ 447 001e 03       		.uleb128 0x3
+ 448 001f 24       		.uleb128 0x24
+ 449 0020 00       		.byte	0
+ 450 0021 0B       		.uleb128 0xb
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 11
+
+
+ 451 0022 0B       		.uleb128 0xb
+ 452 0023 3E       		.uleb128 0x3e
+ 453 0024 0B       		.uleb128 0xb
+ 454 0025 03       		.uleb128 0x3
+ 455 0026 08       		.uleb128 0x8
+ 456 0027 00       		.byte	0
+ 457 0028 00       		.byte	0
+ 458 0029 04       		.uleb128 0x4
+ 459 002a 16       		.uleb128 0x16
+ 460 002b 00       		.byte	0
+ 461 002c 03       		.uleb128 0x3
+ 462 002d 0E       		.uleb128 0xe
+ 463 002e 3A       		.uleb128 0x3a
+ 464 002f 0B       		.uleb128 0xb
+ 465 0030 3B       		.uleb128 0x3b
+ 466 0031 0B       		.uleb128 0xb
+ 467 0032 49       		.uleb128 0x49
+ 468 0033 13       		.uleb128 0x13
+ 469 0034 00       		.byte	0
+ 470 0035 00       		.byte	0
+ 471 0036 05       		.uleb128 0x5
+ 472 0037 16       		.uleb128 0x16
+ 473 0038 00       		.byte	0
+ 474 0039 03       		.uleb128 0x3
+ 475 003a 0E       		.uleb128 0xe
+ 476 003b 3A       		.uleb128 0x3a
+ 477 003c 0B       		.uleb128 0xb
+ 478 003d 3B       		.uleb128 0x3b
+ 479 003e 05       		.uleb128 0x5
+ 480 003f 49       		.uleb128 0x49
+ 481 0040 13       		.uleb128 0x13
+ 482 0041 00       		.byte	0
+ 483 0042 00       		.byte	0
+ 484 0043 06       		.uleb128 0x6
+ 485 0044 35       		.uleb128 0x35
+ 486 0045 00       		.byte	0
+ 487 0046 49       		.uleb128 0x49
+ 488 0047 13       		.uleb128 0x13
+ 489 0048 00       		.byte	0
+ 490 0049 00       		.byte	0
+ 491 004a 07       		.uleb128 0x7
+ 492 004b 2E       		.uleb128 0x2e
+ 493 004c 01       		.byte	0x1
+ 494 004d 3F       		.uleb128 0x3f
+ 495 004e 19       		.uleb128 0x19
+ 496 004f 03       		.uleb128 0x3
+ 497 0050 0E       		.uleb128 0xe
+ 498 0051 3A       		.uleb128 0x3a
+ 499 0052 0B       		.uleb128 0xb
+ 500 0053 3B       		.uleb128 0x3b
+ 501 0054 0B       		.uleb128 0xb
+ 502 0055 27       		.uleb128 0x27
+ 503 0056 19       		.uleb128 0x19
+ 504 0057 11       		.uleb128 0x11
+ 505 0058 01       		.uleb128 0x1
+ 506 0059 12       		.uleb128 0x12
+ 507 005a 06       		.uleb128 0x6
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 12
+
+
+ 508 005b 40       		.uleb128 0x40
+ 509 005c 18       		.uleb128 0x18
+ 510 005d 9742     		.uleb128 0x2117
+ 511 005f 19       		.uleb128 0x19
+ 512 0060 01       		.uleb128 0x1
+ 513 0061 13       		.uleb128 0x13
+ 514 0062 00       		.byte	0
+ 515 0063 00       		.byte	0
+ 516 0064 08       		.uleb128 0x8
+ 517 0065 05       		.uleb128 0x5
+ 518 0066 00       		.byte	0
+ 519 0067 03       		.uleb128 0x3
+ 520 0068 0E       		.uleb128 0xe
+ 521 0069 3A       		.uleb128 0x3a
+ 522 006a 0B       		.uleb128 0xb
+ 523 006b 3B       		.uleb128 0x3b
+ 524 006c 0B       		.uleb128 0xb
+ 525 006d 49       		.uleb128 0x49
+ 526 006e 13       		.uleb128 0x13
+ 527 006f 02       		.uleb128 0x2
+ 528 0070 18       		.uleb128 0x18
+ 529 0071 00       		.byte	0
+ 530 0072 00       		.byte	0
+ 531 0073 09       		.uleb128 0x9
+ 532 0074 34       		.uleb128 0x34
+ 533 0075 00       		.byte	0
+ 534 0076 03       		.uleb128 0x3
+ 535 0077 0E       		.uleb128 0xe
+ 536 0078 3A       		.uleb128 0x3a
+ 537 0079 0B       		.uleb128 0xb
+ 538 007a 3B       		.uleb128 0x3b
+ 539 007b 0B       		.uleb128 0xb
+ 540 007c 49       		.uleb128 0x49
+ 541 007d 13       		.uleb128 0x13
+ 542 007e 02       		.uleb128 0x2
+ 543 007f 18       		.uleb128 0x18
+ 544 0080 00       		.byte	0
+ 545 0081 00       		.byte	0
+ 546 0082 0A       		.uleb128 0xa
+ 547 0083 2E       		.uleb128 0x2e
+ 548 0084 00       		.byte	0
+ 549 0085 3F       		.uleb128 0x3f
+ 550 0086 19       		.uleb128 0x19
+ 551 0087 03       		.uleb128 0x3
+ 552 0088 0E       		.uleb128 0xe
+ 553 0089 3A       		.uleb128 0x3a
+ 554 008a 0B       		.uleb128 0xb
+ 555 008b 3B       		.uleb128 0x3b
+ 556 008c 0B       		.uleb128 0xb
+ 557 008d 27       		.uleb128 0x27
+ 558 008e 19       		.uleb128 0x19
+ 559 008f 49       		.uleb128 0x49
+ 560 0090 13       		.uleb128 0x13
+ 561 0091 11       		.uleb128 0x11
+ 562 0092 01       		.uleb128 0x1
+ 563 0093 12       		.uleb128 0x12
+ 564 0094 06       		.uleb128 0x6
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 13
+
+
+ 565 0095 40       		.uleb128 0x40
+ 566 0096 18       		.uleb128 0x18
+ 567 0097 9742     		.uleb128 0x2117
+ 568 0099 19       		.uleb128 0x19
+ 569 009a 00       		.byte	0
+ 570 009b 00       		.byte	0
+ 571 009c 00       		.byte	0
+ 572              		.section	.debug_aranges,"",%progbits
+ 573 0000 34000000 		.4byte	0x34
+ 574 0004 0200     		.2byte	0x2
+ 575 0006 00000000 		.4byte	.Ldebug_info0
+ 576 000a 04       		.byte	0x4
+ 577 000b 00       		.byte	0
+ 578 000c 0000     		.2byte	0
+ 579 000e 0000     		.2byte	0
+ 580 0010 00000000 		.4byte	.LFB0
+ 581 0014 38000000 		.4byte	.LFE0-.LFB0
+ 582 0018 00000000 		.4byte	.LFB1
+ 583 001c C8000000 		.4byte	.LFE1-.LFB1
+ 584 0020 00000000 		.4byte	.LFB2
+ 585 0024 20000000 		.4byte	.LFE2-.LFB2
+ 586 0028 00000000 		.4byte	.LFB3
+ 587 002c 20000000 		.4byte	.LFE3-.LFB3
+ 588 0030 00000000 		.4byte	0
+ 589 0034 00000000 		.4byte	0
+ 590              		.section	.debug_ranges,"",%progbits
+ 591              	.Ldebug_ranges0:
+ 592 0000 00000000 		.4byte	.LFB0
+ 593 0004 38000000 		.4byte	.LFE0
+ 594 0008 00000000 		.4byte	.LFB1
+ 595 000c C8000000 		.4byte	.LFE1
+ 596 0010 00000000 		.4byte	.LFB2
+ 597 0014 20000000 		.4byte	.LFE2
+ 598 0018 00000000 		.4byte	.LFB3
+ 599 001c 20000000 		.4byte	.LFE3
+ 600 0020 00000000 		.4byte	0
+ 601 0024 00000000 		.4byte	0
+ 602              		.section	.debug_line,"",%progbits
+ 603              	.Ldebug_line0:
+ 604 0000 94000000 		.section	.debug_str,"MS",%progbits,1
+ 604      02004200 
+ 604      00000201 
+ 604      FB0E0D00 
+ 604      01010101 
+ 605              	.LASF21:
+ 606 0000 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\GND.c\000"
+ 606      6E657261 
+ 606      7465645F 
+ 606      536F7572 
+ 606      63655C50 
+ 607              	.LASF16:
+ 608 001f 76616C75 		.ascii	"value\000"
+ 608      6500
+ 609              	.LASF18:
+ 610 0025 474E445F 		.ascii	"GND_Read\000"
+ 610      52656164 
+ 610      00
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 14
+
+
+ 611              	.LASF23:
+ 612 002e 73746174 		.ascii	"staticBits\000"
+ 612      69634269 
+ 612      747300
+ 613              	.LASF20:
+ 614 0039 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 614      4320342E 
+ 614      392E3320 
+ 614      32303135 
+ 614      30333033 
+ 615 006c 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 615      20726576 
+ 615      6973696F 
+ 615      6E203232 
+ 615      31323230 
+ 616 009f 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 616      66756E63 
+ 616      74696F6E 
+ 616      2D736563 
+ 616      74696F6E 
+ 617              	.LASF22:
+ 618 00c7 433A5C55 		.ascii	"C:\\Users\\charl\\Documents\\Virginia_Tech\\FSAE\\P"
+ 618      73657273 
+ 618      5C636861 
+ 618      726C5C44 
+ 618      6F63756D 
+ 619 00f4 534F435C 		.ascii	"SOC\\Current Sensor\\CE95277 ADC and UART\\VTM16 Cu"
+ 619      43757272 
+ 619      656E7420 
+ 619      53656E73 
+ 619      6F725C43 
+ 620 0124 7272656E 		.ascii	"rrent Sensors.cydsn\000"
+ 620      74205365 
+ 620      6E736F72 
+ 620      732E6379 
+ 620      64736E00 
+ 621              	.LASF19:
+ 622 0138 474E445F 		.ascii	"GND_ReadDataReg\000"
+ 622      52656164 
+ 622      44617461 
+ 622      52656700 
+ 623              	.LASF9:
+ 624 0148 666C6F61 		.ascii	"float\000"
+ 624      7400
+ 625              	.LASF1:
+ 626 014e 756E7369 		.ascii	"unsigned char\000"
+ 626      676E6564 
+ 626      20636861 
+ 626      7200
+ 627              	.LASF13:
+ 628 015c 72656738 		.ascii	"reg8\000"
+ 628      00
+ 629              	.LASF5:
+ 630 0161 6C6F6E67 		.ascii	"long unsigned int\000"
+ 630      20756E73 
+ 630      69676E65 
+ 630      6420696E 
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 15
+
+
+ 630      7400
+ 631              	.LASF3:
+ 632 0173 73686F72 		.ascii	"short unsigned int\000"
+ 632      7420756E 
+ 632      7369676E 
+ 632      65642069 
+ 632      6E7400
+ 633              	.LASF14:
+ 634 0186 474E445F 		.ascii	"GND_Write\000"
+ 634      57726974 
+ 634      6500
+ 635              	.LASF10:
+ 636 0190 646F7562 		.ascii	"double\000"
+ 636      6C6500
+ 637              	.LASF8:
+ 638 0197 756E7369 		.ascii	"unsigned int\000"
+ 638      676E6564 
+ 638      20696E74 
+ 638      00
+ 639              	.LASF7:
+ 640 01a4 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 640      206C6F6E 
+ 640      6720756E 
+ 640      7369676E 
+ 640      65642069 
+ 641              	.LASF17:
+ 642 01bb 6D6F6465 		.ascii	"mode\000"
+ 642      00
+ 643              	.LASF6:
+ 644 01c0 6C6F6E67 		.ascii	"long long int\000"
+ 644      206C6F6E 
+ 644      6720696E 
+ 644      7400
+ 645              	.LASF11:
+ 646 01ce 63686172 		.ascii	"char\000"
+ 646      00
+ 647              	.LASF15:
+ 648 01d3 474E445F 		.ascii	"GND_SetDriveMode\000"
+ 648      53657444 
+ 648      72697665 
+ 648      4D6F6465 
+ 648      00
+ 649              	.LASF2:
+ 650 01e4 73686F72 		.ascii	"short int\000"
+ 650      7420696E 
+ 650      7400
+ 651              	.LASF12:
+ 652 01ee 75696E74 		.ascii	"uint8\000"
+ 652      3800
+ 653              	.LASF4:
+ 654 01f4 6C6F6E67 		.ascii	"long int\000"
+ 654      20696E74 
+ 654      00
+ 655              	.LASF0:
+ 656 01fd 7369676E 		.ascii	"signed char\000"
+ 656      65642063 
+ 656      68617200 
+ARM GAS  C:\Users\charl\AppData\Local\Temp\ccvo9AHk.s 			page 16
+
+
+ 657              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

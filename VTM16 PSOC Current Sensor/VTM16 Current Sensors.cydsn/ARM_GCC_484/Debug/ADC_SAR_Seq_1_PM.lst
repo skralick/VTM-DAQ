@@ -1,0 +1,735 @@
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"ADC_SAR_Seq_1_PM.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.ADC_SAR_Seq_1_Sleep,"ax",%progbits
+  19              		.align	2
+  20              		.global	ADC_SAR_Seq_1_Sleep
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	ADC_SAR_Seq_1_Sleep, %function
+  24              	ADC_SAR_Seq_1_Sleep:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_PM.c"
+   1:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * File Name: ADC_SAR_Seq_1_PM.c
+   3:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Version 2.0
+   4:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+   5:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Description:
+   6:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  This file contains the setup, control and status commands to support
+   7:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  component operations in low power mode.
+   8:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+   9:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Note:
+  10:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  11:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** ********************************************************************************
+  12:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Copyright 2012-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  13:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * You may use this file only in accordance with the license, terms, conditions,
+  14:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  15:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * the software package with which this file was provided.
+  16:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *******************************************************************************/
+  17:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  18:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** #include "ADC_SAR_Seq_1.h"
+  19:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** #include "ADC_SAR_Seq_1_SAR.h"
+  20:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** #if(ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL)
+  21:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #include "ADC_SAR_Seq_1_IntClock.h"
+  22:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** #endif   /* ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL */
+  23:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  24:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  25:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** /*******************************************************************************
+  26:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Function Name: ADC_SAR_Seq_1_Sleep
+  27:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** ********************************************************************************
+  28:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  29:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Summary:
+  30:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  Stops the ADC operation and saves the configuration registers and component
+  31:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  enable state. Should be called just prior to entering sleep
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  33:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Parameters:
+  34:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  35:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  36:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Return:
+  37:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  38:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  39:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Side Effects:
+  40:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  41:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  42:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Reentrant:
+  43:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  No.
+  44:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  45:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *******************************************************************************/
+  46:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** void ADC_SAR_Seq_1_Sleep(void)
+  47:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** {
+  27              		.loc 1 47 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31 0000 80B5     		push	{r7, lr}
+  32              		.cfi_def_cfa_offset 8
+  33              		.cfi_offset 7, -8
+  34              		.cfi_offset 14, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  48:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_SAR_Stop();
+  37              		.loc 1 48 0
+  38 0004 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Stop
+  49:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_SAR_Sleep();
+  39              		.loc 1 49 0
+  40 0008 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Sleep
+  50:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_Disable();
+  41              		.loc 1 50 0
+  42 000c FFF7FEFF 		bl	ADC_SAR_Seq_1_Disable
+  51:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  52:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #if(ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL)
+  53:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****         ADC_SAR_Seq_1_IntClock_Stop();
+  43              		.loc 1 53 0
+  44 0010 FFF7FEFF 		bl	ADC_SAR_Seq_1_IntClock_Stop
+  54:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #endif   /* ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL */
+  55:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** }
+  45              		.loc 1 55 0
+  46 0014 80BD     		pop	{r7, pc}
+  47              		.cfi_endproc
+  48              	.LFE0:
+  49              		.size	ADC_SAR_Seq_1_Sleep, .-ADC_SAR_Seq_1_Sleep
+  50 0016 00BF     		.section	.text.ADC_SAR_Seq_1_Wakeup,"ax",%progbits
+  51              		.align	2
+  52              		.global	ADC_SAR_Seq_1_Wakeup
+  53              		.thumb
+  54              		.thumb_func
+  55              		.type	ADC_SAR_Seq_1_Wakeup, %function
+  56              	ADC_SAR_Seq_1_Wakeup:
+  57              	.LFB1:
+  56:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  57:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 3
+
+
+  58:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** /*******************************************************************************
+  59:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Function Name: ADC_SAR_Seq_1_Wakeup
+  60:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** ********************************************************************************
+  61:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  62:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Summary:
+  63:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  Restores the component enable state and configuration registers. This should
+  64:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  be called just after awaking from sleep mode
+  65:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  66:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Parameters:
+  67:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  68:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  69:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Return:
+  70:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  71:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  72:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Side Effects:
+  73:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+  74:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  75:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Reentrant:
+  76:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  No.
+  77:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+  78:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *******************************************************************************/
+  79:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** void ADC_SAR_Seq_1_Wakeup(void)
+  80:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** {
+  58              		.loc 1 80 0
+  59              		.cfi_startproc
+  60              		@ args = 0, pretend = 0, frame = 0
+  61              		@ frame_needed = 1, uses_anonymous_args = 0
+  62 0000 80B5     		push	{r7, lr}
+  63              		.cfi_def_cfa_offset 8
+  64              		.cfi_offset 7, -8
+  65              		.cfi_offset 14, -4
+  66 0002 00AF     		add	r7, sp, #0
+  67              		.cfi_def_cfa_register 7
+  81:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_SAR_Wakeup();
+  68              		.loc 1 81 0
+  69 0004 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Wakeup
+  82:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_SAR_Enable();
+  70              		.loc 1 82 0
+  71 0008 FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_Enable
+  83:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  84:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #if(ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL)
+  85:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****         ADC_SAR_Seq_1_IntClock_Start();
+  72              		.loc 1 85 0
+  73 000c FFF7FEFF 		bl	ADC_SAR_Seq_1_IntClock_Start
+  86:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #endif   /* ADC_SAR_Seq_1_CLOCK_SOURCE == ADC_SAR_Seq_1_CLOCK_INTERNAL */
+  87:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  88:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     /* The block is ready to use 10 us after the SAR enable signal is set high. */
+  89:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     CyDelayUs(10u);
+  74              		.loc 1 89 0
+  75 0010 0A20     		movs	r0, #10
+  76 0012 FFF7FEFF 		bl	CyDelayUs
+  90:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     
+  91:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     ADC_SAR_Seq_1_Enable();
+  77              		.loc 1 91 0
+  78 0016 FFF7FEFF 		bl	ADC_SAR_Seq_1_Enable
+  92:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  93:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #if(ADC_SAR_Seq_1_SAMPLE_MODE == ADC_SAR_Seq_1_SAMPLE_MODE_FREE_RUNNING)
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 4
+
+
+  94:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****         ADC_SAR_Seq_1_SAR_StartConvert();
+  79              		.loc 1 94 0
+  80 001a FFF7FEFF 		bl	ADC_SAR_Seq_1_SAR_StartConvert
+  95:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     #endif /* (ADC_SAR_Seq_1_SAMPLE_MODE == ADC_SAR_Seq_1_SAMPLE_MODE_FREE_RUNNING) */
+  96:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+  97:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c ****     (void) CY_GET_REG8(ADC_SAR_Seq_1_STATUS_PTR);
+  81              		.loc 1 97 0
+  82 001e 014B     		ldr	r3, .L3
+  83 0020 1B78     		ldrb	r3, [r3]
+  98:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** }
+  84              		.loc 1 98 0
+  85 0022 80BD     		pop	{r7, pc}
+  86              	.L4:
+  87              		.align	2
+  88              	.L3:
+  89 0024 67640040 		.word	1073767527
+  90              		.cfi_endproc
+  91              	.LFE1:
+  92              		.size	ADC_SAR_Seq_1_Wakeup, .-ADC_SAR_Seq_1_Wakeup
+  93              		.section	.text.ADC_SAR_Seq_1_SaveConfig,"ax",%progbits
+  94              		.align	2
+  95              		.global	ADC_SAR_Seq_1_SaveConfig
+  96              		.thumb
+  97              		.thumb_func
+  98              		.type	ADC_SAR_Seq_1_SaveConfig, %function
+  99              	ADC_SAR_Seq_1_SaveConfig:
+ 100              	.LFB2:
+  99:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ 100:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ 101:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** /*******************************************************************************
+ 102:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Function Name: ADC_SAR_Seq_1_SaveConfig
+ 103:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** ********************************************************************************
+ 104:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 105:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Summary:
+ 106:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  Save the current configuration of ADC non-retention registers
+ 107:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 108:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Parameters:
+ 109:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 110:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 111:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Return:
+ 112:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 113:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 114:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Side Effects:
+ 115:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 116:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 117:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Reentrant:
+ 118:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  No.
+ 119:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 120:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *******************************************************************************/
+ 121:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** void ADC_SAR_Seq_1_SaveConfig(void)
+ 122:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** {
+ 101              		.loc 1 122 0
+ 102              		.cfi_startproc
+ 103              		@ args = 0, pretend = 0, frame = 0
+ 104              		@ frame_needed = 1, uses_anonymous_args = 0
+ 105              		@ link register save eliminated.
+ 106 0000 80B4     		push	{r7}
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 5
+
+
+ 107              		.cfi_def_cfa_offset 4
+ 108              		.cfi_offset 7, -4
+ 109 0002 00AF     		add	r7, sp, #0
+ 110              		.cfi_def_cfa_register 7
+ 123:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ 124:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** }
+ 111              		.loc 1 124 0
+ 112 0004 BD46     		mov	sp, r7
+ 113              		@ sp needed
+ 114 0006 5DF8047B 		ldr	r7, [sp], #4
+ 115 000a 7047     		bx	lr
+ 116              		.cfi_endproc
+ 117              	.LFE2:
+ 118              		.size	ADC_SAR_Seq_1_SaveConfig, .-ADC_SAR_Seq_1_SaveConfig
+ 119              		.section	.text.ADC_SAR_Seq_1_RestoreConfig,"ax",%progbits
+ 120              		.align	2
+ 121              		.global	ADC_SAR_Seq_1_RestoreConfig
+ 122              		.thumb
+ 123              		.thumb_func
+ 124              		.type	ADC_SAR_Seq_1_RestoreConfig, %function
+ 125              	ADC_SAR_Seq_1_RestoreConfig:
+ 126              	.LFB3:
+ 125:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ 126:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ 127:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** /*******************************************************************************
+ 128:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Function Name: ADC_SAR_Seq_1_RestoreConfig
+ 129:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** ********************************************************************************
+ 130:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 131:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Summary:
+ 132:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  Restores the configuration of ADC non-retention registers
+ 133:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 134:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Parameters:
+ 135:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 136:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 137:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Return:
+ 138:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 139:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 140:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Side Effects:
+ 141:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  None.
+ 142:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 143:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** * Reentrant:
+ 144:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *  No.
+ 145:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *
+ 146:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** *******************************************************************************/
+ 147:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** void ADC_SAR_Seq_1_RestoreConfig(void)
+ 148:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** {
+ 127              		.loc 1 148 0
+ 128              		.cfi_startproc
+ 129              		@ args = 0, pretend = 0, frame = 0
+ 130              		@ frame_needed = 1, uses_anonymous_args = 0
+ 131              		@ link register save eliminated.
+ 132 0000 80B4     		push	{r7}
+ 133              		.cfi_def_cfa_offset 4
+ 134              		.cfi_offset 7, -4
+ 135 0002 00AF     		add	r7, sp, #0
+ 136              		.cfi_def_cfa_register 7
+ 149:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 6
+
+
+ 150:.\Generated_Source\PSoC5/ADC_SAR_Seq_1_PM.c **** }
+ 137              		.loc 1 150 0
+ 138 0004 BD46     		mov	sp, r7
+ 139              		@ sp needed
+ 140 0006 5DF8047B 		ldr	r7, [sp], #4
+ 141 000a 7047     		bx	lr
+ 142              		.cfi_endproc
+ 143              	.LFE3:
+ 144              		.size	ADC_SAR_Seq_1_RestoreConfig, .-ADC_SAR_Seq_1_RestoreConfig
+ 145              		.text
+ 146              	.Letext0:
+ 147              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 148              		.section	.debug_info,"",%progbits
+ 149              	.Ldebug_info0:
+ 150 0000 E4000000 		.4byte	0xe4
+ 151 0004 0400     		.2byte	0x4
+ 152 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 153 000a 04       		.byte	0x4
+ 154 000b 01       		.uleb128 0x1
+ 155 000c 73010000 		.4byte	.LASF19
+ 156 0010 01       		.byte	0x1
+ 157 0011 E3000000 		.4byte	.LASF20
+ 158 0015 1B000000 		.4byte	.LASF21
+ 159 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 160 001d 00000000 		.4byte	0
+ 161 0021 00000000 		.4byte	.Ldebug_line0
+ 162 0025 02       		.uleb128 0x2
+ 163 0026 01       		.byte	0x1
+ 164 0027 06       		.byte	0x6
+ 165 0028 29010000 		.4byte	.LASF0
+ 166 002c 02       		.uleb128 0x2
+ 167 002d 01       		.byte	0x1
+ 168 002e 08       		.byte	0x8
+ 169 002f C7000000 		.4byte	.LASF1
+ 170 0033 02       		.uleb128 0x2
+ 171 0034 02       		.byte	0x2
+ 172 0035 05       		.byte	0x5
+ 173 0036 69010000 		.4byte	.LASF2
+ 174 003a 02       		.uleb128 0x2
+ 175 003b 02       		.byte	0x2
+ 176 003c 07       		.byte	0x7
+ 177 003d 16010000 		.4byte	.LASF3
+ 178 0041 02       		.uleb128 0x2
+ 179 0042 04       		.byte	0x4
+ 180 0043 05       		.byte	0x5
+ 181 0044 DA000000 		.4byte	.LASF4
+ 182 0048 02       		.uleb128 0x2
+ 183 0049 04       		.byte	0x4
+ 184 004a 07       		.byte	0x7
+ 185 004b 8A000000 		.4byte	.LASF5
+ 186 004f 02       		.uleb128 0x2
+ 187 0050 08       		.byte	0x8
+ 188 0051 05       		.byte	0x5
+ 189 0052 00000000 		.4byte	.LASF6
+ 190 0056 02       		.uleb128 0x2
+ 191 0057 08       		.byte	0x8
+ 192 0058 07       		.byte	0x7
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 7
+
+
+ 193 0059 9C000000 		.4byte	.LASF7
+ 194 005d 03       		.uleb128 0x3
+ 195 005e 04       		.byte	0x4
+ 196 005f 05       		.byte	0x5
+ 197 0060 696E7400 		.ascii	"int\000"
+ 198 0064 02       		.uleb128 0x2
+ 199 0065 04       		.byte	0x4
+ 200 0066 07       		.byte	0x7
+ 201 0067 0E000000 		.4byte	.LASF8
+ 202 006b 04       		.uleb128 0x4
+ 203 006c 84000000 		.4byte	.LASF12
+ 204 0070 02       		.byte	0x2
+ 205 0071 A1       		.byte	0xa1
+ 206 0072 2C000000 		.4byte	0x2c
+ 207 0076 02       		.uleb128 0x2
+ 208 0077 04       		.byte	0x4
+ 209 0078 04       		.byte	0x4
+ 210 0079 4E010000 		.4byte	.LASF9
+ 211 007d 02       		.uleb128 0x2
+ 212 007e 08       		.byte	0x8
+ 213 007f 04       		.byte	0x4
+ 214 0080 0F010000 		.4byte	.LASF10
+ 215 0084 02       		.uleb128 0x2
+ 216 0085 01       		.byte	0x1
+ 217 0086 08       		.byte	0x8
+ 218 0087 D5000000 		.4byte	.LASF11
+ 219 008b 05       		.uleb128 0x5
+ 220 008c 7F000000 		.4byte	.LASF13
+ 221 0090 02       		.byte	0x2
+ 222 0091 4B01     		.2byte	0x14b
+ 223 0093 97000000 		.4byte	0x97
+ 224 0097 06       		.uleb128 0x6
+ 225 0098 6B000000 		.4byte	0x6b
+ 226 009c 02       		.uleb128 0x2
+ 227 009d 04       		.byte	0x4
+ 228 009e 07       		.byte	0x7
+ 229 009f EF010000 		.4byte	.LASF14
+ 230 00a3 07       		.uleb128 0x7
+ 231 00a4 B3000000 		.4byte	.LASF15
+ 232 00a8 01       		.byte	0x1
+ 233 00a9 2E       		.byte	0x2e
+ 234 00aa 00000000 		.4byte	.LFB0
+ 235 00ae 16000000 		.4byte	.LFE0-.LFB0
+ 236 00b2 01       		.uleb128 0x1
+ 237 00b3 9C       		.byte	0x9c
+ 238 00b4 07       		.uleb128 0x7
+ 239 00b5 54010000 		.4byte	.LASF16
+ 240 00b9 01       		.byte	0x1
+ 241 00ba 4F       		.byte	0x4f
+ 242 00bb 00000000 		.4byte	.LFB1
+ 243 00bf 28000000 		.4byte	.LFE1-.LFB1
+ 244 00c3 01       		.uleb128 0x1
+ 245 00c4 9C       		.byte	0x9c
+ 246 00c5 08       		.uleb128 0x8
+ 247 00c6 35010000 		.4byte	.LASF17
+ 248 00ca 01       		.byte	0x1
+ 249 00cb 79       		.byte	0x79
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 8
+
+
+ 250 00cc 00000000 		.4byte	.LFB2
+ 251 00d0 0C000000 		.4byte	.LFE2-.LFB2
+ 252 00d4 01       		.uleb128 0x1
+ 253 00d5 9C       		.byte	0x9c
+ 254 00d6 08       		.uleb128 0x8
+ 255 00d7 F8010000 		.4byte	.LASF18
+ 256 00db 01       		.byte	0x1
+ 257 00dc 93       		.byte	0x93
+ 258 00dd 00000000 		.4byte	.LFB3
+ 259 00e1 0C000000 		.4byte	.LFE3-.LFB3
+ 260 00e5 01       		.uleb128 0x1
+ 261 00e6 9C       		.byte	0x9c
+ 262 00e7 00       		.byte	0
+ 263              		.section	.debug_abbrev,"",%progbits
+ 264              	.Ldebug_abbrev0:
+ 265 0000 01       		.uleb128 0x1
+ 266 0001 11       		.uleb128 0x11
+ 267 0002 01       		.byte	0x1
+ 268 0003 25       		.uleb128 0x25
+ 269 0004 0E       		.uleb128 0xe
+ 270 0005 13       		.uleb128 0x13
+ 271 0006 0B       		.uleb128 0xb
+ 272 0007 03       		.uleb128 0x3
+ 273 0008 0E       		.uleb128 0xe
+ 274 0009 1B       		.uleb128 0x1b
+ 275 000a 0E       		.uleb128 0xe
+ 276 000b 55       		.uleb128 0x55
+ 277 000c 17       		.uleb128 0x17
+ 278 000d 11       		.uleb128 0x11
+ 279 000e 01       		.uleb128 0x1
+ 280 000f 10       		.uleb128 0x10
+ 281 0010 17       		.uleb128 0x17
+ 282 0011 00       		.byte	0
+ 283 0012 00       		.byte	0
+ 284 0013 02       		.uleb128 0x2
+ 285 0014 24       		.uleb128 0x24
+ 286 0015 00       		.byte	0
+ 287 0016 0B       		.uleb128 0xb
+ 288 0017 0B       		.uleb128 0xb
+ 289 0018 3E       		.uleb128 0x3e
+ 290 0019 0B       		.uleb128 0xb
+ 291 001a 03       		.uleb128 0x3
+ 292 001b 0E       		.uleb128 0xe
+ 293 001c 00       		.byte	0
+ 294 001d 00       		.byte	0
+ 295 001e 03       		.uleb128 0x3
+ 296 001f 24       		.uleb128 0x24
+ 297 0020 00       		.byte	0
+ 298 0021 0B       		.uleb128 0xb
+ 299 0022 0B       		.uleb128 0xb
+ 300 0023 3E       		.uleb128 0x3e
+ 301 0024 0B       		.uleb128 0xb
+ 302 0025 03       		.uleb128 0x3
+ 303 0026 08       		.uleb128 0x8
+ 304 0027 00       		.byte	0
+ 305 0028 00       		.byte	0
+ 306 0029 04       		.uleb128 0x4
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 9
+
+
+ 307 002a 16       		.uleb128 0x16
+ 308 002b 00       		.byte	0
+ 309 002c 03       		.uleb128 0x3
+ 310 002d 0E       		.uleb128 0xe
+ 311 002e 3A       		.uleb128 0x3a
+ 312 002f 0B       		.uleb128 0xb
+ 313 0030 3B       		.uleb128 0x3b
+ 314 0031 0B       		.uleb128 0xb
+ 315 0032 49       		.uleb128 0x49
+ 316 0033 13       		.uleb128 0x13
+ 317 0034 00       		.byte	0
+ 318 0035 00       		.byte	0
+ 319 0036 05       		.uleb128 0x5
+ 320 0037 16       		.uleb128 0x16
+ 321 0038 00       		.byte	0
+ 322 0039 03       		.uleb128 0x3
+ 323 003a 0E       		.uleb128 0xe
+ 324 003b 3A       		.uleb128 0x3a
+ 325 003c 0B       		.uleb128 0xb
+ 326 003d 3B       		.uleb128 0x3b
+ 327 003e 05       		.uleb128 0x5
+ 328 003f 49       		.uleb128 0x49
+ 329 0040 13       		.uleb128 0x13
+ 330 0041 00       		.byte	0
+ 331 0042 00       		.byte	0
+ 332 0043 06       		.uleb128 0x6
+ 333 0044 35       		.uleb128 0x35
+ 334 0045 00       		.byte	0
+ 335 0046 49       		.uleb128 0x49
+ 336 0047 13       		.uleb128 0x13
+ 337 0048 00       		.byte	0
+ 338 0049 00       		.byte	0
+ 339 004a 07       		.uleb128 0x7
+ 340 004b 2E       		.uleb128 0x2e
+ 341 004c 00       		.byte	0
+ 342 004d 3F       		.uleb128 0x3f
+ 343 004e 19       		.uleb128 0x19
+ 344 004f 03       		.uleb128 0x3
+ 345 0050 0E       		.uleb128 0xe
+ 346 0051 3A       		.uleb128 0x3a
+ 347 0052 0B       		.uleb128 0xb
+ 348 0053 3B       		.uleb128 0x3b
+ 349 0054 0B       		.uleb128 0xb
+ 350 0055 27       		.uleb128 0x27
+ 351 0056 19       		.uleb128 0x19
+ 352 0057 11       		.uleb128 0x11
+ 353 0058 01       		.uleb128 0x1
+ 354 0059 12       		.uleb128 0x12
+ 355 005a 06       		.uleb128 0x6
+ 356 005b 40       		.uleb128 0x40
+ 357 005c 18       		.uleb128 0x18
+ 358 005d 9642     		.uleb128 0x2116
+ 359 005f 19       		.uleb128 0x19
+ 360 0060 00       		.byte	0
+ 361 0061 00       		.byte	0
+ 362 0062 08       		.uleb128 0x8
+ 363 0063 2E       		.uleb128 0x2e
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 10
+
+
+ 364 0064 00       		.byte	0
+ 365 0065 3F       		.uleb128 0x3f
+ 366 0066 19       		.uleb128 0x19
+ 367 0067 03       		.uleb128 0x3
+ 368 0068 0E       		.uleb128 0xe
+ 369 0069 3A       		.uleb128 0x3a
+ 370 006a 0B       		.uleb128 0xb
+ 371 006b 3B       		.uleb128 0x3b
+ 372 006c 0B       		.uleb128 0xb
+ 373 006d 27       		.uleb128 0x27
+ 374 006e 19       		.uleb128 0x19
+ 375 006f 11       		.uleb128 0x11
+ 376 0070 01       		.uleb128 0x1
+ 377 0071 12       		.uleb128 0x12
+ 378 0072 06       		.uleb128 0x6
+ 379 0073 40       		.uleb128 0x40
+ 380 0074 18       		.uleb128 0x18
+ 381 0075 9742     		.uleb128 0x2117
+ 382 0077 19       		.uleb128 0x19
+ 383 0078 00       		.byte	0
+ 384 0079 00       		.byte	0
+ 385 007a 00       		.byte	0
+ 386              		.section	.debug_aranges,"",%progbits
+ 387 0000 34000000 		.4byte	0x34
+ 388 0004 0200     		.2byte	0x2
+ 389 0006 00000000 		.4byte	.Ldebug_info0
+ 390 000a 04       		.byte	0x4
+ 391 000b 00       		.byte	0
+ 392 000c 0000     		.2byte	0
+ 393 000e 0000     		.2byte	0
+ 394 0010 00000000 		.4byte	.LFB0
+ 395 0014 16000000 		.4byte	.LFE0-.LFB0
+ 396 0018 00000000 		.4byte	.LFB1
+ 397 001c 28000000 		.4byte	.LFE1-.LFB1
+ 398 0020 00000000 		.4byte	.LFB2
+ 399 0024 0C000000 		.4byte	.LFE2-.LFB2
+ 400 0028 00000000 		.4byte	.LFB3
+ 401 002c 0C000000 		.4byte	.LFE3-.LFB3
+ 402 0030 00000000 		.4byte	0
+ 403 0034 00000000 		.4byte	0
+ 404              		.section	.debug_ranges,"",%progbits
+ 405              	.Ldebug_ranges0:
+ 406 0000 00000000 		.4byte	.LFB0
+ 407 0004 16000000 		.4byte	.LFE0
+ 408 0008 00000000 		.4byte	.LFB1
+ 409 000c 28000000 		.4byte	.LFE1
+ 410 0010 00000000 		.4byte	.LFB2
+ 411 0014 0C000000 		.4byte	.LFE2
+ 412 0018 00000000 		.4byte	.LFB3
+ 413 001c 0C000000 		.4byte	.LFE3
+ 414 0020 00000000 		.4byte	0
+ 415 0024 00000000 		.4byte	0
+ 416              		.section	.debug_line,"",%progbits
+ 417              	.Ldebug_line0:
+ 418 0000 A3000000 		.section	.debug_str,"MS",%progbits,1
+ 418      02004F00 
+ 418      00000201 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 11
+
+
+ 418      FB0E0D00 
+ 418      01010101 
+ 419              	.LASF6:
+ 420 0000 6C6F6E67 		.ascii	"long long int\000"
+ 420      206C6F6E 
+ 420      6720696E 
+ 420      7400
+ 421              	.LASF8:
+ 422 000e 756E7369 		.ascii	"unsigned int\000"
+ 422      676E6564 
+ 422      20696E74 
+ 422      00
+ 423              	.LASF21:
+ 424 001b 443A5C44 		.ascii	"D:\\Documents\\Virginia_Tech\\FSAE\\PSOC\\Current S"
+ 424      6F63756D 
+ 424      656E7473 
+ 424      5C566972 
+ 424      67696E69 
+ 425 0049 656E736F 		.ascii	"ensor\\CE95277 ADC and UART\\CE95277 ADC and UART.c"
+ 425      725C4345 
+ 425      39353237 
+ 425      37204144 
+ 425      4320616E 
+ 426 007a 7964736E 		.ascii	"ydsn\000"
+ 426      00
+ 427              	.LASF13:
+ 428 007f 72656738 		.ascii	"reg8\000"
+ 428      00
+ 429              	.LASF12:
+ 430 0084 75696E74 		.ascii	"uint8\000"
+ 430      3800
+ 431              	.LASF5:
+ 432 008a 6C6F6E67 		.ascii	"long unsigned int\000"
+ 432      20756E73 
+ 432      69676E65 
+ 432      6420696E 
+ 432      7400
+ 433              	.LASF7:
+ 434 009c 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 434      206C6F6E 
+ 434      6720756E 
+ 434      7369676E 
+ 434      65642069 
+ 435              	.LASF15:
+ 436 00b3 4144435F 		.ascii	"ADC_SAR_Seq_1_Sleep\000"
+ 436      5341525F 
+ 436      5365715F 
+ 436      315F536C 
+ 436      65657000 
+ 437              	.LASF1:
+ 438 00c7 756E7369 		.ascii	"unsigned char\000"
+ 438      676E6564 
+ 438      20636861 
+ 438      7200
+ 439              	.LASF11:
+ 440 00d5 63686172 		.ascii	"char\000"
+ 440      00
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 12
+
+
+ 441              	.LASF4:
+ 442 00da 6C6F6E67 		.ascii	"long int\000"
+ 442      20696E74 
+ 442      00
+ 443              	.LASF20:
+ 444 00e3 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\ADC_SAR_Seq_1_PM.c\000"
+ 444      6E657261 
+ 444      7465645F 
+ 444      536F7572 
+ 444      63655C50 
+ 445              	.LASF10:
+ 446 010f 646F7562 		.ascii	"double\000"
+ 446      6C6500
+ 447              	.LASF3:
+ 448 0116 73686F72 		.ascii	"short unsigned int\000"
+ 448      7420756E 
+ 448      7369676E 
+ 448      65642069 
+ 448      6E7400
+ 449              	.LASF0:
+ 450 0129 7369676E 		.ascii	"signed char\000"
+ 450      65642063 
+ 450      68617200 
+ 451              	.LASF17:
+ 452 0135 4144435F 		.ascii	"ADC_SAR_Seq_1_SaveConfig\000"
+ 452      5341525F 
+ 452      5365715F 
+ 452      315F5361 
+ 452      7665436F 
+ 453              	.LASF9:
+ 454 014e 666C6F61 		.ascii	"float\000"
+ 454      7400
+ 455              	.LASF16:
+ 456 0154 4144435F 		.ascii	"ADC_SAR_Seq_1_Wakeup\000"
+ 456      5341525F 
+ 456      5365715F 
+ 456      315F5761 
+ 456      6B657570 
+ 457              	.LASF2:
+ 458 0169 73686F72 		.ascii	"short int\000"
+ 458      7420696E 
+ 458      7400
+ 459              	.LASF19:
+ 460 0173 474E5520 		.ascii	"GNU C 4.8.4 20140526 (release) [ARM/embedded-4_8-br"
+ 460      4320342E 
+ 460      382E3420 
+ 460      32303134 
+ 460      30353236 
+ 461 01a6 616E6368 		.ascii	"anch revision 211358] -mcpu=cortex-m3 -mthumb -g -O"
+ 461      20726576 
+ 461      6973696F 
+ 461      6E203231 
+ 461      31333538 
+ 462 01d9 30202D66 		.ascii	"0 -ffunction-sections\000"
+ 462      66756E63 
+ 462      74696F6E 
+ 462      2D736563 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\cc5bM7bv.s 			page 13
+
+
+ 462      74696F6E 
+ 463              	.LASF14:
+ 464 01ef 73697A65 		.ascii	"sizetype\000"
+ 464      74797065 
+ 464      00
+ 465              	.LASF18:
+ 466 01f8 4144435F 		.ascii	"ADC_SAR_Seq_1_RestoreConfig\000"
+ 466      5341525F 
+ 466      5365715F 
+ 466      315F5265 
+ 466      73746F72 
+ 467              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.8.4 20140526 (release) [ARM/embedded-4_8-br

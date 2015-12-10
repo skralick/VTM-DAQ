@@ -1,0 +1,852 @@
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"Pin_1.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.Pin_1_Write,"ax",%progbits
+  19              		.align	2
+  20              		.global	Pin_1_Write
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	Pin_1_Write, %function
+  24              	Pin_1_Write:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\Pin_1.c"
+   1:.\Generated_Source\PSoC5/Pin_1.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/Pin_1.c **** * File Name: Pin_1.c  
+   3:.\Generated_Source\PSoC5/Pin_1.c **** * Version 2.10
+   4:.\Generated_Source\PSoC5/Pin_1.c **** *
+   5:.\Generated_Source\PSoC5/Pin_1.c **** * Description:
+   6:.\Generated_Source\PSoC5/Pin_1.c **** *  This file contains API to enable firmware control of a Pins component.
+   7:.\Generated_Source\PSoC5/Pin_1.c **** *
+   8:.\Generated_Source\PSoC5/Pin_1.c **** * Note:
+   9:.\Generated_Source\PSoC5/Pin_1.c **** *
+  10:.\Generated_Source\PSoC5/Pin_1.c **** ********************************************************************************
+  11:.\Generated_Source\PSoC5/Pin_1.c **** * Copyright 2008-2014, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/Pin_1.c **** * You may use this file only in accordance with the license, terms, conditions, 
+  13:.\Generated_Source\PSoC5/Pin_1.c **** * disclaimers, and limitations in the end user license agreement accompanying 
+  14:.\Generated_Source\PSoC5/Pin_1.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/Pin_1.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/Pin_1.c **** 
+  17:.\Generated_Source\PSoC5/Pin_1.c **** #include "cytypes.h"
+  18:.\Generated_Source\PSoC5/Pin_1.c **** #include "Pin_1.h"
+  19:.\Generated_Source\PSoC5/Pin_1.c **** 
+  20:.\Generated_Source\PSoC5/Pin_1.c **** /* APIs are not generated for P15[7:6] on PSoC 5 */
+  21:.\Generated_Source\PSoC5/Pin_1.c **** #if !(CY_PSOC5A &&\
+  22:.\Generated_Source\PSoC5/Pin_1.c **** 	 Pin_1__PORT == 15 && ((Pin_1__MASK & 0xC0) != 0))
+  23:.\Generated_Source\PSoC5/Pin_1.c **** 
+  24:.\Generated_Source\PSoC5/Pin_1.c **** 
+  25:.\Generated_Source\PSoC5/Pin_1.c **** /*******************************************************************************
+  26:.\Generated_Source\PSoC5/Pin_1.c **** * Function Name: Pin_1_Write
+  27:.\Generated_Source\PSoC5/Pin_1.c **** ********************************************************************************
+  28:.\Generated_Source\PSoC5/Pin_1.c **** *
+  29:.\Generated_Source\PSoC5/Pin_1.c **** * Summary:
+  30:.\Generated_Source\PSoC5/Pin_1.c **** *  Assign a new value to the digital port's data output register.  
+  31:.\Generated_Source\PSoC5/Pin_1.c **** *
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/Pin_1.c **** * Parameters:  
+  33:.\Generated_Source\PSoC5/Pin_1.c **** *  prtValue:  The value to be assigned to the Digital Port. 
+  34:.\Generated_Source\PSoC5/Pin_1.c **** *
+  35:.\Generated_Source\PSoC5/Pin_1.c **** * Return: 
+  36:.\Generated_Source\PSoC5/Pin_1.c **** *  None
+  37:.\Generated_Source\PSoC5/Pin_1.c **** *  
+  38:.\Generated_Source\PSoC5/Pin_1.c **** *******************************************************************************/
+  39:.\Generated_Source\PSoC5/Pin_1.c **** void Pin_1_Write(uint8 value) 
+  40:.\Generated_Source\PSoC5/Pin_1.c **** {
+  27              		.loc 1 40 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 16
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 85B0     		sub	sp, sp, #20
+  36              		.cfi_def_cfa_offset 24
+  37 0004 00AF     		add	r7, sp, #0
+  38              		.cfi_def_cfa_register 7
+  39 0006 0346     		mov	r3, r0
+  40 0008 FB71     		strb	r3, [r7, #7]
+  41:.\Generated_Source\PSoC5/Pin_1.c ****     uint8 staticBits = (Pin_1_DR & (uint8)(~Pin_1_MASK));
+  41              		.loc 1 41 0
+  42 000a 0B4B     		ldr	r3, .L2
+  43 000c 1B78     		ldrb	r3, [r3]
+  44 000e DBB2     		uxtb	r3, r3
+  45 0010 23F03003 		bic	r3, r3, #48
+  46 0014 FB73     		strb	r3, [r7, #15]
+  42:.\Generated_Source\PSoC5/Pin_1.c ****     Pin_1_DR = staticBits | ((uint8)(value << Pin_1_SHIFT) & Pin_1_MASK);
+  47              		.loc 1 42 0
+  48 0016 0849     		ldr	r1, .L2
+  49 0018 FB79     		ldrb	r3, [r7, #7]
+  50 001a 1B01     		lsls	r3, r3, #4
+  51 001c DBB2     		uxtb	r3, r3
+  52 001e 03F03003 		and	r3, r3, #48
+  53 0022 DAB2     		uxtb	r2, r3
+  54 0024 FB7B     		ldrb	r3, [r7, #15]
+  55 0026 1343     		orrs	r3, r3, r2
+  56 0028 DBB2     		uxtb	r3, r3
+  57 002a 0B70     		strb	r3, [r1]
+  43:.\Generated_Source\PSoC5/Pin_1.c **** }
+  58              		.loc 1 43 0
+  59 002c 1437     		adds	r7, r7, #20
+  60              		.cfi_def_cfa_offset 4
+  61 002e BD46     		mov	sp, r7
+  62              		.cfi_def_cfa_register 13
+  63              		@ sp needed
+  64 0030 5DF8047B 		ldr	r7, [sp], #4
+  65              		.cfi_restore 7
+  66              		.cfi_def_cfa_offset 0
+  67 0034 7047     		bx	lr
+  68              	.L3:
+  69 0036 00BF     		.align	2
+  70              	.L2:
+  71 0038 C0510040 		.word	1073762752
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 3
+
+
+  72              		.cfi_endproc
+  73              	.LFE0:
+  74              		.size	Pin_1_Write, .-Pin_1_Write
+  75              		.section	.text.Pin_1_SetDriveMode,"ax",%progbits
+  76              		.align	2
+  77              		.global	Pin_1_SetDriveMode
+  78              		.thumb
+  79              		.thumb_func
+  80              		.type	Pin_1_SetDriveMode, %function
+  81              	Pin_1_SetDriveMode:
+  82              	.LFB1:
+  44:.\Generated_Source\PSoC5/Pin_1.c **** 
+  45:.\Generated_Source\PSoC5/Pin_1.c **** 
+  46:.\Generated_Source\PSoC5/Pin_1.c **** /*******************************************************************************
+  47:.\Generated_Source\PSoC5/Pin_1.c **** * Function Name: Pin_1_SetDriveMode
+  48:.\Generated_Source\PSoC5/Pin_1.c **** ********************************************************************************
+  49:.\Generated_Source\PSoC5/Pin_1.c **** *
+  50:.\Generated_Source\PSoC5/Pin_1.c **** * Summary:
+  51:.\Generated_Source\PSoC5/Pin_1.c **** *  Change the drive mode on the pins of the port.
+  52:.\Generated_Source\PSoC5/Pin_1.c **** * 
+  53:.\Generated_Source\PSoC5/Pin_1.c **** * Parameters:  
+  54:.\Generated_Source\PSoC5/Pin_1.c **** *  mode:  Change the pins to one of the following drive modes.
+  55:.\Generated_Source\PSoC5/Pin_1.c **** *
+  56:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_STRONG     Strong Drive 
+  57:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_OD_HI      Open Drain, Drives High 
+  58:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_OD_LO      Open Drain, Drives Low 
+  59:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_RES_UP     Resistive Pull Up 
+  60:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_RES_DWN    Resistive Pull Down 
+  61:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_RES_UPDWN  Resistive Pull Up/Down 
+  62:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_DIG_HIZ    High Impedance Digital 
+  63:.\Generated_Source\PSoC5/Pin_1.c **** *  Pin_1_DM_ALG_HIZ    High Impedance Analog 
+  64:.\Generated_Source\PSoC5/Pin_1.c **** *
+  65:.\Generated_Source\PSoC5/Pin_1.c **** * Return: 
+  66:.\Generated_Source\PSoC5/Pin_1.c **** *  None
+  67:.\Generated_Source\PSoC5/Pin_1.c **** *
+  68:.\Generated_Source\PSoC5/Pin_1.c **** *******************************************************************************/
+  69:.\Generated_Source\PSoC5/Pin_1.c **** void Pin_1_SetDriveMode(uint8 mode) 
+  70:.\Generated_Source\PSoC5/Pin_1.c **** {
+  83              		.loc 1 70 0
+  84              		.cfi_startproc
+  85              		@ args = 0, pretend = 0, frame = 8
+  86              		@ frame_needed = 1, uses_anonymous_args = 0
+  87              		@ link register save eliminated.
+  88 0000 80B4     		push	{r7}
+  89              		.cfi_def_cfa_offset 4
+  90              		.cfi_offset 7, -4
+  91 0002 83B0     		sub	sp, sp, #12
+  92              		.cfi_def_cfa_offset 16
+  93 0004 00AF     		add	r7, sp, #0
+  94              		.cfi_def_cfa_register 7
+  95 0006 0346     		mov	r3, r0
+  96 0008 FB71     		strb	r3, [r7, #7]
+  71:.\Generated_Source\PSoC5/Pin_1.c **** 	CyPins_SetPinDriveMode(Pin_1_0, mode);
+  97              		.loc 1 71 0
+  98 000a 124B     		ldr	r3, .L5
+  99 000c 114A     		ldr	r2, .L5
+ 100 000e 1278     		ldrb	r2, [r2]
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 4
+
+
+ 101 0010 D2B2     		uxtb	r2, r2
+ 102 0012 D2B2     		uxtb	r2, r2
+ 103 0014 22F00E02 		bic	r2, r2, #14
+ 104 0018 D1B2     		uxtb	r1, r2
+ 105 001a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 106 001c 02F00E02 		and	r2, r2, #14
+ 107 0020 D2B2     		uxtb	r2, r2
+ 108 0022 0A43     		orrs	r2, r2, r1
+ 109 0024 D2B2     		uxtb	r2, r2
+ 110 0026 D2B2     		uxtb	r2, r2
+ 111 0028 1A70     		strb	r2, [r3]
+  72:.\Generated_Source\PSoC5/Pin_1.c **** 	CyPins_SetPinDriveMode(Pin_1_1, mode);
+ 112              		.loc 1 72 0
+ 113 002a 0B4B     		ldr	r3, .L5+4
+ 114 002c 0A4A     		ldr	r2, .L5+4
+ 115 002e 1278     		ldrb	r2, [r2]
+ 116 0030 D2B2     		uxtb	r2, r2
+ 117 0032 D2B2     		uxtb	r2, r2
+ 118 0034 22F00E02 		bic	r2, r2, #14
+ 119 0038 D1B2     		uxtb	r1, r2
+ 120 003a FA79     		ldrb	r2, [r7, #7]	@ zero_extendqisi2
+ 121 003c 02F00E02 		and	r2, r2, #14
+ 122 0040 D2B2     		uxtb	r2, r2
+ 123 0042 0A43     		orrs	r2, r2, r1
+ 124 0044 D2B2     		uxtb	r2, r2
+ 125 0046 D2B2     		uxtb	r2, r2
+ 126 0048 1A70     		strb	r2, [r3]
+  73:.\Generated_Source\PSoC5/Pin_1.c **** }
+ 127              		.loc 1 73 0
+ 128 004a 0C37     		adds	r7, r7, #12
+ 129              		.cfi_def_cfa_offset 4
+ 130 004c BD46     		mov	sp, r7
+ 131              		.cfi_def_cfa_register 13
+ 132              		@ sp needed
+ 133 004e 5DF8047B 		ldr	r7, [sp], #4
+ 134              		.cfi_restore 7
+ 135              		.cfi_def_cfa_offset 0
+ 136 0052 7047     		bx	lr
+ 137              	.L6:
+ 138              		.align	2
+ 139              	.L5:
+ 140 0054 64500040 		.word	1073762404
+ 141 0058 65500040 		.word	1073762405
+ 142              		.cfi_endproc
+ 143              	.LFE1:
+ 144              		.size	Pin_1_SetDriveMode, .-Pin_1_SetDriveMode
+ 145              		.section	.text.Pin_1_Read,"ax",%progbits
+ 146              		.align	2
+ 147              		.global	Pin_1_Read
+ 148              		.thumb
+ 149              		.thumb_func
+ 150              		.type	Pin_1_Read, %function
+ 151              	Pin_1_Read:
+ 152              	.LFB2:
+  74:.\Generated_Source\PSoC5/Pin_1.c **** 
+  75:.\Generated_Source\PSoC5/Pin_1.c **** 
+  76:.\Generated_Source\PSoC5/Pin_1.c **** /*******************************************************************************
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 5
+
+
+  77:.\Generated_Source\PSoC5/Pin_1.c **** * Function Name: Pin_1_Read
+  78:.\Generated_Source\PSoC5/Pin_1.c **** ********************************************************************************
+  79:.\Generated_Source\PSoC5/Pin_1.c **** *
+  80:.\Generated_Source\PSoC5/Pin_1.c **** * Summary:
+  81:.\Generated_Source\PSoC5/Pin_1.c **** *  Read the current value on the pins of the Digital Port in right justified 
+  82:.\Generated_Source\PSoC5/Pin_1.c **** *  form.
+  83:.\Generated_Source\PSoC5/Pin_1.c **** *
+  84:.\Generated_Source\PSoC5/Pin_1.c **** * Parameters:  
+  85:.\Generated_Source\PSoC5/Pin_1.c **** *  None
+  86:.\Generated_Source\PSoC5/Pin_1.c **** *
+  87:.\Generated_Source\PSoC5/Pin_1.c **** * Return: 
+  88:.\Generated_Source\PSoC5/Pin_1.c **** *  Returns the current value of the Digital Port as a right justified number
+  89:.\Generated_Source\PSoC5/Pin_1.c **** *  
+  90:.\Generated_Source\PSoC5/Pin_1.c **** * Note:
+  91:.\Generated_Source\PSoC5/Pin_1.c **** *  Macro Pin_1_ReadPS calls this function. 
+  92:.\Generated_Source\PSoC5/Pin_1.c **** *  
+  93:.\Generated_Source\PSoC5/Pin_1.c **** *******************************************************************************/
+  94:.\Generated_Source\PSoC5/Pin_1.c **** uint8 Pin_1_Read(void) 
+  95:.\Generated_Source\PSoC5/Pin_1.c **** {
+ 153              		.loc 1 95 0
+ 154              		.cfi_startproc
+ 155              		@ args = 0, pretend = 0, frame = 0
+ 156              		@ frame_needed = 1, uses_anonymous_args = 0
+ 157              		@ link register save eliminated.
+ 158 0000 80B4     		push	{r7}
+ 159              		.cfi_def_cfa_offset 4
+ 160              		.cfi_offset 7, -4
+ 161 0002 00AF     		add	r7, sp, #0
+ 162              		.cfi_def_cfa_register 7
+  96:.\Generated_Source\PSoC5/Pin_1.c ****     return (Pin_1_PS & Pin_1_MASK) >> Pin_1_SHIFT;
+ 163              		.loc 1 96 0
+ 164 0004 054B     		ldr	r3, .L9
+ 165 0006 1B78     		ldrb	r3, [r3]
+ 166 0008 DBB2     		uxtb	r3, r3
+ 167 000a 03F03003 		and	r3, r3, #48
+ 168 000e 1B09     		lsrs	r3, r3, #4
+ 169 0010 DBB2     		uxtb	r3, r3
+  97:.\Generated_Source\PSoC5/Pin_1.c **** }
+ 170              		.loc 1 97 0
+ 171 0012 1846     		mov	r0, r3
+ 172 0014 BD46     		mov	sp, r7
+ 173              		.cfi_def_cfa_register 13
+ 174              		@ sp needed
+ 175 0016 5DF8047B 		ldr	r7, [sp], #4
+ 176              		.cfi_restore 7
+ 177              		.cfi_def_cfa_offset 0
+ 178 001a 7047     		bx	lr
+ 179              	.L10:
+ 180              		.align	2
+ 181              	.L9:
+ 182 001c C1510040 		.word	1073762753
+ 183              		.cfi_endproc
+ 184              	.LFE2:
+ 185              		.size	Pin_1_Read, .-Pin_1_Read
+ 186              		.section	.text.Pin_1_ReadDataReg,"ax",%progbits
+ 187              		.align	2
+ 188              		.global	Pin_1_ReadDataReg
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 6
+
+
+ 189              		.thumb
+ 190              		.thumb_func
+ 191              		.type	Pin_1_ReadDataReg, %function
+ 192              	Pin_1_ReadDataReg:
+ 193              	.LFB3:
+  98:.\Generated_Source\PSoC5/Pin_1.c **** 
+  99:.\Generated_Source\PSoC5/Pin_1.c **** 
+ 100:.\Generated_Source\PSoC5/Pin_1.c **** /*******************************************************************************
+ 101:.\Generated_Source\PSoC5/Pin_1.c **** * Function Name: Pin_1_ReadDataReg
+ 102:.\Generated_Source\PSoC5/Pin_1.c **** ********************************************************************************
+ 103:.\Generated_Source\PSoC5/Pin_1.c **** *
+ 104:.\Generated_Source\PSoC5/Pin_1.c **** * Summary:
+ 105:.\Generated_Source\PSoC5/Pin_1.c **** *  Read the current value assigned to a Digital Port's data output register
+ 106:.\Generated_Source\PSoC5/Pin_1.c **** *
+ 107:.\Generated_Source\PSoC5/Pin_1.c **** * Parameters:  
+ 108:.\Generated_Source\PSoC5/Pin_1.c **** *  None 
+ 109:.\Generated_Source\PSoC5/Pin_1.c **** *
+ 110:.\Generated_Source\PSoC5/Pin_1.c **** * Return: 
+ 111:.\Generated_Source\PSoC5/Pin_1.c **** *  Returns the current value assigned to the Digital Port's data output register
+ 112:.\Generated_Source\PSoC5/Pin_1.c **** *  
+ 113:.\Generated_Source\PSoC5/Pin_1.c **** *******************************************************************************/
+ 114:.\Generated_Source\PSoC5/Pin_1.c **** uint8 Pin_1_ReadDataReg(void) 
+ 115:.\Generated_Source\PSoC5/Pin_1.c **** {
+ 194              		.loc 1 115 0
+ 195              		.cfi_startproc
+ 196              		@ args = 0, pretend = 0, frame = 0
+ 197              		@ frame_needed = 1, uses_anonymous_args = 0
+ 198              		@ link register save eliminated.
+ 199 0000 80B4     		push	{r7}
+ 200              		.cfi_def_cfa_offset 4
+ 201              		.cfi_offset 7, -4
+ 202 0002 00AF     		add	r7, sp, #0
+ 203              		.cfi_def_cfa_register 7
+ 116:.\Generated_Source\PSoC5/Pin_1.c ****     return (Pin_1_DR & Pin_1_MASK) >> Pin_1_SHIFT;
+ 204              		.loc 1 116 0
+ 205 0004 054B     		ldr	r3, .L13
+ 206 0006 1B78     		ldrb	r3, [r3]
+ 207 0008 DBB2     		uxtb	r3, r3
+ 208 000a 03F03003 		and	r3, r3, #48
+ 209 000e 1B09     		lsrs	r3, r3, #4
+ 210 0010 DBB2     		uxtb	r3, r3
+ 117:.\Generated_Source\PSoC5/Pin_1.c **** }
+ 211              		.loc 1 117 0
+ 212 0012 1846     		mov	r0, r3
+ 213 0014 BD46     		mov	sp, r7
+ 214              		.cfi_def_cfa_register 13
+ 215              		@ sp needed
+ 216 0016 5DF8047B 		ldr	r7, [sp], #4
+ 217              		.cfi_restore 7
+ 218              		.cfi_def_cfa_offset 0
+ 219 001a 7047     		bx	lr
+ 220              	.L14:
+ 221              		.align	2
+ 222              	.L13:
+ 223 001c C0510040 		.word	1073762752
+ 224              		.cfi_endproc
+ 225              	.LFE3:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 7
+
+
+ 226              		.size	Pin_1_ReadDataReg, .-Pin_1_ReadDataReg
+ 227              		.text
+ 228              	.Letext0:
+ 229              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 230              		.section	.debug_info,"",%progbits
+ 231              	.Ldebug_info0:
+ 232 0000 19010000 		.4byte	0x119
+ 233 0004 0400     		.2byte	0x4
+ 234 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 235 000a 04       		.byte	0x4
+ 236 000b 01       		.uleb128 0x1
+ 237 000c 1F000000 		.4byte	.LASF20
+ 238 0010 01       		.byte	0x1
+ 239 0011 B3010000 		.4byte	.LASF21
+ 240 0015 39010000 		.4byte	.LASF22
+ 241 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 242 001d 00000000 		.4byte	0
+ 243 0021 00000000 		.4byte	.Ldebug_line0
+ 244 0025 02       		.uleb128 0x2
+ 245 0026 01       		.byte	0x1
+ 246 0027 06       		.byte	0x6
+ 247 0028 EF010000 		.4byte	.LASF0
+ 248 002c 02       		.uleb128 0x2
+ 249 002d 01       		.byte	0x1
+ 250 002e 08       		.byte	0x8
+ 251 002f B3000000 		.4byte	.LASF1
+ 252 0033 02       		.uleb128 0x2
+ 253 0034 02       		.byte	0x2
+ 254 0035 05       		.byte	0x5
+ 255 0036 A3010000 		.4byte	.LASF2
+ 256 003a 02       		.uleb128 0x2
+ 257 003b 02       		.byte	0x2
+ 258 003c 07       		.byte	0x7
+ 259 003d D8000000 		.4byte	.LASF3
+ 260 0041 02       		.uleb128 0x2
+ 261 0042 04       		.byte	0x4
+ 262 0043 05       		.byte	0x5
+ 263 0044 E6010000 		.4byte	.LASF4
+ 264 0048 02       		.uleb128 0x2
+ 265 0049 04       		.byte	0x4
+ 266 004a 07       		.byte	0x7
+ 267 004b C6000000 		.4byte	.LASF5
+ 268 004f 02       		.uleb128 0x2
+ 269 0050 08       		.byte	0x8
+ 270 0051 05       		.byte	0x5
+ 271 0052 00000000 		.4byte	.LASF6
+ 272 0056 02       		.uleb128 0x2
+ 273 0057 08       		.byte	0x8
+ 274 0058 07       		.byte	0x7
+ 275 0059 12010000 		.4byte	.LASF7
+ 276 005d 03       		.uleb128 0x3
+ 277 005e 04       		.byte	0x4
+ 278 005f 05       		.byte	0x5
+ 279 0060 696E7400 		.ascii	"int\000"
+ 280 0064 02       		.uleb128 0x2
+ 281 0065 04       		.byte	0x4
+ 282 0066 07       		.byte	0x7
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 8
+
+
+ 283 0067 05010000 		.4byte	.LASF8
+ 284 006b 04       		.uleb128 0x4
+ 285 006c AD010000 		.4byte	.LASF12
+ 286 0070 02       		.byte	0x2
+ 287 0071 C2       		.byte	0xc2
+ 288 0072 2C000000 		.4byte	0x2c
+ 289 0076 02       		.uleb128 0x2
+ 290 0077 04       		.byte	0x4
+ 291 0078 04       		.byte	0x4
+ 292 0079 AD000000 		.4byte	.LASF9
+ 293 007d 02       		.uleb128 0x2
+ 294 007e 08       		.byte	0x8
+ 295 007f 04       		.byte	0x4
+ 296 0080 EB000000 		.4byte	.LASF10
+ 297 0084 02       		.uleb128 0x2
+ 298 0085 01       		.byte	0x1
+ 299 0086 08       		.byte	0x8
+ 300 0087 9E010000 		.4byte	.LASF11
+ 301 008b 05       		.uleb128 0x5
+ 302 008c C1000000 		.4byte	.LASF13
+ 303 0090 02       		.byte	0x2
+ 304 0091 6C01     		.2byte	0x16c
+ 305 0093 97000000 		.4byte	0x97
+ 306 0097 06       		.uleb128 0x6
+ 307 0098 6B000000 		.4byte	0x6b
+ 308 009c 07       		.uleb128 0x7
+ 309 009d FB010000 		.4byte	.LASF14
+ 310 00a1 01       		.byte	0x1
+ 311 00a2 27       		.byte	0x27
+ 312 00a3 00000000 		.4byte	.LFB0
+ 313 00a7 3C000000 		.4byte	.LFE0-.LFB0
+ 314 00ab 01       		.uleb128 0x1
+ 315 00ac 9C       		.byte	0x9c
+ 316 00ad CE000000 		.4byte	0xce
+ 317 00b1 08       		.uleb128 0x8
+ 318 00b2 0E000000 		.4byte	.LASF16
+ 319 00b6 01       		.byte	0x1
+ 320 00b7 27       		.byte	0x27
+ 321 00b8 6B000000 		.4byte	0x6b
+ 322 00bc 02       		.uleb128 0x2
+ 323 00bd 91       		.byte	0x91
+ 324 00be 6F       		.sleb128 -17
+ 325 00bf 09       		.uleb128 0x9
+ 326 00c0 14000000 		.4byte	.LASF23
+ 327 00c4 01       		.byte	0x1
+ 328 00c5 29       		.byte	0x29
+ 329 00c6 6B000000 		.4byte	0x6b
+ 330 00ca 02       		.uleb128 0x2
+ 331 00cb 91       		.byte	0x91
+ 332 00cc 77       		.sleb128 -9
+ 333 00cd 00       		.byte	0
+ 334 00ce 07       		.uleb128 0x7
+ 335 00cf F2000000 		.4byte	.LASF15
+ 336 00d3 01       		.byte	0x1
+ 337 00d4 45       		.byte	0x45
+ 338 00d5 00000000 		.4byte	.LFB1
+ 339 00d9 5C000000 		.4byte	.LFE1-.LFB1
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 9
+
+
+ 340 00dd 01       		.uleb128 0x1
+ 341 00de 9C       		.byte	0x9c
+ 342 00df F2000000 		.4byte	0xf2
+ 343 00e3 08       		.uleb128 0x8
+ 344 00e4 29010000 		.4byte	.LASF17
+ 345 00e8 01       		.byte	0x1
+ 346 00e9 45       		.byte	0x45
+ 347 00ea 6B000000 		.4byte	0x6b
+ 348 00ee 02       		.uleb128 0x2
+ 349 00ef 91       		.byte	0x91
+ 350 00f0 77       		.sleb128 -9
+ 351 00f1 00       		.byte	0
+ 352 00f2 0A       		.uleb128 0xa
+ 353 00f3 2E010000 		.4byte	.LASF18
+ 354 00f7 01       		.byte	0x1
+ 355 00f8 5E       		.byte	0x5e
+ 356 00f9 6B000000 		.4byte	0x6b
+ 357 00fd 00000000 		.4byte	.LFB2
+ 358 0101 20000000 		.4byte	.LFE2-.LFB2
+ 359 0105 01       		.uleb128 0x1
+ 360 0106 9C       		.byte	0x9c
+ 361 0107 0A       		.uleb128 0xa
+ 362 0108 D4010000 		.4byte	.LASF19
+ 363 010c 01       		.byte	0x1
+ 364 010d 72       		.byte	0x72
+ 365 010e 6B000000 		.4byte	0x6b
+ 366 0112 00000000 		.4byte	.LFB3
+ 367 0116 20000000 		.4byte	.LFE3-.LFB3
+ 368 011a 01       		.uleb128 0x1
+ 369 011b 9C       		.byte	0x9c
+ 370 011c 00       		.byte	0
+ 371              		.section	.debug_abbrev,"",%progbits
+ 372              	.Ldebug_abbrev0:
+ 373 0000 01       		.uleb128 0x1
+ 374 0001 11       		.uleb128 0x11
+ 375 0002 01       		.byte	0x1
+ 376 0003 25       		.uleb128 0x25
+ 377 0004 0E       		.uleb128 0xe
+ 378 0005 13       		.uleb128 0x13
+ 379 0006 0B       		.uleb128 0xb
+ 380 0007 03       		.uleb128 0x3
+ 381 0008 0E       		.uleb128 0xe
+ 382 0009 1B       		.uleb128 0x1b
+ 383 000a 0E       		.uleb128 0xe
+ 384 000b 55       		.uleb128 0x55
+ 385 000c 17       		.uleb128 0x17
+ 386 000d 11       		.uleb128 0x11
+ 387 000e 01       		.uleb128 0x1
+ 388 000f 10       		.uleb128 0x10
+ 389 0010 17       		.uleb128 0x17
+ 390 0011 00       		.byte	0
+ 391 0012 00       		.byte	0
+ 392 0013 02       		.uleb128 0x2
+ 393 0014 24       		.uleb128 0x24
+ 394 0015 00       		.byte	0
+ 395 0016 0B       		.uleb128 0xb
+ 396 0017 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 10
+
+
+ 397 0018 3E       		.uleb128 0x3e
+ 398 0019 0B       		.uleb128 0xb
+ 399 001a 03       		.uleb128 0x3
+ 400 001b 0E       		.uleb128 0xe
+ 401 001c 00       		.byte	0
+ 402 001d 00       		.byte	0
+ 403 001e 03       		.uleb128 0x3
+ 404 001f 24       		.uleb128 0x24
+ 405 0020 00       		.byte	0
+ 406 0021 0B       		.uleb128 0xb
+ 407 0022 0B       		.uleb128 0xb
+ 408 0023 3E       		.uleb128 0x3e
+ 409 0024 0B       		.uleb128 0xb
+ 410 0025 03       		.uleb128 0x3
+ 411 0026 08       		.uleb128 0x8
+ 412 0027 00       		.byte	0
+ 413 0028 00       		.byte	0
+ 414 0029 04       		.uleb128 0x4
+ 415 002a 16       		.uleb128 0x16
+ 416 002b 00       		.byte	0
+ 417 002c 03       		.uleb128 0x3
+ 418 002d 0E       		.uleb128 0xe
+ 419 002e 3A       		.uleb128 0x3a
+ 420 002f 0B       		.uleb128 0xb
+ 421 0030 3B       		.uleb128 0x3b
+ 422 0031 0B       		.uleb128 0xb
+ 423 0032 49       		.uleb128 0x49
+ 424 0033 13       		.uleb128 0x13
+ 425 0034 00       		.byte	0
+ 426 0035 00       		.byte	0
+ 427 0036 05       		.uleb128 0x5
+ 428 0037 16       		.uleb128 0x16
+ 429 0038 00       		.byte	0
+ 430 0039 03       		.uleb128 0x3
+ 431 003a 0E       		.uleb128 0xe
+ 432 003b 3A       		.uleb128 0x3a
+ 433 003c 0B       		.uleb128 0xb
+ 434 003d 3B       		.uleb128 0x3b
+ 435 003e 05       		.uleb128 0x5
+ 436 003f 49       		.uleb128 0x49
+ 437 0040 13       		.uleb128 0x13
+ 438 0041 00       		.byte	0
+ 439 0042 00       		.byte	0
+ 440 0043 06       		.uleb128 0x6
+ 441 0044 35       		.uleb128 0x35
+ 442 0045 00       		.byte	0
+ 443 0046 49       		.uleb128 0x49
+ 444 0047 13       		.uleb128 0x13
+ 445 0048 00       		.byte	0
+ 446 0049 00       		.byte	0
+ 447 004a 07       		.uleb128 0x7
+ 448 004b 2E       		.uleb128 0x2e
+ 449 004c 01       		.byte	0x1
+ 450 004d 3F       		.uleb128 0x3f
+ 451 004e 19       		.uleb128 0x19
+ 452 004f 03       		.uleb128 0x3
+ 453 0050 0E       		.uleb128 0xe
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 11
+
+
+ 454 0051 3A       		.uleb128 0x3a
+ 455 0052 0B       		.uleb128 0xb
+ 456 0053 3B       		.uleb128 0x3b
+ 457 0054 0B       		.uleb128 0xb
+ 458 0055 27       		.uleb128 0x27
+ 459 0056 19       		.uleb128 0x19
+ 460 0057 11       		.uleb128 0x11
+ 461 0058 01       		.uleb128 0x1
+ 462 0059 12       		.uleb128 0x12
+ 463 005a 06       		.uleb128 0x6
+ 464 005b 40       		.uleb128 0x40
+ 465 005c 18       		.uleb128 0x18
+ 466 005d 9742     		.uleb128 0x2117
+ 467 005f 19       		.uleb128 0x19
+ 468 0060 01       		.uleb128 0x1
+ 469 0061 13       		.uleb128 0x13
+ 470 0062 00       		.byte	0
+ 471 0063 00       		.byte	0
+ 472 0064 08       		.uleb128 0x8
+ 473 0065 05       		.uleb128 0x5
+ 474 0066 00       		.byte	0
+ 475 0067 03       		.uleb128 0x3
+ 476 0068 0E       		.uleb128 0xe
+ 477 0069 3A       		.uleb128 0x3a
+ 478 006a 0B       		.uleb128 0xb
+ 479 006b 3B       		.uleb128 0x3b
+ 480 006c 0B       		.uleb128 0xb
+ 481 006d 49       		.uleb128 0x49
+ 482 006e 13       		.uleb128 0x13
+ 483 006f 02       		.uleb128 0x2
+ 484 0070 18       		.uleb128 0x18
+ 485 0071 00       		.byte	0
+ 486 0072 00       		.byte	0
+ 487 0073 09       		.uleb128 0x9
+ 488 0074 34       		.uleb128 0x34
+ 489 0075 00       		.byte	0
+ 490 0076 03       		.uleb128 0x3
+ 491 0077 0E       		.uleb128 0xe
+ 492 0078 3A       		.uleb128 0x3a
+ 493 0079 0B       		.uleb128 0xb
+ 494 007a 3B       		.uleb128 0x3b
+ 495 007b 0B       		.uleb128 0xb
+ 496 007c 49       		.uleb128 0x49
+ 497 007d 13       		.uleb128 0x13
+ 498 007e 02       		.uleb128 0x2
+ 499 007f 18       		.uleb128 0x18
+ 500 0080 00       		.byte	0
+ 501 0081 00       		.byte	0
+ 502 0082 0A       		.uleb128 0xa
+ 503 0083 2E       		.uleb128 0x2e
+ 504 0084 00       		.byte	0
+ 505 0085 3F       		.uleb128 0x3f
+ 506 0086 19       		.uleb128 0x19
+ 507 0087 03       		.uleb128 0x3
+ 508 0088 0E       		.uleb128 0xe
+ 509 0089 3A       		.uleb128 0x3a
+ 510 008a 0B       		.uleb128 0xb
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 12
+
+
+ 511 008b 3B       		.uleb128 0x3b
+ 512 008c 0B       		.uleb128 0xb
+ 513 008d 27       		.uleb128 0x27
+ 514 008e 19       		.uleb128 0x19
+ 515 008f 49       		.uleb128 0x49
+ 516 0090 13       		.uleb128 0x13
+ 517 0091 11       		.uleb128 0x11
+ 518 0092 01       		.uleb128 0x1
+ 519 0093 12       		.uleb128 0x12
+ 520 0094 06       		.uleb128 0x6
+ 521 0095 40       		.uleb128 0x40
+ 522 0096 18       		.uleb128 0x18
+ 523 0097 9742     		.uleb128 0x2117
+ 524 0099 19       		.uleb128 0x19
+ 525 009a 00       		.byte	0
+ 526 009b 00       		.byte	0
+ 527 009c 00       		.byte	0
+ 528              		.section	.debug_aranges,"",%progbits
+ 529 0000 34000000 		.4byte	0x34
+ 530 0004 0200     		.2byte	0x2
+ 531 0006 00000000 		.4byte	.Ldebug_info0
+ 532 000a 04       		.byte	0x4
+ 533 000b 00       		.byte	0
+ 534 000c 0000     		.2byte	0
+ 535 000e 0000     		.2byte	0
+ 536 0010 00000000 		.4byte	.LFB0
+ 537 0014 3C000000 		.4byte	.LFE0-.LFB0
+ 538 0018 00000000 		.4byte	.LFB1
+ 539 001c 5C000000 		.4byte	.LFE1-.LFB1
+ 540 0020 00000000 		.4byte	.LFB2
+ 541 0024 20000000 		.4byte	.LFE2-.LFB2
+ 542 0028 00000000 		.4byte	.LFB3
+ 543 002c 20000000 		.4byte	.LFE3-.LFB3
+ 544 0030 00000000 		.4byte	0
+ 545 0034 00000000 		.4byte	0
+ 546              		.section	.debug_ranges,"",%progbits
+ 547              	.Ldebug_ranges0:
+ 548 0000 00000000 		.4byte	.LFB0
+ 549 0004 3C000000 		.4byte	.LFE0
+ 550 0008 00000000 		.4byte	.LFB1
+ 551 000c 5C000000 		.4byte	.LFE1
+ 552 0010 00000000 		.4byte	.LFB2
+ 553 0014 20000000 		.4byte	.LFE2
+ 554 0018 00000000 		.4byte	.LFB3
+ 555 001c 20000000 		.4byte	.LFE3
+ 556 0020 00000000 		.4byte	0
+ 557 0024 00000000 		.4byte	0
+ 558              		.section	.debug_line,"",%progbits
+ 559              	.Ldebug_line0:
+ 560 0000 93000000 		.section	.debug_str,"MS",%progbits,1
+ 560      02004400 
+ 560      00000201 
+ 560      FB0E0D00 
+ 560      01010101 
+ 561              	.LASF6:
+ 562 0000 6C6F6E67 		.ascii	"long long int\000"
+ 562      206C6F6E 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 13
+
+
+ 562      6720696E 
+ 562      7400
+ 563              	.LASF16:
+ 564 000e 76616C75 		.ascii	"value\000"
+ 564      6500
+ 565              	.LASF23:
+ 566 0014 73746174 		.ascii	"staticBits\000"
+ 566      69634269 
+ 566      747300
+ 567              	.LASF20:
+ 568 001f 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 568      4320342E 
+ 568      392E3320 
+ 568      32303135 
+ 568      30333033 
+ 569 0052 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 569      20726576 
+ 569      6973696F 
+ 569      6E203232 
+ 569      31323230 
+ 570 0085 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 570      66756E63 
+ 570      74696F6E 
+ 570      2D736563 
+ 570      74696F6E 
+ 571              	.LASF9:
+ 572 00ad 666C6F61 		.ascii	"float\000"
+ 572      7400
+ 573              	.LASF1:
+ 574 00b3 756E7369 		.ascii	"unsigned char\000"
+ 574      676E6564 
+ 574      20636861 
+ 574      7200
+ 575              	.LASF13:
+ 576 00c1 72656738 		.ascii	"reg8\000"
+ 576      00
+ 577              	.LASF5:
+ 578 00c6 6C6F6E67 		.ascii	"long unsigned int\000"
+ 578      20756E73 
+ 578      69676E65 
+ 578      6420696E 
+ 578      7400
+ 579              	.LASF3:
+ 580 00d8 73686F72 		.ascii	"short unsigned int\000"
+ 580      7420756E 
+ 580      7369676E 
+ 580      65642069 
+ 580      6E7400
+ 581              	.LASF10:
+ 582 00eb 646F7562 		.ascii	"double\000"
+ 582      6C6500
+ 583              	.LASF15:
+ 584 00f2 50696E5F 		.ascii	"Pin_1_SetDriveMode\000"
+ 584      315F5365 
+ 584      74447269 
+ 584      76654D6F 
+ 584      646500
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 14
+
+
+ 585              	.LASF8:
+ 586 0105 756E7369 		.ascii	"unsigned int\000"
+ 586      676E6564 
+ 586      20696E74 
+ 586      00
+ 587              	.LASF7:
+ 588 0112 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 588      206C6F6E 
+ 588      6720756E 
+ 588      7369676E 
+ 588      65642069 
+ 589              	.LASF17:
+ 590 0129 6D6F6465 		.ascii	"mode\000"
+ 590      00
+ 591              	.LASF18:
+ 592 012e 50696E5F 		.ascii	"Pin_1_Read\000"
+ 592      315F5265 
+ 592      616400
+ 593              	.LASF22:
+ 594 0139 443A5C44 		.ascii	"D:\\Documents\\Virginia_Tech\\FSAE\\PSOC\\Current S"
+ 594      6F63756D 
+ 594      656E7473 
+ 594      5C566972 
+ 594      67696E69 
+ 595 0167 656E736F 		.ascii	"ensor\\CE95277 ADC and UART\\VTM16 Current Sensors."
+ 595      725C4345 
+ 595      39353237 
+ 595      37204144 
+ 595      4320616E 
+ 596 0198 63796473 		.ascii	"cydsn\000"
+ 596      6E00
+ 597              	.LASF11:
+ 598 019e 63686172 		.ascii	"char\000"
+ 598      00
+ 599              	.LASF2:
+ 600 01a3 73686F72 		.ascii	"short int\000"
+ 600      7420696E 
+ 600      7400
+ 601              	.LASF12:
+ 602 01ad 75696E74 		.ascii	"uint8\000"
+ 602      3800
+ 603              	.LASF21:
+ 604 01b3 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\Pin_1.c\000"
+ 604      6E657261 
+ 604      7465645F 
+ 604      536F7572 
+ 604      63655C50 
+ 605              	.LASF19:
+ 606 01d4 50696E5F 		.ascii	"Pin_1_ReadDataReg\000"
+ 606      315F5265 
+ 606      61644461 
+ 606      74615265 
+ 606      6700
+ 607              	.LASF4:
+ 608 01e6 6C6F6E67 		.ascii	"long int\000"
+ 608      20696E74 
+ 608      00
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccHorJpd.s 			page 15
+
+
+ 609              	.LASF0:
+ 610 01ef 7369676E 		.ascii	"signed char\000"
+ 610      65642063 
+ 610      68617200 
+ 611              	.LASF14:
+ 612 01fb 50696E5F 		.ascii	"Pin_1_Write\000"
+ 612      315F5772 
+ 612      69746500 
+ 613              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br

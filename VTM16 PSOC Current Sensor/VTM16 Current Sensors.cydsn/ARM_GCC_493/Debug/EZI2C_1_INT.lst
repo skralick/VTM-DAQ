@@ -1,0 +1,1644 @@
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 1
+
+
+   1              		.syntax unified
+   2              		.cpu cortex-m3
+   3              		.fpu softvfp
+   4              		.eabi_attribute 20, 1
+   5              		.eabi_attribute 21, 1
+   6              		.eabi_attribute 23, 3
+   7              		.eabi_attribute 24, 1
+   8              		.eabi_attribute 25, 1
+   9              		.eabi_attribute 26, 1
+  10              		.eabi_attribute 30, 6
+  11              		.eabi_attribute 34, 1
+  12              		.eabi_attribute 18, 4
+  13              		.thumb
+  14              		.file	"EZI2C_1_INT.c"
+  15              		.text
+  16              	.Ltext0:
+  17              		.cfi_sections	.debug_frame
+  18              		.section	.text.EZI2C_1_ISR,"ax",%progbits
+  19              		.align	2
+  20              		.global	EZI2C_1_ISR
+  21              		.thumb
+  22              		.thumb_func
+  23              		.type	EZI2C_1_ISR, %function
+  24              	EZI2C_1_ISR:
+  25              	.LFB0:
+  26              		.file 1 ".\\Generated_Source\\PSoC5\\EZI2C_1_INT.c"
+   1:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** /*******************************************************************************
+   2:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * File Name: EZI2C_1INT.c
+   3:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Version 2.0
+   4:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+   5:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Description:
+   6:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  This file contains the code that operates during the interrupt service
+   7:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  routine.  For this component, most of the runtime code is located in
+   8:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  the ISR.
+   9:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  10:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *******************************************************************************
+  11:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Copyright 2008-2015, Cypress Semiconductor Corporation.  All rights reserved.
+  12:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * You may use this file only in accordance with the license, terms, conditions,
+  13:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * disclaimers, and limitations in the end user license agreement accompanying
+  14:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * the software package with which this file was provided.
+  15:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *******************************************************************************/
+  16:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  17:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #include "EZI2C_1_PVT.h"
+  18:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  19:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  20:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  21:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** /*******************************************************************************
+  22:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Function Name: EZI2C_1_ISR
+  23:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** ********************************************************************************
+  24:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  25:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Summary:
+  26:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  Handle Interrupt Service Routine.
+  27:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  28:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Parameters:
+  29:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_dataPtrS1 - The global variable which stores the pointer to the
+  30:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  data exposed to an I2C master for the first slave address.
+  31:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 2
+
+
+  32:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwOffsetS1 - The global variable which stores an offset for read
+  33:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  and write operations, is set at each write sequence of the first slave
+  34:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  address.
+  35:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  36:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwIndexS1: global variable, which stores pointer to the next
+  37:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  value to be read or written for the first slave address.
+  38:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  39:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * EZI2C_1_wrProtectS1 - The global variable which stores an offset where data
+  40:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  is read only for the first slave address.
+  41:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  42:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * EZI2C_1_bufSizeS1 - The global variable which stores the size of a data array
+  43:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  exposed to the I2C master for the first slave address.
+  44:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  45:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_dataPtrS2 - The global variable which stores a pointer to the
+  46:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  data exposed to the I2C master for the second slave address.
+  47:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  48:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwOffsetS2 - The global variable which stores an offset for read
+  49:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  and write operations, is set at each write sequence of the second slave
+  50:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  device.
+  51:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  52:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwIndexS2 - The global variable which stores a pointer to the next
+  53:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  value to be read or written for the second slave address.
+  54:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  55:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * EZI2C_1_wrProtectS2 - The global variable which stores an offset where data
+  56:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  is "Read only" for the second slave address.  ??
+  57:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  58:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * EZI2C_1_bufSizeS2 - The global variable which stores the size of a data array
+  59:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  exposed to the I2C master for the second slave address.
+  60:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  61:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * EZI2C_1_curState - The global variable which stores a current state of an
+  62:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  I2C state machine.
+  63:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  64:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_curStatus - The global variable which stores the current status of
+  65:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  the component.
+  66:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  67:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** * Return:
+  68:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwOffsetS1 - The global variable which stores an offset for read
+  69:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  and write operations, is set at each write sequence of the first slave
+  70:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  address and is reset if a received slave address matches the first slave address
+  71:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  and a next operation will be read.
+  72:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  73:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwIndexS1 - The global variable which stores a pointer to the next
+  74:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  value to be read or written for the first slave address. Is set to
+  75:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwOffsetS1 and than incremented if a received slave address
+  76:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  matches the first slave address and a next operation will be read.
+  77:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  78:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwOffsetS2 - The global variable which stores an offset for read
+  79:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  and write operations, is set at each write sequence of the second slave
+  80:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  address. This variable changes if a new sub-address is passed to the slave.
+  81:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  82:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  EZI2C_1_rwIndexS2 - The global variable which stores a pointer to the next
+  83:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  value to be read or written for the second slave address. This variable
+  84:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *  changes if a new sub-address is passed to the slave.
+  85:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *
+  86:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** *******************************************************************************/
+  87:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** CY_ISR(EZI2C_1_ISR)
+  88:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** {
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 3
+
+
+  27              		.loc 1 88 0
+  28              		.cfi_startproc
+  29              		@ args = 0, pretend = 0, frame = 0
+  30              		@ frame_needed = 1, uses_anonymous_args = 0
+  31              		@ link register save eliminated.
+  32 0000 80B4     		push	{r7}
+  33              		.cfi_def_cfa_offset 4
+  34              		.cfi_offset 7, -4
+  35 0002 00AF     		add	r7, sp, #0
+  36              		.cfi_def_cfa_register 7
+  89:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     static uint8  tmp8;
+  90:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     static uint8  tmpCsr;
+  91:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  92:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #if (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT)
+  93:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     static uint16 tmp16;
+  94:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #endif /* (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT) */
+  95:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+  96:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #ifdef EZI2C_1_ISR_ENTRY_CALLBACK
+  97:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     EZI2C_1_ISR_EntryCallback();
+  98:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #endif /* EZI2C_1_ISR_ENTRY_CALLBACK */
+  99:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     
+ 100:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     /* Entry from interrupt
+ 101:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  In the hardware address compare mode, we can assume we only get interrupted
+ 102:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  when a valid address is recognized. In the software address compare mode,
+ 103:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  we have to check every address after a start condition.
+ 104:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     */
+ 105:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 106:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     /* Make copy to check Stop condition after bus has been released */
+ 107:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     tmpCsr = EZI2C_1_CSR_REG;
+  37              		.loc 1 107 0
+  38 0004 864B     		ldr	r3, .L21
+  39 0006 1B78     		ldrb	r3, [r3]
+  40 0008 DAB2     		uxtb	r2, r3
+  41 000a 864B     		ldr	r3, .L21+4
+  42 000c 1A70     		strb	r2, [r3]
+ 108:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 109:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     /* Check for address phase of the transaction */
+ 110:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     if (EZI2C_1_IS_BIT_SET(tmpCsr, EZI2C_1_CSR_ADDRESS))
+  43              		.loc 1 110 0
+  44 000e 854B     		ldr	r3, .L21+4
+  45 0010 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+  46 0012 03F00803 		and	r3, r3, #8
+  47 0016 002B     		cmp	r3, #0
+  48 0018 42D0     		beq	.L2
+ 111:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     {
+ 112:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         #if (EZI2C_1_ADDRESSES == EZI2C_1_TWO_ADDRESSES)
+ 113:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 114:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             /* Get slave address from data register */
+ 115:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             tmp8 = ((EZI2C_1_DATA_REG >> EZI2C_1_ADDRESS_SHIFT) & EZI2C_1_SADDR_MASK);
+ 116:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 117:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             if (tmp8 == EZI2C_1_addrS1)   /* Check for address 1  */
+ 118:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             {
+ 119:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 if (EZI2C_1_IS_BIT_SET(EZI2C_1_DATA_REG, EZI2C_1_READ_FLAG))
+ 120:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {  /* Prepare next read op, get data and place in register */
+ 121:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 122:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Load first data byte  */
+ 123:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_DATA_REG = EZI2C_1_dataPtrS1[EZI2C_1_rwOffsetS1];
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 4
+
+
+ 124:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 125:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and transmit */
+ 126:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = (EZI2C_1_CSR_ACK | EZI2C_1_CSR_TRANSMIT);
+ 127:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 128:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Set index to offset */
+ 129:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_rwIndexS1 = EZI2C_1_rwOffsetS1;
+ 130:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 131:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Advance to data location */
+ 132:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     ++EZI2C_1_rwIndexS1;
+ 133:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 134:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Set Read busy status */
+ 135:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curStatus |= EZI2C_1_STATUS_RD1BUSY;
+ 136:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 137:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Prepare for read transaction */
+ 138:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_DEV1_RD_DATA;
+ 139:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 140:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 else  /* Start of a Write transaction, reset pointers, first byte is address */
+ 141:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {  /* Prepare next operation to write offset */
+ 142:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 143:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and ready to receive sub address */
+ 144:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 145:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 146:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Set Write busy status */
+ 147:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curStatus |= EZI2C_1_STATUS_WR1BUSY;
+ 148:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 149:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Prepare for read transaction */
+ 150:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_DEV1_WR_ADDR;
+ 151:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 152:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Stop Interrupt Enable */
+ 153:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CFG_REG  |= EZI2C_1_CFG_STOP_IE;
+ 154:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 155:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }  /* Prepared for next Write transaction */
+ 156:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             }   /* Slave address #1 is processed */
+ 157:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             else if (tmp8 == EZI2C_1_addrS2)   /* Check for address 2  */
+ 158:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             {
+ 159:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 if (EZI2C_1_IS_BIT_SET(EZI2C_1_DATA_REG, EZI2C_1_READ_FLAG))
+ 160:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {  /* Prepare next read op, get data and place in register */
+ 161:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 162:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Load first data byte  */
+ 163:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_DATA_REG = EZI2C_1_dataPtrS2[EZI2C_1_rwOffsetS2];
+ 164:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 165:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and transmit */
+ 166:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = (EZI2C_1_CSR_ACK | EZI2C_1_CSR_TRANSMIT);
+ 167:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 168:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Reset pointer to previous offset */
+ 169:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_rwIndexS2 = EZI2C_1_rwOffsetS2;
+ 170:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 171:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Advance to data location */
+ 172:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     ++EZI2C_1_rwIndexS2;
+ 173:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 174:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Set read busy status */
+ 175:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curStatus |= EZI2C_1_STATUS_RD2BUSY;
+ 176:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 177:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Prepare for read transaction */
+ 178:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_DEV2_RD_DATA;
+ 179:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 180:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }  /* Prepared for next Read transaction */
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 5
+
+
+ 181:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 else  /* Start of write transfer, reset ptrs, 1st byte is address */
+ 182:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {  /* Prepare next operation to write offset */
+ 183:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 184:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and ready to receive address */
+ 185:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 186:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 187:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Set Write busy status */
+ 188:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curStatus |= EZI2C_1_STATUS_WR2BUSY;
+ 189:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 190:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Prepare for read transaction */
+ 191:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_DEV2_WR_ADDR;
+ 192:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 193:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Enable interrupt on Stop */
+ 194:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CFG_REG  |= EZI2C_1_CFG_STOP_IE;
+ 195:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 } /* Prepared for the next Write transaction */
+ 196:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             }
+ 197:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             else   /* No address match */
+ 198:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             {   /* NAK address Match  */
+ 199:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 200:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             }
+ 201:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         #else /* One slave address - hardware address matching */
+ 202:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 203:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             if (EZI2C_1_IS_BIT_SET(EZI2C_1_DATA_REG, EZI2C_1_READ_FLAG))
+  49              		.loc 1 203 0
+  50 001a 834B     		ldr	r3, .L21+8
+  51 001c 1B78     		ldrb	r3, [r3]
+  52 001e DBB2     		uxtb	r3, r3
+  53 0020 03F00103 		and	r3, r3, #1
+  54 0024 002B     		cmp	r3, #0
+  55 0026 24D0     		beq	.L3
+ 204:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             {   /* Prepare next read op, get data and place in register */
+ 205:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 206:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Load first data byte  */
+ 207:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_DATA_REG = EZI2C_1_dataPtrS1[EZI2C_1_rwOffsetS1];
+  56              		.loc 1 207 0
+  57 0028 7F4A     		ldr	r2, .L21+8
+  58 002a 804B     		ldr	r3, .L21+12
+  59 002c 1B68     		ldr	r3, [r3]
+  60 002e 8049     		ldr	r1, .L21+16
+  61 0030 0978     		ldrb	r1, [r1]
+  62 0032 C9B2     		uxtb	r1, r1
+  63 0034 0B44     		add	r3, r3, r1
+  64 0036 1B78     		ldrb	r3, [r3]
+  65 0038 DBB2     		uxtb	r3, r3
+  66 003a 1370     		strb	r3, [r2]
+ 208:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 209:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* ACK and transmit */
+ 210:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_CSR_REG = (EZI2C_1_CSR_ACK | EZI2C_1_CSR_TRANSMIT);
+  67              		.loc 1 210 0
+  68 003c 784B     		ldr	r3, .L21
+  69 003e 1422     		movs	r2, #20
+  70 0040 1A70     		strb	r2, [r3]
+ 211:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 212:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Reset pointer to previous offset */
+ 213:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_rwIndexS1 = EZI2C_1_rwOffsetS1;
+  71              		.loc 1 213 0
+  72 0042 7B4B     		ldr	r3, .L21+16
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 6
+
+
+  73 0044 1B78     		ldrb	r3, [r3]
+  74 0046 DAB2     		uxtb	r2, r3
+  75 0048 7A4B     		ldr	r3, .L21+20
+  76 004a 1A70     		strb	r2, [r3]
+ 214:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 215:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Advance to data location */
+ 216:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 ++EZI2C_1_rwIndexS1;
+  77              		.loc 1 216 0
+  78 004c 794B     		ldr	r3, .L21+20
+  79 004e 1B78     		ldrb	r3, [r3]
+  80 0050 DBB2     		uxtb	r3, r3
+  81 0052 0133     		adds	r3, r3, #1
+  82 0054 DAB2     		uxtb	r2, r3
+  83 0056 774B     		ldr	r3, .L21+20
+  84 0058 1A70     		strb	r2, [r3]
+ 217:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 218:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Set read busy status */
+ 219:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_curStatus |= EZI2C_1_STATUS_RD1BUSY;
+  85              		.loc 1 219 0
+  86 005a 774B     		ldr	r3, .L21+24
+  87 005c 1B78     		ldrb	r3, [r3]
+  88 005e DBB2     		uxtb	r3, r3
+  89 0060 43F01103 		orr	r3, r3, #17
+  90 0064 DAB2     		uxtb	r2, r3
+  91 0066 744B     		ldr	r3, .L21+24
+  92 0068 1A70     		strb	r2, [r3]
+ 220:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 221:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Prepare for read transaction */
+ 222:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_curState = EZI2C_1_SM_DEV1_RD_DATA;
+  93              		.loc 1 222 0
+  94 006a 744B     		ldr	r3, .L21+28
+  95 006c 0822     		movs	r2, #8
+  96 006e 1A70     		strb	r2, [r3]
+  97 0070 B7E0     		b	.L5
+  98              	.L3:
+ 223:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             }
+ 224:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             else  /* Start of write transfer, reset ptrs, 1st byte is address */
+ 225:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             {   /* Prepare next operation to write offset */
+ 226:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 227:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* ACK and ready to receive address */
+ 228:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+  99              		.loc 1 228 0
+ 100 0072 6B4B     		ldr	r3, .L21
+ 101 0074 1022     		movs	r2, #16
+ 102 0076 1A70     		strb	r2, [r3]
+ 229:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 230:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Set Write activity */
+ 231:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_curStatus |= EZI2C_1_STATUS_WR1BUSY;
+ 103              		.loc 1 231 0
+ 104 0078 6F4B     		ldr	r3, .L21+24
+ 105 007a 1B78     		ldrb	r3, [r3]
+ 106 007c DBB2     		uxtb	r3, r3
+ 107 007e 43F01203 		orr	r3, r3, #18
+ 108 0082 DAB2     		uxtb	r2, r3
+ 109 0084 6C4B     		ldr	r3, .L21+24
+ 110 0086 1A70     		strb	r2, [r3]
+ 232:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 7
+
+
+ 233:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Prepare for read transaction */
+ 234:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_curState = EZI2C_1_SM_DEV1_WR_ADDR;
+ 111              		.loc 1 234 0
+ 112 0088 6C4B     		ldr	r3, .L21+28
+ 113 008a 0122     		movs	r2, #1
+ 114 008c 1A70     		strb	r2, [r3]
+ 235:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 236:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Enable interrupt on stop */
+ 237:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_CFG_REG |= EZI2C_1_CFG_STOP_IE;
+ 115              		.loc 1 237 0
+ 116 008e 6C4A     		ldr	r2, .L21+32
+ 117 0090 6B4B     		ldr	r3, .L21+32
+ 118 0092 1B78     		ldrb	r3, [r3]
+ 119 0094 DBB2     		uxtb	r3, r3
+ 120 0096 43F01003 		orr	r3, r3, #16
+ 121 009a DBB2     		uxtb	r3, r3
+ 122 009c 1370     		strb	r3, [r2]
+ 123 009e A0E0     		b	.L5
+ 124              	.L2:
+ 238:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             }
+ 239:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         #endif  /* (EZI2C_1_ADDRESSES == EZI2C_1_TWO_ADDRESSES) */
+ 240:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     }
+ 241:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     else if (EZI2C_1_IS_BIT_SET(tmpCsr, EZI2C_1_CSR_BYTE_COMPLETE))
+ 125              		.loc 1 241 0
+ 126 00a0 604B     		ldr	r3, .L21+4
+ 127 00a2 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 128 00a4 03F00103 		and	r3, r3, #1
+ 129 00a8 002B     		cmp	r3, #0
+ 130 00aa 00F09A80 		beq	.L5
+ 242:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     {   /* Check for data transfer */
+ 243:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 244:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* Data transfer state machine */
+ 245:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         switch (EZI2C_1_curState)
+ 131              		.loc 1 245 0
+ 132 00ae 634B     		ldr	r3, .L21+28
+ 133 00b0 1B78     		ldrb	r3, [r3]
+ 134 00b2 DBB2     		uxtb	r3, r3
+ 135 00b4 042B     		cmp	r3, #4
+ 136 00b6 24D0     		beq	.L7
+ 137 00b8 082B     		cmp	r3, #8
+ 138 00ba 48D0     		beq	.L8
+ 139 00bc 012B     		cmp	r3, #1
+ 140 00be 40F08380 		bne	.L20
+ 246:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         {
+ 247:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             /* Address written from Master to Slave. */
+ 248:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             case EZI2C_1_SM_DEV1_WR_ADDR:
+ 249:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 250:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* If 8-bit interface, Advance to WR_Data, else to ADDR2 */
+ 251:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 #if (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_8BIT)
+ 252:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     tmp8 = EZI2C_1_DATA_REG;
+ 141              		.loc 1 252 0
+ 142 00c2 594B     		ldr	r3, .L21+8
+ 143 00c4 1B78     		ldrb	r3, [r3]
+ 144 00c6 DAB2     		uxtb	r2, r3
+ 145 00c8 5E4B     		ldr	r3, .L21+36
+ 146 00ca 1A70     		strb	r2, [r3]
+ 253:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     if (tmp8 < EZI2C_1_bufSizeS1)
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 8
+
+
+ 147              		.loc 1 253 0
+ 148 00cc 5D4B     		ldr	r3, .L21+36
+ 149 00ce 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 150 00d0 9AB2     		uxth	r2, r3
+ 151 00d2 5D4B     		ldr	r3, .L21+40
+ 152 00d4 1B88     		ldrh	r3, [r3]	@ movhi
+ 153 00d6 9BB2     		uxth	r3, r3
+ 154 00d8 9A42     		cmp	r2, r3
+ 155 00da 0ED2     		bcs	.L10
+ 254:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 255:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* ACK and ready to receive data */
+ 256:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 156              		.loc 1 256 0
+ 157 00dc 504B     		ldr	r3, .L21
+ 158 00de 1022     		movs	r2, #16
+ 159 00e0 1A70     		strb	r2, [r3]
+ 257:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 258:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Set offset to new value */
+ 259:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_rwOffsetS1 = tmp8;
+ 160              		.loc 1 259 0
+ 161 00e2 584B     		ldr	r3, .L21+36
+ 162 00e4 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 163 00e6 524B     		ldr	r3, .L21+16
+ 164 00e8 1A70     		strb	r2, [r3]
+ 260:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 261:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Reset index to offset value */
+ 262:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_rwIndexS1 = tmp8;
+ 165              		.loc 1 262 0
+ 166 00ea 564B     		ldr	r3, .L21+36
+ 167 00ec 1A78     		ldrb	r2, [r3]	@ zero_extendqisi2
+ 168 00ee 514B     		ldr	r3, .L21+20
+ 169 00f0 1A70     		strb	r2, [r3]
+ 263:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 264:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Prepare for write transaction */
+ 265:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_curState = EZI2C_1_SM_DEV1_WR_DATA;
+ 170              		.loc 1 265 0
+ 171 00f2 524B     		ldr	r3, .L21+28
+ 172 00f4 0422     		movs	r2, #4
+ 173 00f6 1A70     		strb	r2, [r3]
+ 266:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 267:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     else    /* Out of range, NAK data and don't set offset */
+ 268:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 269:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* NAK master */
+ 270:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 271:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 272:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 273:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 #else   /* 16-bit */
+ 274:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Save MSB of address */
+ 275:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     tmp16 = EZI2C_1_DATA_REG;
+ 276:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 277:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and ready to receive address */
+ 278:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 279:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 280:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Prepare to get LSB of address */
+ 281:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_DEV1_WR_ADDR_LSB;
+ 282:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 283:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 #endif  /* (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_8BIT) */
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 9
+
+
+ 284:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 285:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             break;  /* case EZI2C_1_SM_DEV1_WR_ADDR */
+ 174              		.loc 1 285 0
+ 175 00f8 73E0     		b	.L12
+ 176              	.L10:
+ 270:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 177              		.loc 1 270 0
+ 178 00fa 494B     		ldr	r3, .L21
+ 179 00fc 0022     		movs	r2, #0
+ 180 00fe 1A70     		strb	r2, [r3]
+ 181              		.loc 1 285 0
+ 182 0100 6FE0     		b	.L12
+ 183              	.L7:
+ 286:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 287:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             #if (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT)
+ 288:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 289:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Only used with 16-bit interface */
+ 290:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 case EZI2C_1_SM_DEV1_WR_ADDR_LSB:
+ 291:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 292:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Create offset */
+ 293:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     tmp16 = (uint16) (tmp16 << EZI2C_1_ADDRESS_LSB_SHIFT) | EZI2C_1_DATA_REG;
+ 294:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 295:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Check range */
+ 296:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     if(tmp16 < EZI2C_1_bufSizeS1)
+ 297:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 298:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* ACK and ready to receive address */
+ 299:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 300:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 301:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Set offset to new value */
+ 302:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_rwOffsetS1 = tmp16;
+ 303:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 304:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Reset index to offset value */
+ 305:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_rwIndexS1 = tmp16;
+ 306:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 307:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Prepare for write transaction */
+ 308:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_curState = EZI2C_1_SM_DEV1_WR_DATA;
+ 309:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 310:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     else    /* Out of range, NAK data and don't set offset */
+ 311:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 312:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* NAK master */
+ 313:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 314:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 315:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 break; /* case EZI2C_1_SM_DEV1_WR_ADDR_LSB */
+ 316:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 317:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             #endif  /* (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT) */
+ 318:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 319:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 320:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             /* Data written from master to slave. */
+ 321:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             case EZI2C_1_SM_DEV1_WR_DATA:
+ 322:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 323:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Check for valid range */
+ 324:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 if (EZI2C_1_rwIndexS1 < EZI2C_1_wrProtectS1)
+ 184              		.loc 1 324 0
+ 185 0102 4C4B     		ldr	r3, .L21+20
+ 186 0104 1B78     		ldrb	r3, [r3]
+ 187 0106 DBB2     		uxtb	r3, r3
+ 188 0108 9AB2     		uxth	r2, r3
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 10
+
+
+ 189 010a 504B     		ldr	r3, .L21+44
+ 190 010c 1B88     		ldrh	r3, [r3]	@ movhi
+ 191 010e 9BB2     		uxth	r3, r3
+ 192 0110 9A42     		cmp	r2, r3
+ 193 0112 18D2     		bcs	.L13
+ 325:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {
+ 326:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Get data, to ACK quickly */
+ 327:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     tmp8 = EZI2C_1_DATA_REG;
+ 194              		.loc 1 327 0
+ 195 0114 444B     		ldr	r3, .L21+8
+ 196 0116 1B78     		ldrb	r3, [r3]
+ 197 0118 DAB2     		uxtb	r2, r3
+ 198 011a 4A4B     		ldr	r3, .L21+36
+ 199 011c 1A70     		strb	r2, [r3]
+ 328:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 329:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* ACK and ready to receive sub address */
+ 330:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 200              		.loc 1 330 0
+ 201 011e 404B     		ldr	r3, .L21
+ 202 0120 1022     		movs	r2, #16
+ 203 0122 1A70     		strb	r2, [r3]
+ 331:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 332:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Write data to array */
+ 333:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_dataPtrS1[EZI2C_1_rwIndexS1] = tmp8;
+ 204              		.loc 1 333 0
+ 205 0124 414B     		ldr	r3, .L21+12
+ 206 0126 1B68     		ldr	r3, [r3]
+ 207 0128 424A     		ldr	r2, .L21+20
+ 208 012a 1278     		ldrb	r2, [r2]
+ 209 012c D2B2     		uxtb	r2, r2
+ 210 012e 1344     		add	r3, r3, r2
+ 211 0130 444A     		ldr	r2, .L21+36
+ 212 0132 1278     		ldrb	r2, [r2]	@ zero_extendqisi2
+ 213 0134 1A70     		strb	r2, [r3]
+ 334:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 335:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Increment pointer */
+ 336:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_rwIndexS1++;
+ 214              		.loc 1 336 0
+ 215 0136 3F4B     		ldr	r3, .L21+20
+ 216 0138 1B78     		ldrb	r3, [r3]
+ 217 013a DBB2     		uxtb	r3, r3
+ 218 013c 0133     		adds	r3, r3, #1
+ 219 013e DAB2     		uxtb	r2, r3
+ 220 0140 3C4B     		ldr	r3, .L21+20
+ 221 0142 1A70     		strb	r2, [r3]
+ 337:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 338:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 else
+ 339:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {
+ 340:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* NAK cause beyond write area */
+ 341:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 342:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 343:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             break;  /* EZI2C_1_SM_DEV1_WR_DATA */
+ 222              		.loc 1 343 0
+ 223 0144 4DE0     		b	.L12
+ 224              	.L13:
+ 341:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 225              		.loc 1 341 0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 11
+
+
+ 226 0146 364B     		ldr	r3, .L21
+ 227 0148 0022     		movs	r2, #0
+ 228 014a 1A70     		strb	r2, [r3]
+ 229              		.loc 1 343 0
+ 230 014c 49E0     		b	.L12
+ 231              	.L8:
+ 344:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 345:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 346:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             /* Data read by master from slave */
+ 347:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             case EZI2C_1_SM_DEV1_RD_DATA:
+ 348:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 349:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Check ACK/NAK */
+ 350:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 if ((tmpCsr & EZI2C_1_CSR_LRB) == EZI2C_1_CSR_LRB_ACK)
+ 232              		.loc 1 350 0
+ 233 014e 354B     		ldr	r3, .L21+4
+ 234 0150 1B78     		ldrb	r3, [r3]	@ zero_extendqisi2
+ 235 0152 03F00203 		and	r3, r3, #2
+ 236 0156 002B     		cmp	r3, #0
+ 237 0158 24D1     		bne	.L15
+ 351:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {
+ 352:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Check for valid range */
+ 353:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     if (EZI2C_1_rwIndexS1 < EZI2C_1_bufSizeS1)
+ 238              		.loc 1 353 0
+ 239 015a 364B     		ldr	r3, .L21+20
+ 240 015c 1B78     		ldrb	r3, [r3]
+ 241 015e DBB2     		uxtb	r3, r3
+ 242 0160 9AB2     		uxth	r2, r3
+ 243 0162 394B     		ldr	r3, .L21+40
+ 244 0164 1B88     		ldrh	r3, [r3]	@ movhi
+ 245 0166 9BB2     		uxth	r3, r3
+ 246 0168 9A42     		cmp	r2, r3
+ 247 016a 14D2     		bcs	.L16
+ 354:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 355:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Get data from array */
+ 356:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_DATA_REG = EZI2C_1_dataPtrS1[EZI2C_1_rwIndexS1];
+ 248              		.loc 1 356 0
+ 249 016c 2E4A     		ldr	r2, .L21+8
+ 250 016e 2F4B     		ldr	r3, .L21+12
+ 251 0170 1B68     		ldr	r3, [r3]
+ 252 0172 3049     		ldr	r1, .L21+20
+ 253 0174 0978     		ldrb	r1, [r1]
+ 254 0176 C9B2     		uxtb	r1, r1
+ 255 0178 0B44     		add	r3, r3, r1
+ 256 017a 1B78     		ldrb	r3, [r3]
+ 257 017c DBB2     		uxtb	r3, r3
+ 258 017e 1370     		strb	r3, [r2]
+ 357:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 358:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Send Data */
+ 359:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_TRANSMIT;
+ 259              		.loc 1 359 0
+ 260 0180 274B     		ldr	r3, .L21
+ 261 0182 0422     		movs	r2, #4
+ 262 0184 1A70     		strb	r2, [r3]
+ 360:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 361:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Increment pointer */
+ 362:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         ++EZI2C_1_rwIndexS1;
+ 263              		.loc 1 362 0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 12
+
+
+ 264 0186 2B4B     		ldr	r3, .L21+20
+ 265 0188 1B78     		ldrb	r3, [r3]
+ 266 018a DBB2     		uxtb	r3, r3
+ 267 018c 0133     		adds	r3, r3, #1
+ 268 018e DAB2     		uxtb	r2, r3
+ 269 0190 284B     		ldr	r3, .L21+20
+ 270 0192 1A70     		strb	r2, [r3]
+ 363:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 364:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     else    /* No valid range */
+ 365:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 366:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Out of range send FFs */
+ 367:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_DATA_REG = EZI2C_1_DUMMY_DATA;
+ 368:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 369:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Send Data */
+ 370:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_TRANSMIT;
+ 371:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 372:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 373:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 else    /* Data was NAKed */
+ 374:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 {
+ 375:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Send dummy data at the end of read transaction */
+ 376:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_DATA_REG = EZI2C_1_DUMMY_DATA;
+ 377:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 378:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Clear transmit bit at the end of read transaction */
+ 379:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 380:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 381:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Clear Busy Flag */
+ 382:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curStatus &= ((uint8) ~EZI2C_1_STATUS_BUSY);
+ 383:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 384:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Error or Stop, reset state */
+ 385:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     EZI2C_1_curState = EZI2C_1_SM_IDLE;
+ 386:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 387:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 }
+ 388:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             break;  /* EZI2C_1_SM_DEV1_RD_DATA */
+ 271              		.loc 1 388 0
+ 272 0194 25E0     		b	.L12
+ 273              	.L16:
+ 367:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 274              		.loc 1 367 0
+ 275 0196 244B     		ldr	r3, .L21+8
+ 276 0198 FF22     		movs	r2, #255
+ 277 019a 1A70     		strb	r2, [r3]
+ 370:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 278              		.loc 1 370 0
+ 279 019c 204B     		ldr	r3, .L21
+ 280 019e 0422     		movs	r2, #4
+ 281 01a0 1A70     		strb	r2, [r3]
+ 282              		.loc 1 388 0
+ 283 01a2 1EE0     		b	.L12
+ 284              	.L15:
+ 376:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 285              		.loc 1 376 0
+ 286 01a4 204B     		ldr	r3, .L21+8
+ 287 01a6 FF22     		movs	r2, #255
+ 288 01a8 1A70     		strb	r2, [r3]
+ 379:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 289              		.loc 1 379 0
+ 290 01aa 1D4B     		ldr	r3, .L21
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 13
+
+
+ 291 01ac 0022     		movs	r2, #0
+ 292 01ae 1A70     		strb	r2, [r3]
+ 382:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 293              		.loc 1 382 0
+ 294 01b0 214B     		ldr	r3, .L21+24
+ 295 01b2 1B78     		ldrb	r3, [r3]
+ 296 01b4 DBB2     		uxtb	r3, r3
+ 297 01b6 23F01003 		bic	r3, r3, #16
+ 298 01ba DAB2     		uxtb	r2, r3
+ 299 01bc 1E4B     		ldr	r3, .L21+24
+ 300 01be 1A70     		strb	r2, [r3]
+ 385:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 301              		.loc 1 385 0
+ 302 01c0 1E4B     		ldr	r3, .L21+28
+ 303 01c2 0022     		movs	r2, #0
+ 304 01c4 1A70     		strb	r2, [r3]
+ 305              		.loc 1 388 0
+ 306 01c6 0CE0     		b	.L12
+ 307              	.L20:
+ 389:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 390:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             /* Second Device Address */
+ 391:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             #if (EZI2C_1_ADDRESSES == EZI2C_1_TWO_ADDRESSES)
+ 392:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 393:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 case EZI2C_1_SM_DEV2_WR_ADDR:
+ 394:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 395:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* If 8-bit interface, Advance to WR_Data, else to ADDR2 */
+ 396:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     #if (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_8BIT)
+ 397:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 398:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         tmp8 = EZI2C_1_DATA_REG;
+ 399:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         if (tmp8 < EZI2C_1_bufSizeS2)
+ 400:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {
+ 401:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* ACK and ready to receive address */
+ 402:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 403:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 404:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Set offset to new value */
+ 405:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_rwOffsetS2 = tmp8;
+ 406:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 407:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Reset index to offset value */
+ 408:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_rwIndexS2 = tmp8;
+ 409:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 410:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Prepare for write transaction */
+ 411:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_curState = EZI2C_1_SM_DEV2_WR_DATA;
+ 412:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }
+ 413:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         else    /* Out of range, NAK data and don't set offset */
+ 414:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {
+ 415:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* NAK master */
+ 416:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 417:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }
+ 418:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     #else
+ 419:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Save LSB of address */
+ 420:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         tmp16 = EZI2C_1_DATA_REG;
+ 421:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 422:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* ACK and ready to receive address */
+ 423:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 424:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 425:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Prepare to get LSB of address */
+ 426:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_curState = EZI2C_1_SM_DEV2_WR_ADDR_LSB;
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 14
+
+
+ 427:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     #endif  /* (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_8BIT) */
+ 428:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 429:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 break;  /* EZI2C_1_SM_DEV2_WR_ADDR */
+ 430:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 431:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 #if (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT)
+ 432:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 433:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Only used with 16-bit interface */
+ 434:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     case EZI2C_1_SM_DEV2_WR_ADDR_LSB:
+ 435:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Create offset */
+ 436:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         tmp16 = (uint16) (tmp16 << 8u) | EZI2C_1_DATA_REG;
+ 437:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         if (tmp16 < EZI2C_1_bufSizeS2)
+ 438:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {
+ 439:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* ACK and ready to receive address */
+ 440:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 441:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 442:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Set offset to new value */
+ 443:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_rwOffsetS2 = tmp16;
+ 444:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 445:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Reset index to offset value */
+ 446:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_rwIndexS2 = tmp16;
+ 447:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 448:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Prepare for write transaction */
+ 449:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_curState = EZI2C_1_SM_DEV2_WR_DATA;
+ 450:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }
+ 451:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         else    /* Out of range, NAK data and don't set offset */
+ 452:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {
+ 453:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* NAK master */
+ 454:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 455:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }
+ 456:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         break; /* EZI2C_1_SM_DEV2_WR_ADDR_LSB */
+ 457:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 458:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 #endif   /* (EZI2C_1_SUBADDR_WIDTH == EZI2C_1_SUBADDR_16BIT) */
+ 459:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 460:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 461:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Data written from master to slave. */
+ 462:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 case EZI2C_1_SM_DEV2_WR_DATA:
+ 463:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 464:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Check for valid range */
+ 465:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     if (EZI2C_1_rwIndexS2 < EZI2C_1_wrProtectS2)
+ 466:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 467:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Get data, to ACK quickly */
+ 468:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         tmp8 = EZI2C_1_DATA_REG;
+ 469:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 470:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* ACK and ready to receive sub address */
+ 471:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_ACK;
+ 472:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 473:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Write data to array */
+ 474:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_dataPtrS2[EZI2C_1_rwIndexS2] = tmp8;
+ 475:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 476:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* Inc pointer */
+ 477:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         ++EZI2C_1_rwIndexS2;
+ 478:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ 479:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     else
+ 480:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     {
+ 481:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         /* NAK cause beyond write area */
+ 482:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 483:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     }
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 15
+
+
+ 484:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     break;  /* EZI2C_1_SM_DEV2_WR_DATA */
+ 485:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 486:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     /* Data read by master from slave */
+ 487:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                     case EZI2C_1_SM_DEV2_RD_DATA:
+ 488:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 489:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         if ((tmpCsr & EZI2C_1_CSR_LRB) == EZI2C_1_CSR_LRB_ACK)
+ 490:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {   /* ACKed */
+ 491:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Check for valid range */
+ 492:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             if (EZI2C_1_rwIndexS2 < EZI2C_1_bufSizeS2)
+ 493:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             {   /* Check ACK/NAK */
+ 494:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 /* Get data from array */
+ 495:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 EZI2C_1_DATA_REG = EZI2C_1_dataPtrS2[EZI2C_1_rwIndexS2];
+ 496:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 497:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 /* Send Data */
+ 498:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 EZI2C_1_CSR_REG = EZI2C_1_CSR_TRANSMIT;
+ 499:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 500:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 /* Increment pointer */
+ 501:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 EZI2C_1_rwIndexS2++;
+ 502:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             }
+ 503:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             else    /* Not valid range */
+ 504:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             {
+ 505:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 /* Out of range send FFs */
+ 506:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 EZI2C_1_DATA_REG = EZI2C_1_DUMMY_DATA;
+ 507:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 508:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 /* Send Data */
+ 509:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                                 EZI2C_1_CSR_REG = EZI2C_1_CSR_TRANSMIT;
+ 510:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             }
+ 511:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }
+ 512:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         else    /* NAKed */
+ 513:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         {
+ 514:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Out of range send FFs */
+ 515:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_DATA_REG = EZI2C_1_DUMMY_DATA;
+ 516:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 517:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Send Data */
+ 518:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_CSR_REG = EZI2C_1_CSR_TRANSMIT;
+ 519:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 520:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Clear busy status */
+ 521:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_curStatus &= ((uint8) ~EZI2C_1_STATUS_BUSY);
+ 522:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 523:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             /* Error or Stop, reset state */
+ 524:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                             EZI2C_1_curState = EZI2C_1_SM_IDLE;
+ 525:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         }   /* End if ACK/NAK */
+ 526:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 527:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                         break;  /* EZI2C_1_SM_DEV2_RD_DATA */
+ 528:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 529:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             #endif  /* (EZI2C_1_ADDRESSES == EZI2C_1_TWO_ADDRESSES) */
+ 530:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 531:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****             default:
+ 532:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Invalid state, reset state to idle */
+ 533:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_curState = EZI2C_1_SM_IDLE;
+ 308              		.loc 1 533 0
+ 309 01c8 1C4B     		ldr	r3, .L21+28
+ 310 01ca 0022     		movs	r2, #0
+ 311 01cc 1A70     		strb	r2, [r3]
+ 534:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 535:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Reset offsets and index */
+ 536:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_rwOffsetS1 = 0u;
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 16
+
+
+ 312              		.loc 1 536 0
+ 313 01ce 184B     		ldr	r3, .L21+16
+ 314 01d0 0022     		movs	r2, #0
+ 315 01d2 1A70     		strb	r2, [r3]
+ 537:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_rwIndexS1  = 0u;
+ 316              		.loc 1 537 0
+ 317 01d4 174B     		ldr	r3, .L21+20
+ 318 01d6 0022     		movs	r2, #0
+ 319 01d8 1A70     		strb	r2, [r3]
+ 538:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 539:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 /* Dummy NAK to release bus */
+ 540:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 EZI2C_1_CSR_REG = EZI2C_1_CSR_NAK;
+ 320              		.loc 1 540 0
+ 321 01da 114B     		ldr	r3, .L21
+ 322 01dc 0022     		movs	r2, #0
+ 323 01de 1A70     		strb	r2, [r3]
+ 541:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****                 break;
+ 324              		.loc 1 541 0
+ 325 01e0 00BF     		nop
+ 326              	.L12:
+ 327              	.L5:
+ 542:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 543:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         }  /* End switch/case EZI2C_1_curState */
+ 544:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     }
+ 545:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     else
+ 546:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     {
+ 547:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* Intentional blank line */
+ 548:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     }
+ 549:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 550:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     /* Check if Stop was detected */
+ 551:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     if (EZI2C_1_IS_BIT_SET(EZI2C_1_CSR_REG, EZI2C_1_CSR_STOP_STATUS))
+ 328              		.loc 1 551 0
+ 329 01e2 0F4B     		ldr	r3, .L21
+ 330 01e4 1B78     		ldrb	r3, [r3]
+ 331 01e6 DBB2     		uxtb	r3, r3
+ 332 01e8 03F02003 		and	r3, r3, #32
+ 333 01ec 002B     		cmp	r3, #0
+ 334 01ee 12D0     		beq	.L1
+ 552:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     {
+ 553:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* Clear Busy flag */
+ 554:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_curStatus &= ((uint8) ~EZI2C_1_STATUS_BUSY);
+ 335              		.loc 1 554 0
+ 336 01f0 114B     		ldr	r3, .L21+24
+ 337 01f2 1B78     		ldrb	r3, [r3]
+ 338 01f4 DBB2     		uxtb	r3, r3
+ 339 01f6 23F01003 		bic	r3, r3, #16
+ 340 01fa DAB2     		uxtb	r2, r3
+ 341 01fc 0E4B     		ldr	r3, .L21+24
+ 342 01fe 1A70     		strb	r2, [r3]
+ 555:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 556:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* error or stop - reset state */
+ 557:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_curState = EZI2C_1_SM_IDLE;
+ 343              		.loc 1 557 0
+ 344 0200 0E4B     		ldr	r3, .L21+28
+ 345 0202 0022     		movs	r2, #0
+ 346 0204 1A70     		strb	r2, [r3]
+ 558:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 17
+
+
+ 559:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* Disable interrupt on Stop */
+ 560:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_CFG_REG &= ((uint8) ~EZI2C_1_CFG_STOP_IE);
+ 347              		.loc 1 560 0
+ 348 0206 0E4A     		ldr	r2, .L21+32
+ 349 0208 0D4B     		ldr	r3, .L21+32
+ 350 020a 1B78     		ldrb	r3, [r3]
+ 351 020c DBB2     		uxtb	r3, r3
+ 352 020e 23F01003 		bic	r3, r3, #16
+ 353 0212 DBB2     		uxtb	r3, r3
+ 354 0214 1370     		strb	r3, [r2]
+ 355              	.L1:
+ 561:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     }
+ 562:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #ifdef EZI2C_1_ISR_EXIT_CALLBACK
+ 563:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     EZI2C_1_ISR_ExitCallback();
+ 564:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #endif /* EZI2C_1_ISR_EXIT_CALLBACK */    
+ 565:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** }
+ 356              		.loc 1 565 0
+ 357 0216 BD46     		mov	sp, r7
+ 358              		.cfi_def_cfa_register 13
+ 359              		@ sp needed
+ 360 0218 5DF8047B 		ldr	r7, [sp], #4
+ 361              		.cfi_restore 7
+ 362              		.cfi_def_cfa_offset 0
+ 363 021c 7047     		bx	lr
+ 364              	.L22:
+ 365 021e 00BF     		.align	2
+ 366              	.L21:
+ 367 0220 D7490040 		.word	1073760727
+ 368 0224 00000000 		.word	tmpCsr.4853
+ 369 0228 D8490040 		.word	1073760728
+ 370 022c 00000000 		.word	EZI2C_1_dataPtrS1
+ 371 0230 00000000 		.word	EZI2C_1_rwOffsetS1
+ 372 0234 00000000 		.word	EZI2C_1_rwIndexS1
+ 373 0238 00000000 		.word	EZI2C_1_curStatus
+ 374 023c 00000000 		.word	EZI2C_1_curState
+ 375 0240 D6490040 		.word	1073760726
+ 376 0244 01000000 		.word	tmp8.4852
+ 377 0248 00000000 		.word	EZI2C_1_bufSizeS1
+ 378 024c 00000000 		.word	EZI2C_1_wrProtectS1
+ 379              		.cfi_endproc
+ 380              	.LFE0:
+ 381              		.size	EZI2C_1_ISR, .-EZI2C_1_ISR
+ 382              		.section	.text.EZI2C_1_WAKEUP_ISR,"ax",%progbits
+ 383              		.align	2
+ 384              		.global	EZI2C_1_WAKEUP_ISR
+ 385              		.thumb
+ 386              		.thumb_func
+ 387              		.type	EZI2C_1_WAKEUP_ISR, %function
+ 388              	EZI2C_1_WAKEUP_ISR:
+ 389              	.LFB1:
+ 566:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 567:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 568:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** #if (EZI2C_1_WAKEUP_ENABLED)
+ 569:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     /*******************************************************************************
+ 570:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     * Function Name: EZI2C_1_WAKEUP_ISR
+ 571:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     ********************************************************************************
+ 572:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 18
+
+
+ 573:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     * Summary:
+ 574:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  The interrupt handler to trigger after a wakeup.
+ 575:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *
+ 576:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     * Parameters:
+ 577:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  None.
+ 578:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *
+ 579:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     * Return:
+ 580:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *  None.
+ 581:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *
+ 582:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     *******************************************************************************/
+ 583:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     CY_ISR(EZI2C_1_WAKEUP_ISR)
+ 584:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     {
+ 390              		.loc 1 584 0
+ 391              		.cfi_startproc
+ 392              		@ args = 0, pretend = 0, frame = 0
+ 393              		@ frame_needed = 1, uses_anonymous_args = 0
+ 394              		@ link register save eliminated.
+ 395 0000 80B4     		push	{r7}
+ 396              		.cfi_def_cfa_offset 4
+ 397              		.cfi_offset 7, -4
+ 398 0002 00AF     		add	r7, sp, #0
+ 399              		.cfi_def_cfa_register 7
+ 585:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     #ifdef EZI2C_1_WAKEUP_ISR_ENTRY_CALLBACK
+ 586:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_WAKEUP_ISR_EntryCallback();
+ 587:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     #endif /* EZI2C_1_WAKEUP_ISR_ENTRY_CALLBACK */         
+ 588:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         
+ 589:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_wakeupSource = 1u;  /* I2C was wakeup source */
+ 400              		.loc 1 589 0
+ 401 0004 034B     		ldr	r3, .L24
+ 402 0006 0122     		movs	r2, #1
+ 403 0008 1A70     		strb	r2, [r3]
+ 590:.\Generated_Source\PSoC5/EZI2C_1_INT.c **** 
+ 591:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         /* SCL is stretched until EZI2C_Wakeup() is called */
+ 592:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         
+ 593:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     #ifdef EZI2C_1_ISR_EXIT_CALLBACK
+ 594:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****         EZI2C_1_ISR_ExitCallback();
+ 595:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     #endif /* EZI2C_1_ISR_EXIT_CALLBACK */         
+ 596:.\Generated_Source\PSoC5/EZI2C_1_INT.c ****     }
+ 404              		.loc 1 596 0
+ 405 000a BD46     		mov	sp, r7
+ 406              		.cfi_def_cfa_register 13
+ 407              		@ sp needed
+ 408 000c 5DF8047B 		ldr	r7, [sp], #4
+ 409              		.cfi_restore 7
+ 410              		.cfi_def_cfa_offset 0
+ 411 0010 7047     		bx	lr
+ 412              	.L25:
+ 413 0012 00BF     		.align	2
+ 414              	.L24:
+ 415 0014 00000000 		.word	EZI2C_1_wakeupSource
+ 416              		.cfi_endproc
+ 417              	.LFE1:
+ 418              		.size	EZI2C_1_WAKEUP_ISR, .-EZI2C_1_WAKEUP_ISR
+ 419              		.bss
+ 420              	tmpCsr.4853:
+ 421 0000 00       		.space	1
+ 422              	tmp8.4852:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 19
+
+
+ 423 0001 00       		.space	1
+ 424              		.text
+ 425              	.Letext0:
+ 426              		.file 2 ".\\Generated_Source\\PSoC5\\cytypes.h"
+ 427              		.file 3 ".\\Generated_Source\\PSoC5\\EZI2C_1_PVT.h"
+ 428              		.section	.debug_info,"",%progbits
+ 429              	.Ldebug_info0:
+ 430 0000 58010000 		.4byte	0x158
+ 431 0004 0400     		.2byte	0x4
+ 432 0006 00000000 		.4byte	.Ldebug_abbrev0
+ 433 000a 04       		.byte	0x4
+ 434 000b 01       		.uleb128 0x1
+ 435 000c DF000000 		.4byte	.LASF26
+ 436 0010 01       		.byte	0x1
+ 437 0011 3E000000 		.4byte	.LASF27
+ 438 0015 C6010000 		.4byte	.LASF28
+ 439 0019 00000000 		.4byte	.Ldebug_ranges0+0
+ 440 001d 00000000 		.4byte	0
+ 441 0021 00000000 		.4byte	.Ldebug_line0
+ 442 0025 02       		.uleb128 0x2
+ 443 0026 01       		.byte	0x1
+ 444 0027 06       		.byte	0x6
+ 445 0028 7F020000 		.4byte	.LASF0
+ 446 002c 02       		.uleb128 0x2
+ 447 002d 01       		.byte	0x1
+ 448 002e 08       		.byte	0x8
+ 449 002f 8F000000 		.4byte	.LASF1
+ 450 0033 02       		.uleb128 0x2
+ 451 0034 02       		.byte	0x2
+ 452 0035 05       		.byte	0x5
+ 453 0036 6C020000 		.4byte	.LASF2
+ 454 003a 02       		.uleb128 0x2
+ 455 003b 02       		.byte	0x2
+ 456 003c 07       		.byte	0x7
+ 457 003d 71000000 		.4byte	.LASF3
+ 458 0041 02       		.uleb128 0x2
+ 459 0042 04       		.byte	0x4
+ 460 0043 05       		.byte	0x5
+ 461 0044 76020000 		.4byte	.LASF4
+ 462 0048 02       		.uleb128 0x2
+ 463 0049 04       		.byte	0x4
+ 464 004a 07       		.byte	0x7
+ 465 004b B4000000 		.4byte	.LASF5
+ 466 004f 02       		.uleb128 0x2
+ 467 0050 08       		.byte	0x8
+ 468 0051 05       		.byte	0x5
+ 469 0052 34020000 		.4byte	.LASF6
+ 470 0056 02       		.uleb128 0x2
+ 471 0057 08       		.byte	0x8
+ 472 0058 07       		.byte	0x7
+ 473 0059 9A010000 		.4byte	.LASF7
+ 474 005d 03       		.uleb128 0x3
+ 475 005e 04       		.byte	0x4
+ 476 005f 05       		.byte	0x5
+ 477 0060 696E7400 		.ascii	"int\000"
+ 478 0064 02       		.uleb128 0x2
+ 479 0065 04       		.byte	0x4
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 20
+
+
+ 480 0066 07       		.byte	0x7
+ 481 0067 8D010000 		.4byte	.LASF8
+ 482 006b 04       		.uleb128 0x4
+ 483 006c C6000000 		.4byte	.LASF9
+ 484 0070 02       		.byte	0x2
+ 485 0071 C2       		.byte	0xc2
+ 486 0072 2C000000 		.4byte	0x2c
+ 487 0076 04       		.uleb128 0x4
+ 488 0077 86010000 		.4byte	.LASF10
+ 489 007b 02       		.byte	0x2
+ 490 007c C3       		.byte	0xc3
+ 491 007d 3A000000 		.4byte	0x3a
+ 492 0081 02       		.uleb128 0x2
+ 493 0082 04       		.byte	0x4
+ 494 0083 04       		.byte	0x4
+ 495 0084 84000000 		.4byte	.LASF11
+ 496 0088 02       		.uleb128 0x2
+ 497 0089 08       		.byte	0x8
+ 498 008a 04       		.byte	0x4
+ 499 008b 6D010000 		.4byte	.LASF12
+ 500 008f 02       		.uleb128 0x2
+ 501 0090 01       		.byte	0x1
+ 502 0091 08       		.byte	0x8
+ 503 0092 54020000 		.4byte	.LASF13
+ 504 0096 05       		.uleb128 0x5
+ 505 0097 AF000000 		.4byte	.LASF14
+ 506 009b 02       		.byte	0x2
+ 507 009c 6C01     		.2byte	0x16c
+ 508 009e A2000000 		.4byte	0xa2
+ 509 00a2 06       		.uleb128 0x6
+ 510 00a3 6B000000 		.4byte	0x6b
+ 511 00a7 06       		.uleb128 0x6
+ 512 00a8 76000000 		.4byte	0x76
+ 513 00ac 02       		.uleb128 0x2
+ 514 00ad 04       		.byte	0x4
+ 515 00ae 07       		.byte	0x7
+ 516 00af 2B020000 		.4byte	.LASF15
+ 517 00b3 07       		.uleb128 0x7
+ 518 00b4 65000000 		.4byte	.LASF29
+ 519 00b8 01       		.byte	0x1
+ 520 00b9 57       		.byte	0x57
+ 521 00ba 00000000 		.4byte	.LFB0
+ 522 00be 50020000 		.4byte	.LFE0-.LFB0
+ 523 00c2 01       		.uleb128 0x1
+ 524 00c3 9C       		.byte	0x9c
+ 525 00c4 EB000000 		.4byte	0xeb
+ 526 00c8 08       		.uleb128 0x8
+ 527 00c9 8A000000 		.4byte	.LASF16
+ 528 00cd 01       		.byte	0x1
+ 529 00ce 59       		.byte	0x59
+ 530 00cf 6B000000 		.4byte	0x6b
+ 531 00d3 05       		.uleb128 0x5
+ 532 00d4 03       		.byte	0x3
+ 533 00d5 01000000 		.4byte	tmp8.4852
+ 534 00d9 08       		.uleb128 0x8
+ 535 00da 00000000 		.4byte	.LASF17
+ 536 00de 01       		.byte	0x1
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 21
+
+
+ 537 00df 5A       		.byte	0x5a
+ 538 00e0 6B000000 		.4byte	0x6b
+ 539 00e4 05       		.uleb128 0x5
+ 540 00e5 03       		.byte	0x3
+ 541 00e6 00000000 		.4byte	tmpCsr.4853
+ 542 00ea 00       		.byte	0
+ 543 00eb 09       		.uleb128 0x9
+ 544 00ec CC000000 		.4byte	.LASF30
+ 545 00f0 01       		.byte	0x1
+ 546 00f1 4702     		.2byte	0x247
+ 547 00f3 00000000 		.4byte	.LFB1
+ 548 00f7 18000000 		.4byte	.LFE1-.LFB1
+ 549 00fb 01       		.uleb128 0x1
+ 550 00fc 9C       		.byte	0x9c
+ 551 00fd 0A       		.uleb128 0xa
+ 552 00fe 74010000 		.4byte	.LASF18
+ 553 0102 03       		.byte	0x3
+ 554 0103 1D       		.byte	0x1d
+ 555 0104 A2000000 		.4byte	0xa2
+ 556 0108 0A       		.uleb128 0xa
+ 557 0109 07000000 		.4byte	.LASF19
+ 558 010d 03       		.byte	0x3
+ 559 010e 1E       		.byte	0x1e
+ 560 010f A2000000 		.4byte	0xa2
+ 561 0113 0A       		.uleb128 0xa
+ 562 0114 9D000000 		.4byte	.LASF20
+ 563 0118 03       		.byte	0x3
+ 564 0119 21       		.byte	0x21
+ 565 011a 1E010000 		.4byte	0x11e
+ 566 011e 0B       		.uleb128 0xb
+ 567 011f 04       		.byte	0x4
+ 568 0120 A2000000 		.4byte	0xa2
+ 569 0124 0A       		.uleb128 0xa
+ 570 0125 2C000000 		.4byte	.LASF21
+ 571 0129 03       		.byte	0x3
+ 572 012a 22       		.byte	0x22
+ 573 012b A7000000 		.4byte	0xa7
+ 574 012f 0A       		.uleb128 0xa
+ 575 0130 18000000 		.4byte	.LASF22
+ 576 0134 03       		.byte	0x3
+ 577 0135 23       		.byte	0x23
+ 578 0136 A7000000 		.4byte	0xa7
+ 579 013a 0A       		.uleb128 0xa
+ 580 013b 59020000 		.4byte	.LASF23
+ 581 013f 03       		.byte	0x3
+ 582 0140 24       		.byte	0x24
+ 583 0141 A2000000 		.4byte	0xa2
+ 584 0145 0A       		.uleb128 0xa
+ 585 0146 42020000 		.4byte	.LASF24
+ 586 014a 03       		.byte	0x3
+ 587 014b 25       		.byte	0x25
+ 588 014c A2000000 		.4byte	0xa2
+ 589 0150 0A       		.uleb128 0xa
+ 590 0151 B1010000 		.4byte	.LASF25
+ 591 0155 03       		.byte	0x3
+ 592 0156 33       		.byte	0x33
+ 593 0157 A2000000 		.4byte	0xa2
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 22
+
+
+ 594 015b 00       		.byte	0
+ 595              		.section	.debug_abbrev,"",%progbits
+ 596              	.Ldebug_abbrev0:
+ 597 0000 01       		.uleb128 0x1
+ 598 0001 11       		.uleb128 0x11
+ 599 0002 01       		.byte	0x1
+ 600 0003 25       		.uleb128 0x25
+ 601 0004 0E       		.uleb128 0xe
+ 602 0005 13       		.uleb128 0x13
+ 603 0006 0B       		.uleb128 0xb
+ 604 0007 03       		.uleb128 0x3
+ 605 0008 0E       		.uleb128 0xe
+ 606 0009 1B       		.uleb128 0x1b
+ 607 000a 0E       		.uleb128 0xe
+ 608 000b 55       		.uleb128 0x55
+ 609 000c 17       		.uleb128 0x17
+ 610 000d 11       		.uleb128 0x11
+ 611 000e 01       		.uleb128 0x1
+ 612 000f 10       		.uleb128 0x10
+ 613 0010 17       		.uleb128 0x17
+ 614 0011 00       		.byte	0
+ 615 0012 00       		.byte	0
+ 616 0013 02       		.uleb128 0x2
+ 617 0014 24       		.uleb128 0x24
+ 618 0015 00       		.byte	0
+ 619 0016 0B       		.uleb128 0xb
+ 620 0017 0B       		.uleb128 0xb
+ 621 0018 3E       		.uleb128 0x3e
+ 622 0019 0B       		.uleb128 0xb
+ 623 001a 03       		.uleb128 0x3
+ 624 001b 0E       		.uleb128 0xe
+ 625 001c 00       		.byte	0
+ 626 001d 00       		.byte	0
+ 627 001e 03       		.uleb128 0x3
+ 628 001f 24       		.uleb128 0x24
+ 629 0020 00       		.byte	0
+ 630 0021 0B       		.uleb128 0xb
+ 631 0022 0B       		.uleb128 0xb
+ 632 0023 3E       		.uleb128 0x3e
+ 633 0024 0B       		.uleb128 0xb
+ 634 0025 03       		.uleb128 0x3
+ 635 0026 08       		.uleb128 0x8
+ 636 0027 00       		.byte	0
+ 637 0028 00       		.byte	0
+ 638 0029 04       		.uleb128 0x4
+ 639 002a 16       		.uleb128 0x16
+ 640 002b 00       		.byte	0
+ 641 002c 03       		.uleb128 0x3
+ 642 002d 0E       		.uleb128 0xe
+ 643 002e 3A       		.uleb128 0x3a
+ 644 002f 0B       		.uleb128 0xb
+ 645 0030 3B       		.uleb128 0x3b
+ 646 0031 0B       		.uleb128 0xb
+ 647 0032 49       		.uleb128 0x49
+ 648 0033 13       		.uleb128 0x13
+ 649 0034 00       		.byte	0
+ 650 0035 00       		.byte	0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 23
+
+
+ 651 0036 05       		.uleb128 0x5
+ 652 0037 16       		.uleb128 0x16
+ 653 0038 00       		.byte	0
+ 654 0039 03       		.uleb128 0x3
+ 655 003a 0E       		.uleb128 0xe
+ 656 003b 3A       		.uleb128 0x3a
+ 657 003c 0B       		.uleb128 0xb
+ 658 003d 3B       		.uleb128 0x3b
+ 659 003e 05       		.uleb128 0x5
+ 660 003f 49       		.uleb128 0x49
+ 661 0040 13       		.uleb128 0x13
+ 662 0041 00       		.byte	0
+ 663 0042 00       		.byte	0
+ 664 0043 06       		.uleb128 0x6
+ 665 0044 35       		.uleb128 0x35
+ 666 0045 00       		.byte	0
+ 667 0046 49       		.uleb128 0x49
+ 668 0047 13       		.uleb128 0x13
+ 669 0048 00       		.byte	0
+ 670 0049 00       		.byte	0
+ 671 004a 07       		.uleb128 0x7
+ 672 004b 2E       		.uleb128 0x2e
+ 673 004c 01       		.byte	0x1
+ 674 004d 3F       		.uleb128 0x3f
+ 675 004e 19       		.uleb128 0x19
+ 676 004f 03       		.uleb128 0x3
+ 677 0050 0E       		.uleb128 0xe
+ 678 0051 3A       		.uleb128 0x3a
+ 679 0052 0B       		.uleb128 0xb
+ 680 0053 3B       		.uleb128 0x3b
+ 681 0054 0B       		.uleb128 0xb
+ 682 0055 27       		.uleb128 0x27
+ 683 0056 19       		.uleb128 0x19
+ 684 0057 11       		.uleb128 0x11
+ 685 0058 01       		.uleb128 0x1
+ 686 0059 12       		.uleb128 0x12
+ 687 005a 06       		.uleb128 0x6
+ 688 005b 40       		.uleb128 0x40
+ 689 005c 18       		.uleb128 0x18
+ 690 005d 9742     		.uleb128 0x2117
+ 691 005f 19       		.uleb128 0x19
+ 692 0060 01       		.uleb128 0x1
+ 693 0061 13       		.uleb128 0x13
+ 694 0062 00       		.byte	0
+ 695 0063 00       		.byte	0
+ 696 0064 08       		.uleb128 0x8
+ 697 0065 34       		.uleb128 0x34
+ 698 0066 00       		.byte	0
+ 699 0067 03       		.uleb128 0x3
+ 700 0068 0E       		.uleb128 0xe
+ 701 0069 3A       		.uleb128 0x3a
+ 702 006a 0B       		.uleb128 0xb
+ 703 006b 3B       		.uleb128 0x3b
+ 704 006c 0B       		.uleb128 0xb
+ 705 006d 49       		.uleb128 0x49
+ 706 006e 13       		.uleb128 0x13
+ 707 006f 02       		.uleb128 0x2
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 24
+
+
+ 708 0070 18       		.uleb128 0x18
+ 709 0071 00       		.byte	0
+ 710 0072 00       		.byte	0
+ 711 0073 09       		.uleb128 0x9
+ 712 0074 2E       		.uleb128 0x2e
+ 713 0075 00       		.byte	0
+ 714 0076 3F       		.uleb128 0x3f
+ 715 0077 19       		.uleb128 0x19
+ 716 0078 03       		.uleb128 0x3
+ 717 0079 0E       		.uleb128 0xe
+ 718 007a 3A       		.uleb128 0x3a
+ 719 007b 0B       		.uleb128 0xb
+ 720 007c 3B       		.uleb128 0x3b
+ 721 007d 05       		.uleb128 0x5
+ 722 007e 27       		.uleb128 0x27
+ 723 007f 19       		.uleb128 0x19
+ 724 0080 11       		.uleb128 0x11
+ 725 0081 01       		.uleb128 0x1
+ 726 0082 12       		.uleb128 0x12
+ 727 0083 06       		.uleb128 0x6
+ 728 0084 40       		.uleb128 0x40
+ 729 0085 18       		.uleb128 0x18
+ 730 0086 9742     		.uleb128 0x2117
+ 731 0088 19       		.uleb128 0x19
+ 732 0089 00       		.byte	0
+ 733 008a 00       		.byte	0
+ 734 008b 0A       		.uleb128 0xa
+ 735 008c 34       		.uleb128 0x34
+ 736 008d 00       		.byte	0
+ 737 008e 03       		.uleb128 0x3
+ 738 008f 0E       		.uleb128 0xe
+ 739 0090 3A       		.uleb128 0x3a
+ 740 0091 0B       		.uleb128 0xb
+ 741 0092 3B       		.uleb128 0x3b
+ 742 0093 0B       		.uleb128 0xb
+ 743 0094 49       		.uleb128 0x49
+ 744 0095 13       		.uleb128 0x13
+ 745 0096 3F       		.uleb128 0x3f
+ 746 0097 19       		.uleb128 0x19
+ 747 0098 3C       		.uleb128 0x3c
+ 748 0099 19       		.uleb128 0x19
+ 749 009a 00       		.byte	0
+ 750 009b 00       		.byte	0
+ 751 009c 0B       		.uleb128 0xb
+ 752 009d 0F       		.uleb128 0xf
+ 753 009e 00       		.byte	0
+ 754 009f 0B       		.uleb128 0xb
+ 755 00a0 0B       		.uleb128 0xb
+ 756 00a1 49       		.uleb128 0x49
+ 757 00a2 13       		.uleb128 0x13
+ 758 00a3 00       		.byte	0
+ 759 00a4 00       		.byte	0
+ 760 00a5 00       		.byte	0
+ 761              		.section	.debug_aranges,"",%progbits
+ 762 0000 24000000 		.4byte	0x24
+ 763 0004 0200     		.2byte	0x2
+ 764 0006 00000000 		.4byte	.Ldebug_info0
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 25
+
+
+ 765 000a 04       		.byte	0x4
+ 766 000b 00       		.byte	0
+ 767 000c 0000     		.2byte	0
+ 768 000e 0000     		.2byte	0
+ 769 0010 00000000 		.4byte	.LFB0
+ 770 0014 50020000 		.4byte	.LFE0-.LFB0
+ 771 0018 00000000 		.4byte	.LFB1
+ 772 001c 18000000 		.4byte	.LFE1-.LFB1
+ 773 0020 00000000 		.4byte	0
+ 774 0024 00000000 		.4byte	0
+ 775              		.section	.debug_ranges,"",%progbits
+ 776              	.Ldebug_ranges0:
+ 777 0000 00000000 		.4byte	.LFB0
+ 778 0004 50020000 		.4byte	.LFE0
+ 779 0008 00000000 		.4byte	.LFB1
+ 780 000c 18000000 		.4byte	.LFE1
+ 781 0010 00000000 		.4byte	0
+ 782 0014 00000000 		.4byte	0
+ 783              		.section	.debug_line,"",%progbits
+ 784              	.Ldebug_line0:
+ 785 0000 D5000000 		.section	.debug_str,"MS",%progbits,1
+ 785      02005B00 
+ 785      00000201 
+ 785      FB0E0D00 
+ 785      01010101 
+ 786              	.LASF17:
+ 787 0000 746D7043 		.ascii	"tmpCsr\000"
+ 787      737200
+ 788              	.LASF19:
+ 789 0007 455A4932 		.ascii	"EZI2C_1_curState\000"
+ 789      435F315F 
+ 789      63757253 
+ 789      74617465 
+ 789      00
+ 790              	.LASF22:
+ 791 0018 455A4932 		.ascii	"EZI2C_1_wrProtectS1\000"
+ 791      435F315F 
+ 791      77725072 
+ 791      6F746563 
+ 791      74533100 
+ 792              	.LASF21:
+ 793 002c 455A4932 		.ascii	"EZI2C_1_bufSizeS1\000"
+ 793      435F315F 
+ 793      62756653 
+ 793      697A6553 
+ 793      3100
+ 794              	.LASF27:
+ 795 003e 2E5C4765 		.ascii	".\\Generated_Source\\PSoC5\\EZI2C_1_INT.c\000"
+ 795      6E657261 
+ 795      7465645F 
+ 795      536F7572 
+ 795      63655C50 
+ 796              	.LASF29:
+ 797 0065 455A4932 		.ascii	"EZI2C_1_ISR\000"
+ 797      435F315F 
+ 797      49535200 
+ 798              	.LASF3:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 26
+
+
+ 799 0071 73686F72 		.ascii	"short unsigned int\000"
+ 799      7420756E 
+ 799      7369676E 
+ 799      65642069 
+ 799      6E7400
+ 800              	.LASF11:
+ 801 0084 666C6F61 		.ascii	"float\000"
+ 801      7400
+ 802              	.LASF16:
+ 803 008a 746D7038 		.ascii	"tmp8\000"
+ 803      00
+ 804              	.LASF1:
+ 805 008f 756E7369 		.ascii	"unsigned char\000"
+ 805      676E6564 
+ 805      20636861 
+ 805      7200
+ 806              	.LASF20:
+ 807 009d 455A4932 		.ascii	"EZI2C_1_dataPtrS1\000"
+ 807      435F315F 
+ 807      64617461 
+ 807      50747253 
+ 807      3100
+ 808              	.LASF14:
+ 809 00af 72656738 		.ascii	"reg8\000"
+ 809      00
+ 810              	.LASF5:
+ 811 00b4 6C6F6E67 		.ascii	"long unsigned int\000"
+ 811      20756E73 
+ 811      69676E65 
+ 811      6420696E 
+ 811      7400
+ 812              	.LASF9:
+ 813 00c6 75696E74 		.ascii	"uint8\000"
+ 813      3800
+ 814              	.LASF30:
+ 815 00cc 455A4932 		.ascii	"EZI2C_1_WAKEUP_ISR\000"
+ 815      435F315F 
+ 815      57414B45 
+ 815      55505F49 
+ 815      535200
+ 816              	.LASF26:
+ 817 00df 474E5520 		.ascii	"GNU C 4.9.3 20150303 (release) [ARM/embedded-4_9-br"
+ 817      4320342E 
+ 817      392E3320 
+ 817      32303135 
+ 817      30333033 
+ 818 0112 616E6368 		.ascii	"anch revision 221220] -mcpu=cortex-m3 -mthumb -g -O"
+ 818      20726576 
+ 818      6973696F 
+ 818      6E203232 
+ 818      31323230 
+ 819 0145 30202D66 		.ascii	"0 -ffunction-sections -ffat-lto-objects\000"
+ 819      66756E63 
+ 819      74696F6E 
+ 819      2D736563 
+ 819      74696F6E 
+ 820              	.LASF12:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 27
+
+
+ 821 016d 646F7562 		.ascii	"double\000"
+ 821      6C6500
+ 822              	.LASF18:
+ 823 0174 455A4932 		.ascii	"EZI2C_1_curStatus\000"
+ 823      435F315F 
+ 823      63757253 
+ 823      74617475 
+ 823      7300
+ 824              	.LASF10:
+ 825 0186 75696E74 		.ascii	"uint16\000"
+ 825      313600
+ 826              	.LASF8:
+ 827 018d 756E7369 		.ascii	"unsigned int\000"
+ 827      676E6564 
+ 827      20696E74 
+ 827      00
+ 828              	.LASF7:
+ 829 019a 6C6F6E67 		.ascii	"long long unsigned int\000"
+ 829      206C6F6E 
+ 829      6720756E 
+ 829      7369676E 
+ 829      65642069 
+ 830              	.LASF25:
+ 831 01b1 455A4932 		.ascii	"EZI2C_1_wakeupSource\000"
+ 831      435F315F 
+ 831      77616B65 
+ 831      7570536F 
+ 831      75726365 
+ 832              	.LASF28:
+ 833 01c6 443A5C44 		.ascii	"D:\\Documents\\Virginia_Tech\\FSAE\\PSOC\\Current S"
+ 833      6F63756D 
+ 833      656E7473 
+ 833      5C566972 
+ 833      67696E69 
+ 834 01f4 656E736F 		.ascii	"ensor\\CE95277 ADC and UART\\VTM16 Current Sensors."
+ 834      725C4345 
+ 834      39353237 
+ 834      37204144 
+ 834      4320616E 
+ 835 0225 63796473 		.ascii	"cydsn\000"
+ 835      6E00
+ 836              	.LASF15:
+ 837 022b 73697A65 		.ascii	"sizetype\000"
+ 837      74797065 
+ 837      00
+ 838              	.LASF6:
+ 839 0234 6C6F6E67 		.ascii	"long long int\000"
+ 839      206C6F6E 
+ 839      6720696E 
+ 839      7400
+ 840              	.LASF24:
+ 841 0242 455A4932 		.ascii	"EZI2C_1_rwIndexS1\000"
+ 841      435F315F 
+ 841      7277496E 
+ 841      64657853 
+ 841      3100
+ 842              	.LASF13:
+ARM GAS  C:\Users\Charlie\AppData\Local\Temp\ccYVXcah.s 			page 28
+
+
+ 843 0254 63686172 		.ascii	"char\000"
+ 843      00
+ 844              	.LASF23:
+ 845 0259 455A4932 		.ascii	"EZI2C_1_rwOffsetS1\000"
+ 845      435F315F 
+ 845      72774F66 
+ 845      66736574 
+ 845      533100
+ 846              	.LASF2:
+ 847 026c 73686F72 		.ascii	"short int\000"
+ 847      7420696E 
+ 847      7400
+ 848              	.LASF4:
+ 849 0276 6C6F6E67 		.ascii	"long int\000"
+ 849      20696E74 
+ 849      00
+ 850              	.LASF0:
+ 851 027f 7369676E 		.ascii	"signed char\000"
+ 851      65642063 
+ 851      68617200 
+ 852              		.ident	"GCC: (GNU Tools for ARM Embedded Processors) 4.9.3 20150303 (release) [ARM/embedded-4_9-br
